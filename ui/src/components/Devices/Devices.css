@@ -1,0 +1,28 @@
+.Devices{
+    width: 932px;
+    padding: 5px 5px 5px 0px;
+}
+
+.Devices__header{
+    display: flex;
+}
+
+.Devices__header span{
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    font-family: helvetica,arial,verdana,sans-serif;
+    line-height: 16px;
+    padding: 3px 3px 3px 10px;
+}
+
+.Devices__body{
+    background: #3b3b3b;
+    color: #d5d5d5;
+    height: 175px;
+}
+
+.Devices__body-wrapper{
+display: flex;
+height: 100%;
+}

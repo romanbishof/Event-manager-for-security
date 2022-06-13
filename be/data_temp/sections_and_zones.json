@@ -1,0 +1,400 @@
+[
+    {
+        "ZoneList": {
+            "Zones": [
+                {
+                    "Id": 18,
+                    "Name": "APA_BOP_Jetty",
+                    "AlarmCount": 0,
+                    "AlarmLevel": 0
+                },
+                {
+                    "Id": 19,
+                    "Name": "APA_Control_Centre",
+                    "AlarmCount": 22,
+                    "AlarmLevel": 4
+                },
+                {
+                    "Id": 17,
+                    "Name": "APA_NOJ_Jetty",
+                    "AlarmCount": 2,
+                    "AlarmLevel": 4
+                },
+                {
+                    "Id": 30,
+                    "Name": "APA_Outside_Entry",
+                    "AlarmCount": 0,
+                    "AlarmLevel": 0
+                },
+                {
+                    "Id": 16,
+                    "Name": "APA_PWA_Jetty",
+                    "AlarmCount": 5,
+                    "AlarmLevel": 4
+                },
+                {
+                    "Id": 28,
+                    "Name": "MCC",
+                    "AlarmCount": 1,
+                    "AlarmLevel": 4
+                }
+            ]
+        },
+        "Id": 20,
+        "Name": "APAPA_JETTY",
+        "ParentId": -1,
+        "AlarmCount": 50,
+        "AlarmLevel": 2,
+        "ScIp": "192.168.45.71",
+        "ScPort": "null",
+        "Status": 1,
+        "AuthId": "APAPA_JETTY",
+        "AuthPwd": "admin",
+        "TemplateId": 20,
+        "SecurityMode": 0,
+        "ScModel": "CS1000B",
+        "MapDevices": []
+    },
+    {
+        "ZoneList": {
+            "Zones": [
+                {
+                    "Id": 37,
+                    "Name": "ATL_CC_Road",
+                    "AlarmCount": 0,
+                    "AlarmLevel": 0
+                },
+                {
+                    "Id": 24,
+                    "Name": "ATL_Control_Centre",
+                    "AlarmCount": 0,
+                    "AlarmLevel": 0
+                },
+                {
+                    "Id": 39,
+                    "Name": "ATL_JBN_Yard",
+                    "AlarmCount": 0,
+                    "AlarmLevel": 0
+                },
+                {
+                    "Id": 20,
+                    "Name": "ATL_JETTY_GATE",
+                    "AlarmCount": 0,
+                    "AlarmLevel": 0
+                },
+                {
+                    "Id": 41,
+                    "Name": "ATL_Jetty_Water_Front",
+                    "AlarmCount": 0,
+                    "AlarmLevel": 0
+                },
+                {
+                    "Id": 35,
+                    "Name": "ATL_Landing_Jetty",
+                    "AlarmCount": 0,
+                    "AlarmLevel": 0
+                },
+                {
+                    "Id": 32,
+                    "Name": "ATL_Navy_Gate",
+                    "AlarmCount": 0,
+                    "AlarmLevel": 0
+                },
+                {
+                    "Id": 33,
+                    "Name": "ATL_Optimization",
+                    "AlarmCount": 0,
+                    "AlarmLevel": 0
+                },
+                {
+                    "Id": 31,
+                    "Name": "ATL_PRA_Area",
+                    "AlarmCount": 0,
+                    "AlarmLevel": 0
+                },
+                {
+                    "Id": 34,
+                    "Name": "ATL_Pollution_Control",
+                    "AlarmCount": 0,
+                    "AlarmLevel": 0
+                },
+                {
+                    "Id": 38,
+                    "Name": "ATL_Store_Road",
+                    "AlarmCount": 0,
+                    "AlarmLevel": 0
+                },
+                {
+                    "Id": 36,
+                    "Name": "ATL_Telecom",
+                    "AlarmCount": 0,
+                    "AlarmLevel": 0
+                },
+                {
+                    "Id": 40,
+                    "Name": "ATL_Yellow_Jetty",
+                    "AlarmCount": 0,
+                    "AlarmLevel": 0
+                },
+                {
+                    "Id": 29,
+                    "Name": "MCC",
+                    "AlarmCount": 0,
+                    "AlarmLevel": 0
+                }
+            ]
+        },
+        "Id": 21,
+        "Name": "ATLAS_JETTY",
+        "ParentId": -1,
+        "AlarmCount": 14,
+        "AlarmLevel": 2,
+        "ScIp": "192.168.41.71",
+        "ScPort": "null",
+        "Status": 1,
+        "AuthId": "ATLAS_JETTY",
+        "AuthPwd": "admin",
+        "TemplateId": 21,
+        "SecurityMode": 0,
+        "ScModel": "CS1000B",
+        "MapDevices": []
+    },
+    {
+        "ZoneList": {
+            "Zones": [
+                {
+                    "Id": 23,
+                    "Name": "CAL_Back_Gate",
+                    "AlarmCount": 0,
+                    "AlarmLevel": 0
+                },
+                {
+                    "Id": 25,
+                    "Name": "CAL_Control_Centre",
+                    "AlarmCount": 0,
+                    "AlarmLevel": 0
+                },
+                {
+                    "Id": 22,
+                    "Name": "CAL_Jetty",
+                    "AlarmCount": 0,
+                    "AlarmLevel": 0
+                },
+                {
+                    "Id": 21,
+                    "Name": "CAL_Main_Gate",
+                    "AlarmCount": 0,
+                    "AlarmLevel": 0
+                }
+            ]
+        },
+        "Id": 22,
+        "Name": "Calabar_Jetty",
+        "ParentId": -1,
+        "AlarmCount": 0,
+        "AlarmLevel": 0,
+        "ScIp": "192.168.57.71",
+        "ScPort": "null",
+        "Status": 0,
+        "AuthId": "Calabar_Jetty",
+        "AuthPwd": "admin",
+        "TemplateId": 22,
+        "SecurityMode": 1,
+        "ScModel": "CS1000B",
+        "MapDevices": []
+    },
+    {
+        "ZoneList": {
+            "Zones": [
+                {
+                    "Id": 15,
+                    "Name": "CCTV",
+                    "AlarmCount": 116,
+                    "AlarmLevel": 5
+                },
+                {
+                    "Id": 27,
+                    "Name": "MCC_NOC_Area",
+                    "AlarmCount": 0,
+                    "AlarmLevel": 0
+                },
+                {
+                    "Id": 26,
+                    "Name": "MCC_OPS_Area",
+                    "AlarmCount": 0,
+                    "AlarmLevel": 0
+                }
+            ]
+        },
+        "Id": 1,
+        "Name": "NNPC_Towers",
+        "ParentId": -1,
+        "AlarmCount": 116,
+        "AlarmLevel": 5,
+        "ScIp": "127.0.0.1",
+        "ScPort": "null",
+        "Status": 1,
+        "AuthId": "admin",
+        "AuthPwd": "admin",
+        "TemplateId": 1,
+        "SecurityMode": 1,
+        "ScModel": "CS1000B",
+        "MapDevices": []
+    },
+    {
+        "ZoneList": {
+            "Zones": [
+                {
+                    "Id": 52,
+                    "Name": "Control_Centre",
+                    "AlarmCount": 0,
+                    "AlarmLevel": 0
+                },
+                {
+                    "Id": 54,
+                    "Name": "Custom_Area",
+                    "AlarmCount": 0,
+                    "AlarmLevel": 0
+                },
+                {
+                    "Id": 53,
+                    "Name": "Jetty_Gate",
+                    "AlarmCount": 0,
+                    "AlarmLevel": 0
+                },
+                {
+                    "Id": 51,
+                    "Name": "Jetty_Head",
+                    "AlarmCount": 0,
+                    "AlarmLevel": 0
+                }
+            ]
+        },
+        "Id": 25,
+        "Name": "OKRIKA_JETTY",
+        "ParentId": -1,
+        "AlarmCount": 37,
+        "AlarmLevel": 2,
+        "ScIp": "192.168.53.71",
+        "ScPort": "null",
+        "Status": 1,
+        "AuthId": "OKRIKA_JETTY",
+        "AuthPwd": "admin",
+        "TemplateId": 25,
+        "SecurityMode": 0,
+        "ScModel": "CS1000B",
+        "MapDevices": []
+    },
+    {
+        "ZoneList": {
+            "Zones": []
+        },
+        "Id": 24,
+        "Name": "Unregistered",
+        "ParentId": -1,
+        "AlarmCount": 0,
+        "AlarmLevel": 0,
+        "ScIp": "",
+        "ScPort": "null",
+        "Status": 0,
+        "AuthId": "OKRIKA_JETTY ",
+        "AuthPwd": "admin",
+        "TemplateId": 24,
+        "SecurityMode": 0,
+        "ScModel": "null",
+        "MapDevices": []
+    },
+    {
+        "ZoneList": {
+            "Zones": []
+        },
+        "Id": 19,
+        "Name": "Unregistered",
+        "ParentId": -1,
+        "AlarmCount": 0,
+        "AlarmLevel": 0,
+        "ScIp": "",
+        "ScPort": "null",
+        "Status": 0,
+        "AuthId": "Atlas_Jetty",
+        "AuthPwd": "admin",
+        "TemplateId": 19,
+        "SecurityMode": 0,
+        "ScModel": "null",
+        "MapDevices": []
+    },
+    {
+        "ZoneList": {
+            "Zones": [
+                {
+                    "Id": 48,
+                    "Name": "WAR_Cargo_Berth1",
+                    "AlarmCount": 0,
+                    "AlarmLevel": 0
+                },
+                {
+                    "Id": 49,
+                    "Name": "WAR_Cargo_Berth2",
+                    "AlarmCount": 0,
+                    "AlarmLevel": 0
+                },
+                {
+                    "Id": 42,
+                    "Name": "WAR_First_Gate",
+                    "AlarmCount": 0,
+                    "AlarmLevel": 0
+                },
+                {
+                    "Id": 46,
+                    "Name": "WAR_Loading_Berth1",
+                    "AlarmCount": 0,
+                    "AlarmLevel": 0
+                },
+                {
+                    "Id": 47,
+                    "Name": "WAR_Loading_Berth2",
+                    "AlarmCount": 0,
+                    "AlarmLevel": 0
+                },
+                {
+                    "Id": 44,
+                    "Name": "WAR_Muster_Point1",
+                    "AlarmCount": 0,
+                    "AlarmLevel": 0
+                },
+                {
+                    "Id": 45,
+                    "Name": "WAR_Muster_Point2",
+                    "AlarmCount": 0,
+                    "AlarmLevel": 0
+                },
+                {
+                    "Id": 43,
+                    "Name": "WAR_NPDC",
+                    "AlarmCount": 0,
+                    "AlarmLevel": 0
+                },
+                {
+                    "Id": 50,
+                    "Name": "Warri_Control_Centre",
+                    "AlarmCount": 14,
+                    "AlarmLevel": 5
+                }
+            ]
+        },
+        "Id": 23,
+        "Name": "WARRI_JETTY",
+        "ParentId": -1,
+        "AlarmCount": 14,
+        "AlarmLevel": 5,
+        "ScIp": "192.168.49.71",
+        "ScPort": "null",
+        "Status": 1,
+        "AuthId": "WARRI_JETTY",
+        "AuthPwd": "admin",
+        "TemplateId": 23,
+        "SecurityMode": 0,
+        "ScModel": "CS1000B",
+        "MapDevices": []
+    }
+]

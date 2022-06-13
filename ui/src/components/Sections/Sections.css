@@ -1,0 +1,29 @@
+.Sections{
+    width: 932px;
+    padding: 5px 5px 5px 0px;
+}
+
+.Sections__header{
+    display: flex;
+}
+
+.Sections__header span{
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    font-family: helvetica,arial,verdana,sans-serif;
+    line-height: 16px;
+    padding: 3px 3px 3px 10px;
+}
+
+.Section__body{
+    background: #3b3b3b;
+    color: #d5d5d5;
+    height: 106px;
+}
+
+.Section__body-wrapper{
+    display: flex;
+    justify-content: space-around;
+    height: 100%;
+}

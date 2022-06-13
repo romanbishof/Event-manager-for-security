@@ -1,0 +1,23 @@
+.TableDevices{
+    width: 932px;
+    padding: 5px 5px 5px 0px;
+}
+
+.TableDevices__header{
+    display: flex;
+}
+
+.TableDevices__header span{
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    font-family: helvetica,arial,verdana,sans-serif;
+    line-height: 16px;
+    padding: 3px 3px 3px 10px;
+}
+
+.TableDevices__body{
+    background: #3b3b3b;
+    color: #d5d5d5;
+    height: 475px;
+}

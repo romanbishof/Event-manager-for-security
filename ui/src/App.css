@@ -1,0 +1,9 @@
+.App{
+    height: 100vh;
+    background-color: #000;
+}
+
+.App__wrapper{
+    display: flex;
+    flex-direction: row;
+}
