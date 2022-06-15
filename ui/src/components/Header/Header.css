@@ -8,7 +8,7 @@
 .Header__wrapper{
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: flex-end;
 }
 .Header__title{
     width: 480px;
@@ -30,4 +30,22 @@
     font-size: 18px;
     font-weight: bold;
     font-family: helvetica,arial,verdana,sans-serif;
+}
+
+.Header__options{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 54px;
+    width: 37.5%;
+}
+
+.Header__options img{
+    cursor: pointer;
+    margin: 0px;
+    width: 25px;
+    right: auto;
+    /* left: 636px;
+    top: 12px; */
+    margin-right: 50px;
 }

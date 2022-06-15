@@ -14,7 +14,8 @@ function Sections() {
           <Section jetty="atlas" coordinates={[6.4112, 3.3921]} />
           <Section jetty="calabar" coordinates={[8.320861, 4.984461]} />
           <Section jetty="okrika" coordinates={[7.087561, 4.724506]} />
-          <Section jetty="warri" coordinates={[5.53698, 5.69558]} />
+          <Section jetty="warri" coordinates={[5.69558, 5.53698]} />
+          {/* <Section jetty="warri" coordinates={[5.69529, 5.53766]} /> */}
         </div>
       </div>
     </div>

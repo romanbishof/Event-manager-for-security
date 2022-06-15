@@ -1,17 +1,38 @@
 import { imageOverlay } from "leaflet";
-import React, { useEffect } from "react";
-import { TileLayer, useMap, useMapEvent } from "react-leaflet";
-import { useSelector } from "react-redux";
-import apapa_jetty from "../../images/apapa_jetty.png";
-import atlas_jetty from "../../images/atlas_jetty.png";
-import calabar_jetty from "../../images/calabar_jetty.png";
-import okrika_jetty from "../../images/okrika_jetty.png";
-import warri_jetty from "../../images/warri_jetty.png";
+import React, { useEffect, useState } from "react";
+import {
+  ImageOverlay,
+  Marker,
+  Pane,
+  Rectangle,
+  TileLayer,
+  useMap,
+  useMapEvent,
+} from "react-leaflet";
+import { useDispatch, useSelector } from "react-redux";
+// import apapa_jetty from "../../images/apapa_jetty.png";
+// import atlas_jetty from "../../images/atlas_jetty.png";
+// import calabar_jetty from "../../images/calabar_jetty.png";
+// import okrika_jetty from "../../images/okrika_jetty.png";
+// import warri_jetty from "../../images/warri_jetty.png";
+import apapa_jetty_img from "../../images/Apapa - Copy.jpg";
+import warri_jetty_img from "../../images/Warri - Copy.jpg";
+import atlas_jetty_img from "../../images/ATLAS COVE_2.jpg";
+import calabar_jetty_img from "../../images/Calabar - Copy.jpg";
+import okrika_jetty_img from "../../images/Okrika 2.jpg";
 
 function MapComponent() {
   const state = useSelector((state) => state.ISMS);
-
+  const [position, setPosition] = useState(null);
+  const [markers, setMarkers] = useState([]);
   const map = useMap();
+
+  const mapEvents = useMapEvent({
+    click: (e) => {
+      let coordinates = e.latlng;
+      setMarkers([...markers, coordinates]);
+    },
+  });
 
   const bounds = {
     apapa: [
@@ -36,19 +57,29 @@ function MapComponent() {
     ],
   };
 
-  const apapaImage = imageOverlay(apapa_jetty, bounds.apapa).addTo(map);
-  const atlasImage = imageOverlay(atlas_jetty, bounds.atlas).addTo(map);
-  const calabarImage = imageOverlay(calabar_jetty, bounds.calabar).addTo(map);
-  const okrikaImage = imageOverlay(okrika_jetty, bounds.okrika).addTo(map);
-  const warriImage = imageOverlay(warri_jetty, bounds.warri).addTo(map);
+  // let outer = [
+  //   [5.69242, 3.36908],
+  //   [8.32331, 5.54087],
+  // ];
+
+  const apapaImage = imageOverlay(apapa_jetty_img, bounds.apapa).addTo(map);
+  const atlasImage = imageOverlay(atlas_jetty_img, bounds.atlas).addTo(map);
+  const calabarImage = imageOverlay(calabar_jetty_img, bounds.calabar).addTo(
+    map
+  );
+  const okrikaImage = imageOverlay(okrika_jetty_img, bounds.okrika).addTo(map);
+  const warriImage = imageOverlay(warri_jetty_img, bounds.warri).addTo(map);
 
   useEffect(() => {
     map.panTo(state.Center);
     map.setZoom(17);
   }, [state]);
+
   return (
     <div>
-      <TileLayer url={process.env.REACT_APP_API_MAP} />
+      {markers.map((position, index) => {
+        return <Marker key={index} position={position}></Marker>;
+      })}
     </div>
   );
 }
