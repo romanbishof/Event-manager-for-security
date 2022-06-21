@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
 import axios from "axios";
-import data from "../data/cloud_devices.json";
+// import data from "../data/cloud_devices.json";
 
 export const getSectionsAsync = createAsyncThunk(
   "isms/getSectionsAsync",
@@ -46,12 +46,13 @@ const initialState = {
   Center: [6.4553, 3.3713],
   Jetty: "APAPA",
   ZoneId: "",
-  JsonData: data[0],
+  // JsonData: data[0],
   Sections: [],
   Devices: [],
   PhysicalDevices: [],
   SectionId: "",
   integrationDevices: [],
+  markers: [],
 };
 
 const ISMS_Slice = createSlice({
@@ -70,6 +71,9 @@ const ISMS_Slice = createSlice({
     setSectionId: (state, action) => {
       state.SectionId = action.payload;
     },
+    setMarkersState: (state, action) => {
+      state.markers = action.payload;
+    },
   },
   extraReducers: {
     [getSectionsAsync.fulfilled]: (state, action) => {
@@ -87,7 +91,12 @@ const ISMS_Slice = createSlice({
   },
 });
 
-export const { setCoordinatesJetty, setDevicesJetty, setZoneId, setSectionId } =
-  ISMS_Slice.actions;
+export const {
+  setMarkersState,
+  setCoordinatesJetty,
+  setDevicesJetty,
+  setZoneId,
+  setSectionId,
+} = ISMS_Slice.actions;
 
 export default ISMS_Slice.reducer;

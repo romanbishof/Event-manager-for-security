@@ -1,4 +1,4 @@
-import { imageOverlay } from "leaflet";
+import { icon, imageOverlay } from "leaflet";
 import React, { useEffect, useState } from "react";
 import {
   ImageOverlay,
@@ -24,15 +24,15 @@ import okrika_jetty_img from "../../images/Okrika 2.jpg";
 function MapComponent() {
   const state = useSelector((state) => state.ISMS);
   const [position, setPosition] = useState(null);
-  const [markers, setMarkers] = useState([]);
+  const [markers, setMarkers] = useState(state.markers);
   const map = useMap();
 
-  const mapEvents = useMapEvent({
-    click: (e) => {
-      let coordinates = e.latlng;
-      setMarkers([...markers, coordinates]);
-    },
-  });
+  // const mapEvents = useMapEvent({
+  //   click: (e) => {
+  //     let coordinates = e.latlng;
+  //     setMarkers([...markers, coordinates]);
+  //   },
+  // });
 
   const bounds = {
     apapa: [
@@ -77,9 +77,18 @@ function MapComponent() {
 
   return (
     <div>
-      {markers.map((position, index) => {
-        return <Marker key={index} position={position}></Marker>;
-      })}
+      {markers.lenth === 0
+        ? ""
+        : markers.map((marker) => {
+            return (
+              <Marker
+                key={marker.id}
+                position={marker.coordinates}
+                icon={icon({ iconUrl: marker.icon, iconSize: [28, 28] })}
+                draggable={false}
+              ></Marker>
+            );
+          })}
     </div>
   );
 }

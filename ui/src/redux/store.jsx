@@ -5,4 +5,8 @@ export default configureStore({
   reducer: {
     ISMS: ISMS_Reducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });

@@ -8,20 +8,65 @@
 }
 .Settings__sections{
     background-color:#515151;
-    width: 250px;
+    width: 185px;
     min-height: 100%;
 }
 
 .Settings__wrapper{
     display: flex;
     flex-direction: row;
+    width: 100%;
 }
 
-.Settings__wrapper-devices_list{
+.Settings__wrapper-map{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.Settings__devices_list{
     margin: 0px 5px;
-    width: 220px;
+    min-width: 250px;
     height: 100%;
     background-color:#515151;
     overflow-y: scroll;
     overflow-x: hidden;
+}
+
+.Settings__Table{
+    width: 100%;
+    /* height: 50px; */
+    border-bottom: 1px solid rgb(0, 0, 0);
+}
+
+.Settings__Table :hover{
+    background-color: #353535
+}
+
+.Settings__Table-td{
+    width: 187px;
+    
+}
+
+.Settings__Table-div{
+    display: flex;
+    /* overflow: hidden; */
+    width: 100%;
+    height: 50px;
+}
+
+.Settings__Table-img{
+    width: 35px;
+    height: 35px;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.Settings__map{
+    width: 100%;
+    height: 100%;
+}
+
+.Settings__map__body{
+    height: 100%;
 }

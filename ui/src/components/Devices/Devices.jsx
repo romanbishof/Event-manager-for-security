@@ -5,12 +5,14 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import "./Devices.css";
 import { useDispatch, useSelector } from "react-redux";
 import { setZoneId } from "../../redux/ISMS_Slice";
+// import { v4 as uuidv4 } from "uuid";
 
 function Devices() {
   const state = useSelector((state) => state.ISMS);
   const [patentTree, setParentTree] = useState("");
   const dispatch = useDispatch();
-  // let { TreeList } = state.JsonData;
+  let { integrationDevices } = state;
+
   let treeList = state.Sections;
 
   useEffect(() => {
@@ -19,6 +21,73 @@ function Devices() {
     );
     setParentTree(treeRoot);
   }, [state]);
+
+  // console.log(integrationDevices);
+
+  const buildTree = (nodes, parentId, n = 4) => {
+    if (nodes.length === 0) {
+      return;
+    }
+    if (n !== 0) {
+      let children = "";
+      switch (n) {
+        case 4:
+          return nodes
+            .filter((node) => node.ParentObjectId === parentId)
+            .reduce(
+              (tree, node) => [
+                ...tree,
+                { ...node, Sections: buildTree(nodes, node.Id, n - 1) },
+              ],
+              []
+            );
+
+        case 3:
+          return nodes
+            .filter((node) => node.ParentObjectId === parentId)
+            .reduce(
+              (tree, node) => [
+                ...tree,
+                { ...node, Zones: buildTree(nodes, node.Id, n - 1) },
+              ],
+              []
+            );
+
+        case 2:
+          return nodes
+            .filter((node) => node.ParentObjectId === parentId)
+            .reduce(
+              (tree, node) => [
+                ...tree,
+                { ...node, PhysicalDevices: buildTree(nodes, node.Id, n - 1) },
+              ],
+              []
+            );
+
+        case 1:
+          return nodes
+            .filter((node) => node.ParentObjectId === parentId)
+            .reduce(
+              (tree, node) => [
+                ...tree,
+                { ...node, Devices: buildTree(nodes, node.Id, n - 1) },
+              ],
+              []
+            );
+
+        default:
+          break;
+      }
+    }
+  };
+
+  let temp = buildTree(
+    integrationDevices,
+    "00000000-0000-0000-0000-000000000000"
+  );
+  console.log(temp);
+
+  localStorage.setItem("temp", JSON.stringify(temp));
 
   const handleClickNode = (Id) => {
     dispatch(setZoneId(Id));

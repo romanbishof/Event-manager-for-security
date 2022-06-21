@@ -14,6 +14,7 @@ import {
   getSectionsAsync,
   getDevicesAsync,
   getPhysicalDevicesAsync,
+  getIntegrationDevicesAsync,
 } from "./redux/ISMS_Slice";
 function App() {
   const state = useSelector((state) => state.ISMS);
@@ -23,7 +24,7 @@ function App() {
     dispatch(getSectionsAsync());
     dispatch(getDevicesAsync());
     dispatch(getPhysicalDevicesAsync());
-    dispatch(getPhysicalDevicesAsync());
+    dispatch(getIntegrationDevicesAsync());
   }, []);
 
   return (

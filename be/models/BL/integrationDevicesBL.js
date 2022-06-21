@@ -36,7 +36,7 @@ let addIntegrationDevice = (device) => {
 let getAllIntegrationDevices = () => {
 
     return new Promise((resolve, reject) => {
-        Devices.find({}, (err, data) => {
+        IntegrationDevices.find({}, (err, data) => {
             if (err) {
                 reject(err)
             } else {
