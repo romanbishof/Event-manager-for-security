@@ -1,5 +1,5 @@
 import { TreeItem, TreeView } from "@mui/lab";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
@@ -15,6 +15,14 @@ import main_device_door_close from "../../iconImage/main_device_door_close.png";
 // import main_device_door_open from "../../iconImage/main_device_door_open.png";
 import main_device_panic_detecting from "../../iconImage/main_device_panic_detecting.png";
 import main_device_siren_normal from "../../iconImage/main_device_siren_normal.png";
+import {
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableRow,
+} from "@mui/material";
 
 function Settings() {
   const state = useSelector((state) => state.ISMS);
@@ -25,7 +33,12 @@ function Settings() {
     let filterdDevices = state.Devices.filter(
       (device) => device.SectionId === id
     );
-    setDevices(filterdDevices);
+    let temp = state.Sections.filter((section) =>
+      // section.Name.toLowerCase().includes(state.Jetty.toLowerCase())
+      section.Name.toLowerCase().includes(id.toLowerCase())
+    );
+
+    setDevices(temp);
 
     switch (id) {
       case 21: //selecting ATLAS Jetty for map
@@ -85,11 +98,11 @@ function Settings() {
           {state.Sections.map((section) => {
             return (
               <TreeItem
-                key={section._id}
-                nodeId={toString(section._id)}
+                key={section.Id}
+                nodeId={toString(section.Id)}
                 label={section.Name}
                 onClick={() => {
-                  handleSelectJetty(section.Id);
+                  handleSelectJetty(section.Name);
                   dispatch(setSectionId(section.Id));
                 }}
               >
@@ -110,7 +123,47 @@ function Settings() {
       <div className="Settings__wrapper">
         <div className="Settings__wrapper-map" id="map">
           <div className="Settings__devices_list">
-            {devices.length === 0
+            {devices[0]?.Zones?.map((obj) => {
+              return obj.PhysicalDevices.map((obj) => {
+                // console.log(obj);
+                return obj.Devices.length > 0 ? (
+                  obj.Devices.map((obj) => (
+                    <TableContainer
+                      sx={{ overflowX: "hidden" }}
+                      key={obj.Id}
+                      component={Paper}
+                    >
+                      <Table size="small">
+                        <TableBody>
+                          <TableRow hover={true}>
+                            <TableCell id={obj.Id} draggable={true}>
+                              {obj.Name}
+                            </TableCell>
+                          </TableRow>
+                        </TableBody>
+                      </Table>
+                    </TableContainer>
+                  ))
+                ) : (
+                  <TableContainer
+                    sx={{ overflowX: "hidden" }}
+                    key={obj.Id}
+                    component={Paper}
+                  >
+                    <Table>
+                      <TableBody>
+                        <TableRow>
+                          <TableCell id={obj.Id} draggable={true}>
+                            {obj.Name}
+                          </TableCell>
+                        </TableRow>
+                      </TableBody>
+                    </Table>
+                  </TableContainer>
+                );
+              });
+            })}
+            {/* {devices.length === 0
               ? ""
               : devices.map((device, index) => {
                   return (
@@ -137,14 +190,9 @@ function Settings() {
                       </tbody>
                     </table>
                   );
-                })}
+                })} */}
           </div>
           <div className="Settings__map">
-            {/* <div className="Settings__map-options">
-              <Button size="small" variant="contained">
-                Save
-              </Button>
-            </div> */}
             <MapContainer
               className="Settings__map__body"
               center={[6.4553, 3.3713]}
@@ -152,7 +200,6 @@ function Settings() {
               maxZoom={20}
               zoom={18}
             >
-              {/* <MapSettingsComponent /> */}
               {/* <TileLayer url={process.env.REACT_APP_API_MAP}></TileLayer> */}
               <MapSettingsComponent />
             </MapContainer>
