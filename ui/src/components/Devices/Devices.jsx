@@ -4,115 +4,148 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import "./Devices.css";
 import { useDispatch, useSelector } from "react-redux";
-import { setZoneId } from "../../redux/ISMS_Slice";
+import { setPhysicalDevices, setZoneId } from "../../redux/ISMS_Slice";
 // import { v4 as uuidv4 } from "uuid";
 
 function Devices() {
   const state = useSelector((state) => state.ISMS);
-  const [patentTree, setParentTree] = useState("");
+  const [parentTree, setParentTree] = useState(state.integrationDevices);
   const dispatch = useDispatch();
-  let { integrationDevices } = state;
+  // let { integrationDevices } = state;
 
-  let treeList = state.Sections;
+  // let treeList = state.Sections;
 
   useEffect(() => {
-    let [treeRoot] = treeList.filter((obj) =>
+    let [treeRoot] = state.Sections.filter((obj) =>
       obj.Name.toLowerCase().includes(state.Jetty.toLowerCase())
     );
     setParentTree(treeRoot);
   }, [state]);
 
-  // console.log(integrationDevices);
+  // function to make obj tree from array of obj
+  // const buildTree = (nodes, parentId, n = 5) => {
+  //   if (nodes.length === 0) {
+  //     return;
+  //   }
+  //   if (n !== 0) {
+  //     switch (n) {
+  //       case 5:
+  //         return nodes
+  //           .filter((node) => node.ParentObjectId === parentId)
+  //           .reduce(
+  //             (tree, node) => [
+  //               ...tree,
+  //               { ...node, Sections: buildTree(nodes, node.Id, n - 1) },
+  //             ],
+  //             []
+  //           );
+  //       case 4:
+  //         return nodes
+  //           .filter((node) => node.ParentObjectId === parentId)
+  //           .reduce(
+  //             (tree, node) => [
+  //               ...tree,
+  //               { ...node, Zones: buildTree(nodes, node.Id, n - 1) },
+  //             ],
+  //             []
+  //           );
 
-  const buildTree = (nodes, parentId, n = 4) => {
-    if (nodes.length === 0) {
-      return;
-    }
-    if (n !== 0) {
-      let children = "";
-      switch (n) {
-        case 4:
-          return nodes
-            .filter((node) => node.ParentObjectId === parentId)
-            .reduce(
-              (tree, node) => [
-                ...tree,
-                { ...node, Sections: buildTree(nodes, node.Id, n - 1) },
-              ],
-              []
-            );
+  //       case 3:
+  //         return nodes
+  //           .filter((node) => node.ParentObjectId === parentId)
+  //           .reduce(
+  //             (tree, node) => [
+  //               ...tree,
+  //               { ...node, PhysicalDevices: buildTree(nodes, node.Id, n - 1) },
+  //             ],
+  //             []
+  //           );
+  //       case 2:
+  //         return nodes
+  //           .filter((node) => node.ParentObjectId === parentId)
+  //           .reduce(
+  //             (tree, node) => [
+  //               ...tree,
+  //               { ...node, Devices: buildTree(nodes, node.Id, n - 1) },
+  //             ],
+  //             []
+  //           );
+  //       case 1:
+  //         return nodes
+  //           .filter((node) => node.ParentObjectId === parentId)
+  //           .reduce(
+  //             (tree, node) => [
+  //               ...tree,
+  //               { ...node, Childdren: buildTree(nodes, node.Id, n - 1) },
+  //             ],
+  //             []
+  //           );
 
-        case 3:
-          return nodes
-            .filter((node) => node.ParentObjectId === parentId)
-            .reduce(
-              (tree, node) => [
-                ...tree,
-                { ...node, Zones: buildTree(nodes, node.Id, n - 1) },
-              ],
-              []
-            );
+  //       default:
+  //         break;
+  //     }
+  //     // return nodes
+  //     //   .filter((node) => node.ParentObjectId === parentId)
+  //     //   .reduce(
+  //     //     (tree, node) => [
+  //     //       ...tree,
+  //     //       { ...node, Children: buildTree(nodes, node.Id, n - 1) },
+  //     //     ],
+  //     //     []
+  //     //   );
+  //   }
+  // };
 
-        case 2:
-          return nodes
-            .filter((node) => node.ParentObjectId === parentId)
-            .reduce(
-              (tree, node) => [
-                ...tree,
-                { ...node, PhysicalDevices: buildTree(nodes, node.Id, n - 1) },
-              ],
-              []
-            );
+  // let temp = buildTree(
+  //   integrationDevices,
+  //   "00000000-0000-0000-0000-000000000000"
+  // );
+  // console.log(temp);
 
-        case 1:
-          return nodes
-            .filter((node) => node.ParentObjectId === parentId)
-            .reduce(
-              (tree, node) => [
-                ...tree,
-                { ...node, Devices: buildTree(nodes, node.Id, n - 1) },
-              ],
-              []
-            );
+  // localStorage.setItem("temp", JSON.stringify(temp));
 
-        default:
-          break;
-      }
-    }
+  const handleClickNode = (physicalDevices) => {
+    // dispatch(setZoneId(Id));
+    dispatch(setPhysicalDevices(physicalDevices));
   };
 
-  let temp = buildTree(
-    integrationDevices,
-    "00000000-0000-0000-0000-000000000000"
-  );
-  console.log(temp);
-
-  localStorage.setItem("temp", JSON.stringify(temp));
-
-  const handleClickNode = (Id) => {
-    dispatch(setZoneId(Id));
-  };
+  // const renderTree = (nodes) => {
+  //   if (nodes.ZoneList !== undefined) {
+  //     return (
+  //       <div>
+  //         {nodes.ZoneList.Zones.map((_node) => {
+  //           return (
+  //             <TreeItem
+  //               key={_node.Id}
+  //               nodeId={String(_node.Id)}
+  //               label={_node.Name}
+  //               onClick={() => {
+  //                 handleClickNode(_node.Id);
+  //               }}
+  //               sx={{ borderBottom: "1px solid #a0bd11" }}
+  //             ></TreeItem>
+  //           );
+  //         })}
+  //       </div>
+  //     );
+  //   } else {
+  //     console.log("The data is undefined", nodes.ZoneList);
+  //     return [];
+  //   }
+  // };
 
   const renderTree = (nodes) => {
-    if (nodes.ZoneList !== undefined) {
+    if (nodes?.Zones) {
       return (
-        // <TreeItem
-        //   key={nodes.Id}
-        //   nodeId={String(nodes.Id)}
-        //   label={nodes.Name}
-        //   sx={{ border: "1px solid #7a7a78" }}
-        // >
-
-        // </TreeItem>
         <div>
-          {nodes.ZoneList.Zones.map((_node) => {
+          {nodes.Zones.map((_node) => {
             return (
               <TreeItem
                 key={_node.Id}
                 nodeId={String(_node.Id)}
                 label={_node.Name}
                 onClick={() => {
-                  handleClickNode(_node.Id);
+                  handleClickNode(_node.PhysicalDevices);
                 }}
                 sx={{ borderBottom: "1px solid #a0bd11" }}
               ></TreeItem>
@@ -121,11 +154,10 @@ function Devices() {
         </div>
       );
     } else {
-      console.log("The data is undefined", nodes.ZoneList);
+      console.log("The data is undefined", nodes?.Zones);
       return [];
     }
   };
-
   return (
     <div className="Devices">
       <div className="Devices__header header">
@@ -145,7 +177,7 @@ function Devices() {
               overflowY: "auto",
             }}
           >
-            {renderTree(patentTree)}
+            {renderTree(parentTree)}
           </TreeView>
         </div>
       </div>

@@ -3,11 +3,10 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-// import imgIcon from "../../iconImage/gateway_on.png";
 import "./Settings.css";
 import { MapContainer } from "react-leaflet";
 import MapSettingsComponent from "../MapComponent/MapSettingsComponent";
-import { setCoordinatesJetty } from "../../redux/ISMS_Slice";
+import { setCoordinatesJetty, setSectionId } from "../../redux/ISMS_Slice";
 import gateway_on from "../../iconImage/gateway_on.png";
 import emergency_idle from "../../iconImage/emergency_idle.png";
 import doorphone_on from "../../iconImage/doorphone_on.png";
@@ -27,23 +26,28 @@ function Settings() {
       (device) => device.SectionId === id
     );
     setDevices(filterdDevices);
+
     switch (id) {
-      case 21:
+      case 21: //selecting ATLAS Jetty for map
         dispatch(setCoordinatesJetty([6.4112, 3.3921]));
 
         break;
-      case 20:
+      case 20: //selecting APAPA Jetty for map
         dispatch(setCoordinatesJetty([6.454467, 3.37155]));
         break;
-      case 22:
-        dispatch(setCoordinatesJetty([8.320861, 4.984461]));
+
+      case 22: //selecting CALABAR Jetty for map
+        dispatch(setCoordinatesJetty([8.322446, 4.984032]));
         break;
-      case 23:
-        dispatch(setCoordinatesJetty([5.69558, 5.53698]));
+
+      case 23: //selecting WARRI Jetty for map
+        dispatch(setCoordinatesJetty([5.695483, 5.537667]));
         break;
-      case 25:
-        dispatch(setCoordinatesJetty([7.087561, 4.724506]));
+
+      case 25: //selecting OKRIKA Jetty for map
+        dispatch(setCoordinatesJetty([7.086445, 4.721889]));
         break;
+
       default:
         break;
     }
@@ -70,7 +74,6 @@ function Settings() {
     }
   };
 
-  // console.log(devices);
   return (
     <div className="Settings">
       <div className="Settings__sections">
@@ -87,6 +90,7 @@ function Settings() {
                 label={section.Name}
                 onClick={() => {
                   handleSelectJetty(section.Id);
+                  dispatch(setSectionId(section.Id));
                 }}
               >
                 {/* {section.ZoneList.Zones.map((zone) => {

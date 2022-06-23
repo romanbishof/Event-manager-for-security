@@ -1,7 +1,83 @@
 import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
 import axios from "axios";
+
 // import data from "../data/cloud_devices.json";
 
+// function to make obj tree from array of obj
+const buildTree = (nodes, parentId, n = 5) => {
+  if (nodes.length === 0) {
+    return;
+  }
+  if (n !== 0) {
+    switch (n) {
+      case 5:
+        return nodes
+          .filter((node) => node.ParentObjectId === parentId)
+          .reduce(
+            (tree, node) => [
+              ...tree,
+              { ...node, Sections: buildTree(nodes, node.Id, n - 1) },
+            ],
+            []
+          );
+      case 4:
+        return nodes
+          .filter((node) => node.ParentObjectId === parentId)
+          .reduce(
+            (tree, node) => [
+              ...tree,
+              { ...node, Zones: buildTree(nodes, node.Id, n - 1) },
+            ],
+            []
+          );
+
+      case 3:
+        return nodes
+          .filter((node) => node.ParentObjectId === parentId)
+          .reduce(
+            (tree, node) => [
+              ...tree,
+              { ...node, PhysicalDevices: buildTree(nodes, node.Id, n - 1) },
+            ],
+            []
+          );
+      case 2:
+        return nodes
+          .filter((node) => node.ParentObjectId === parentId)
+          .reduce(
+            (tree, node) => [
+              ...tree,
+              { ...node, Devices: buildTree(nodes, node.Id, n - 1) },
+            ],
+            []
+          );
+      case 1:
+        return nodes
+          .filter((node) => node.ParentObjectId === parentId)
+          .reduce(
+            (tree, node) => [
+              ...tree,
+              { ...node, Children: buildTree(nodes, node.Id, n - 1) },
+            ],
+            []
+          );
+
+      default:
+        break;
+    }
+    // return nodes
+    //   .filter((node) => node.ParentObjectId === parentId)
+    //   .reduce(
+    //     (tree, node) => [
+    //       ...tree,
+    //       { ...node, Children: buildTree(nodes, node.Id, n - 1) },
+    //     ],
+    //     []
+    //   );
+  }
+};
+
+// getting sections of jetty from DB
 export const getSectionsAsync = createAsyncThunk(
   "isms/getSectionsAsync",
   async () => {
@@ -11,6 +87,7 @@ export const getSectionsAsync = createAsyncThunk(
   }
 );
 
+// getting Devices from DB
 export const getDevicesAsync = createAsyncThunk(
   "isms/getDevicesAsync",
   async () => {
@@ -20,6 +97,7 @@ export const getDevicesAsync = createAsyncThunk(
   }
 );
 
+// getting Physical Devices from DB
 export const getPhysicalDevicesAsync = createAsyncThunk(
   "isms/getPhysicalDevicesAsync",
   async () => {
@@ -31,14 +109,25 @@ export const getPhysicalDevicesAsync = createAsyncThunk(
   }
 );
 
+// getting integration Devices From DB
 export const getIntegrationDevicesAsync = createAsyncThunk(
   "isms/getIntegrationDevicesAsync",
   async () => {
-    let sections = await axios.get(
-      `http://localhost:8080/api/v1/integrationDevices`
-    );
+    let data;
+    await axios
+      .get(`http://localhost:8080/api/v1/integrationDevices`)
+      .then((resp) => {
+        data = resp.data;
+        localStorage.setItem("integrationDevices", JSON.stringify(data));
+      })
+      .catch((err) => {
+        if (err.message === "Network Error") {
+          data = JSON.parse(localStorage.getItem("integrationDevices"));
+          return data;
+        }
+      });
 
-    return sections.data;
+    return data;
   }
 );
 
@@ -48,6 +137,7 @@ const initialState = {
   ZoneId: "",
   // JsonData: data[0],
   Sections: [],
+  NonCategorizedDevices: [],
   Devices: [],
   PhysicalDevices: [],
   SectionId: "",
@@ -55,10 +145,14 @@ const initialState = {
   markers: [],
 };
 
+// our Action for Reducer
 const ISMS_Slice = createSlice({
   name: "ISMS",
   initialState: initialState,
   reducers: {
+    setPhysicalDevices: (state, action) => {
+      state.PhysicalDevices = action.payload;
+    },
     setCoordinatesJetty: (state, action) => {
       state.Center = action.payload;
     },
@@ -70,33 +164,49 @@ const ISMS_Slice = createSlice({
     },
     setSectionId: (state, action) => {
       state.SectionId = action.payload;
+      state.PhysicalDevices = [];
     },
     setMarkersState: (state, action) => {
       state.markers = action.payload;
     },
   },
   extraReducers: {
-    [getSectionsAsync.fulfilled]: (state, action) => {
-      state.Sections = action.payload;
-    },
-    [getDevicesAsync.fulfilled]: (state, action) => {
-      state.Devices = action.payload;
-    },
-    [getPhysicalDevicesAsync.fulfilled]: (state, action) => {
-      state.PhysicalDevices = action.payload;
-    },
+    // [getSectionsAsync.fulfilled]: (state, action) => {
+    //   state.Sections = action.payload;
+    // },
+    // [getDevicesAsync.fulfilled]: (state, action) => {
+    //   state.Devices = action.payload;
+    // },
+    // [getPhysicalDevicesAsync.fulfilled]: (state, action) => {
+    //   state.PhysicalDevices = action.payload;
+    // },
     [getIntegrationDevicesAsync.fulfilled]: (state, action) => {
-      state.integrationDevices = action.payload;
+      let tree = buildTree(
+        action.payload,
+        "00000000-0000-0000-0000-000000000000"
+      );
+      state.integrationDevices = tree;
+      state.Sections = tree[0].Sections.filter(
+        (obj) => obj.Name.toLowerCase().includes("jetty") && obj.Type === 31
+      );
+
+      state.NonCategorizedDevices = tree[0].Sections.filter(
+        (obj) => obj.Type === 14
+      );
+
+      // console.log(current(state));
     },
   },
 });
 
+// export all reducers as actions
 export const {
   setMarkersState,
   setCoordinatesJetty,
   setDevicesJetty,
   setZoneId,
   setSectionId,
+  setPhysicalDevices,
 } = ISMS_Slice.actions;
 
 export default ISMS_Slice.reducer;

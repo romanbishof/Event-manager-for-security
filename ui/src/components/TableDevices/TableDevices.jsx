@@ -7,21 +7,42 @@ import "./TableDevices.css";
 import TableItem from "./TableItem/TableItem";
 
 function TableDevices() {
-  const [zoneDevices, setZoneDevices] = useState([]);
-  const [physicalZoneDevices, setPhysicalZoneDevices] = useState([]);
+  // const [nonCategorizedDevices, setNonCategorizedDevices] = useState([]);
+  // const [physicalZoneDevices, setPhysicalZoneDevices] = useState([]);
   //   const [physicalZoneDevices, setPhysicalZoneDevices] = useState(null);
   const state = useSelector((state) => state.ISMS);
-  let { PhysicalDevices, Devices } = state;
-  // let { PhysicalDevices, Devices } = state.JsonData;
+  let { PhysicalDevices, NonCategorizedDevices } = state;
 
-  useEffect(() => {
-    let physicalFilterdDevices = PhysicalDevices.filter(
-      (obj) => obj.ZoneId === state.ZoneId
-    );
-    setPhysicalZoneDevices(physicalFilterdDevices);
-    let filterdDevices = Devices.filter((obj) => obj.ZoneId === state.ZoneId);
-    setZoneDevices(filterdDevices);
-  }, [state]);
+  // let { PhysicalDevices, Devices } = state.JsonData;
+  // console.log(NonCategorizedDevices);
+
+  // useEffect(() => {
+  //   let physicalFilterdDevices = PhysicalDevices.filter(
+  //     (obj) => obj.ZoneId === state.ZoneId
+  //   );
+  //   setPhysicalZoneDevices(physicalFilterdDevices);
+  //   let filterdDevices = Devices.filter((obj) => obj.ZoneId === state.ZoneId);
+  //   setZoneDevices(filterdDevices);
+  // }, [state]);
+
+  // useEffect(() => {
+  //   if (NonCategorizedDevices) {
+  //     let fiterdNonCategorizedDevices = NonCategorizedDevices.filter((obj) =>
+  //       obj.Name.toLowerCase().includes(
+  //         state.Jetty.toLowerCase().substring(0, 3)
+  //       )
+  //     );
+
+  //     // console.log(fiterdNonCategorizedDevices);
+  //     setNonCategorizedDevices(fiterdNonCategorizedDevices);
+  //   }
+  // }, [state]);
+
+  // const filterNonCategorizedDevices = (devices) => {
+  //   return NonCategorizedDevices.filter((obj) =>
+  //     obj.Name.toLowerCase().includes(state.Jetty.toLowerCase().substring(0, 3))
+  //   );
+  // };
 
   return (
     <div className="TableDevices">
@@ -41,8 +62,19 @@ function TableDevices() {
             overflowY: "auto",
           }}
         >
-          <TableItem _devices={zoneDevices} _label="Devices" />
-          <TableItem _devices={physicalZoneDevices} _label="Physical Devices" />
+          <TableItem
+            _devices={NonCategorizedDevices}
+            _label="Non Categorized Devices"
+          />
+          {/* <TableItem
+            _devices={NonCategorizedDevices.filter((obj) =>
+              obj.Name.toLowerCase().includes(
+                state.Jetty.toLowerCase().substring(0, 3)
+              )
+            )}
+            _label="Non Categorized Devices"
+          /> */}
+          <TableItem _devices={PhysicalDevices} _label="Physical Devices" />
         </TreeView>
       </div>
     </div>

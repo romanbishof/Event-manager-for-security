@@ -10,11 +10,31 @@ function Sections() {
       </div>
       <div className="Section__body">
         <div className="Section__body-wrapper">
-          <Section jetty="APAPA" coordinates={[6.454467, 3.37155]} />
-          <Section jetty="ATLAS" coordinates={[6.4112, 3.3921]} />
-          <Section jetty="CALABAR" coordinates={[8.320861, 4.984461]} />
-          <Section jetty="OKRIKA" coordinates={[7.087561, 4.724506]} />
-          <Section jetty="WARRI" coordinates={[5.69558, 5.53698]} />
+          <Section
+            jetty="APAPA"
+            sectionId={20}
+            coordinates={[6.455443, 3.371531]}
+          />
+          <Section
+            jetty="ATLAS"
+            sectionId={21}
+            coordinates={[6.4112, 3.3921]}
+          />
+          <Section
+            jetty="CALABAR"
+            sectionId={22}
+            coordinates={[8.322446, 4.984032]}
+          />
+          <Section
+            jetty="OKRIKA"
+            sectionId={25}
+            coordinates={[7.086445, 4.721889]}
+          />
+          <Section
+            jetty="WARRI"
+            sectionId={23}
+            coordinates={[5.695483, 5.537667]}
+          />
           {/* <Section jetty="warri" coordinates={[5.69529, 5.53766]} /> */}
         </div>
       </div>

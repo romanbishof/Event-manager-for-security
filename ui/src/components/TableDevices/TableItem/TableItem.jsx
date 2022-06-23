@@ -17,6 +17,7 @@ import Paper from "@mui/material/Paper";
 
 import React, { useEffect, useState } from "react";
 import "./TableItem.css";
+
 function TableItem({ _devices, _label }) {
   const [open, setOpen] = useState(false);
   const [device, setDevice] = useState({});
@@ -34,6 +35,27 @@ function TableItem({ _devices, _label }) {
     setDeviceKeys(Object.keys(device));
   }, [device]);
 
+  // console.log(_devices);
+
+  // const renderTree = (nodes) => {
+  //   console.log(nodes.Name);
+  //   // nodes?.Devices?.length > 0 || nodes?.Zones?.length > 0
+  //   //   ? console.log("device")
+  //   //   : console.log("no devices");
+  //   return (
+  //     <TreeItem
+  //       key={nodes.Id}
+  //       nodeId={nodes.Id}
+  //       label={nodes.Name}
+  //       sx={{ border: "1px solid #7a7a78" }}
+  //     >
+  //       {nodes?.Devices?.length > 0
+  //         ? nodes.Devices.map((node) => renderTree(node))
+  //         : null}
+  //     </TreeItem>
+  //   );
+  // };
+
   return (
     <div className="TableItem">
       {_devices.length > 0 ? (
@@ -50,17 +72,36 @@ function TableItem({ _devices, _label }) {
                 nodeId={String(obj.Id)}
                 label={obj.Name}
                 sx={{ borderBottom: "1px solid #a0bd11" }}
-                onClick={() => {
-                  setDevice(obj);
-                  handlePopupItem(obj);
-                }}
-              ></TreeItem>
+                // onClick={() => {
+                //   setDevice(obj);
+                //   handlePopupItem(obj);
+                // }}
+              >
+                {obj?.Devices?.length > 0
+                  ? obj.Devices.map((obj) => {
+                      return (
+                        <TreeItem
+                          key={obj.Id}
+                          nodeId={String(obj.Id)}
+                          label={obj.Name}
+                          sx={{ borderBottom: "1px solid #a0bd11" }}
+                          // onClick={() => {
+                          //   setDevice(obj);
+                          //   handlePopupItem(obj);
+                          // }}
+                        ></TreeItem>
+                      );
+                    })
+                  : ""}
+              </TreeItem>
             );
           })}
         </TreeItem>
       ) : (
         ""
       )}
+
+      {/* {renderTree(_devices)} */}
 
       <Dialog
         open={open}

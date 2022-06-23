@@ -27,12 +27,13 @@ function MapComponent() {
   const [markers, setMarkers] = useState(state.markers);
   const map = useMap();
 
-  // const mapEvents = useMapEvent({
-  //   click: (e) => {
-  //     let coordinates = e.latlng;
-  //     setMarkers([...markers, coordinates]);
-  //   },
-  // });
+  const mapEvents = useMapEvent({
+    click: (e) => {
+      let coordinates = e.latlng;
+      console.log(coordinates);
+      // setMarkers([...markers, coordinates]);
+    },
+  });
 
   const bounds = {
     apapa: [
@@ -70,9 +71,32 @@ function MapComponent() {
   const okrikaImage = imageOverlay(okrika_jetty_img, bounds.okrika).addTo(map);
   const warriImage = imageOverlay(warri_jetty_img, bounds.warri).addTo(map);
 
+  // Setting the right pan for our Jetty
   useEffect(() => {
-    map.panTo(state.Center);
-    map.setZoom(17);
+    switch (state.SectionId) {
+      case 21: // setting ATLAS Jetty
+        map.panTo(state.Center);
+        map.setZoom(16);
+        break;
+      case 20: // Setting APAPA Jetty
+        map.panTo(state.Center);
+        map.setZoom(18);
+        break;
+      case 22: // Setting CALABAR Jetty
+        map.panTo(state.Center);
+        map.setZoom(19);
+        break;
+      case 25: // Setting OKRIKA Jetty
+        map.panTo(state.Center);
+        map.setZoom(17);
+        break;
+      case 23: // Setting WARRI Jetty
+        map.panTo(state.Center);
+        map.setZoom(17);
+        break;
+      default:
+        break;
+    }
   }, [state]);
 
   return (

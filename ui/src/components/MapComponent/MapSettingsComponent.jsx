@@ -24,7 +24,7 @@ function MapSettingsComponent() {
   // const [position, setPosition] = useState("");
   const [id, setId] = useState("");
   const dispatch = useDispatch();
-  const markerRef = useRef(null);
+  // const markerRef = useRef(null);
 
   const map = useMap();
 
@@ -119,9 +119,32 @@ function MapSettingsComponent() {
   const okrikaImage = imageOverlay(okrika_jetty_img, bounds.okrika).addTo(map);
   const warriImage = imageOverlay(warri_jetty_img, bounds.warri).addTo(map);
 
+  // seeting the right pan for our Jetty
   useEffect(() => {
-    map.panTo(state.Center);
-    map.setZoom(17);
+    switch (state.SectionId) {
+      case 21: // setting ATLAS Jetty
+        map.panTo(state.Center);
+        map.setZoom(16);
+        break;
+      case 20: // Setting APAPA Jetty
+        map.panTo(state.Center);
+        map.setZoom(18);
+        break;
+      case 22: // Setting CALABAR Jetty
+        map.panTo(state.Center);
+        map.setZoom(19);
+        break;
+      case 25: // Setting OKRIKA Jetty
+        map.panTo(state.Center);
+        map.setZoom(17);
+        break;
+      case 23: // Setting WARRI Jetty
+        map.panTo(state.Center);
+        map.setZoom(17);
+        break;
+      default:
+        break;
+    }
   }, [state]);
 
   const handleDeleteIcon = (_id) => {
@@ -134,7 +157,6 @@ function MapSettingsComponent() {
     let newMarkers = markers.map((marker) => {
       return marker.id === _id ? { ...marker, coordinates: location } : marker;
     });
-    console.log(newMarkers);
     setMarkers(newMarkers);
     dispatch(setMarkersState(newMarkers));
   };
@@ -146,27 +168,28 @@ function MapSettingsComponent() {
         ? ""
         : markers.map((marker) => {
             return (
-              <div key={marker.id}>
-                <Marker
-                  position={marker.coordinates}
-                  icon={icon({ iconUrl: marker.icon, iconSize: [28, 28] })}
-                  draggable={true}
-                  eventHandlers={{
-                    mouseup: (e) => {
-                      handleMarkerNewLocation(e.latlng, marker.id);
-                    },
-                  }}
-                >
-                  <Popup>
-                    <p>Device Name</p>
-                    <DeleteIcon
-                      sx={{ cursor: "pointer" }}
-                      fontSize="small"
-                      onClick={() => handleDeleteIcon(marker.id)}
-                    ></DeleteIcon>
-                  </Popup>
-                </Marker>
-              </div>
+              // <div >
+              <Marker
+                key={marker.id}
+                position={marker.coordinates}
+                icon={icon({ iconUrl: marker.icon, iconSize: [28, 28] })}
+                draggable={true}
+                eventHandlers={{
+                  mouseup: (e) => {
+                    handleMarkerNewLocation(e.latlng, marker.id);
+                  },
+                }}
+              >
+                <Popup>
+                  <p>Device Name</p>
+                  <DeleteIcon
+                    sx={{ cursor: "pointer" }}
+                    fontSize="small"
+                    onClick={() => handleDeleteIcon(marker.id)}
+                  ></DeleteIcon>
+                </Popup>
+              </Marker>
+              // </div>
             );
           })}
     </div>
