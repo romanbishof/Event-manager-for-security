@@ -10,4 +10,12 @@ router.get('/', async (req, resp) => {
     resp.status(201).send(devices)
 })
 
+// update location of device
+router.put('/updateLocation', async (req, resp) => {
+    // let {Id} = req.params
+    let body = req.body
+    let updateDeviceLocation = await integrationDevicesBL.updateDeviceLocation(body.id, body)
+    resp.status(201).send(updateDeviceLocation)
+})
+
 export default router

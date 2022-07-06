@@ -1,4 +1,4 @@
-import { icon, imageOverlay } from "leaflet";
+import { divIcon, icon, imageOverlay } from "leaflet";
 import React, { useEffect, useState } from "react";
 import {
   ImageOverlay,
@@ -6,34 +6,33 @@ import {
   Pane,
   Rectangle,
   TileLayer,
+  Tooltip,
   useMap,
   useMapEvent,
 } from "react-leaflet";
 import { useDispatch, useSelector } from "react-redux";
-// import apapa_jetty from "../../images/apapa_jetty.png";
-// import atlas_jetty from "../../images/atlas_jetty.png";
-// import calabar_jetty from "../../images/calabar_jetty.png";
-// import okrika_jetty from "../../images/okrika_jetty.png";
-// import warri_jetty from "../../images/warri_jetty.png";
 import apapa_jetty_img from "../../images/Apapa - Copy.jpg";
 import warri_jetty_img from "../../images/Warri - Copy.jpg";
 import atlas_jetty_img from "../../images/ATLAS COVE_2.jpg";
 import calabar_jetty_img from "../../images/Calabar - Copy.jpg";
 import okrika_jetty_img from "../../images/Okrika 2.jpg";
+import { setMarkersState } from "../../redux/ISMS_Slice";
 
 function MapComponent() {
   const state = useSelector((state) => state.ISMS);
-  const [position, setPosition] = useState(null);
-  const [markers, setMarkers] = useState(state.markers);
+  // const [position, setPosition] = useState(null);
+  // const [markers, setMarkers] = useState(state.markers);
   const map = useMap();
 
-  const mapEvents = useMapEvent({
-    click: (e) => {
-      let coordinates = e.latlng;
-      console.log(coordinates);
-      // setMarkers([...markers, coordinates]);
-    },
-  });
+  // const mapEvents = useMapEvent({
+  //   click: (e) => {
+  //     let coordinates = e.latlng;
+  //     // setMarkers([...markers, coordinates]);
+  //   },
+  //   load: () => {
+  //     console.log(markers);
+  //   },
+  // });
 
   const bounds = {
     apapa: [
@@ -58,11 +57,6 @@ function MapComponent() {
     ],
   };
 
-  // let outer = [
-  //   [5.69242, 3.36908],
-  //   [8.32331, 5.54087],
-  // ];
-
   const apapaImage = imageOverlay(apapa_jetty_img, bounds.apapa).addTo(map);
   const atlasImage = imageOverlay(atlas_jetty_img, bounds.atlas).addTo(map);
   const calabarImage = imageOverlay(calabar_jetty_img, bounds.calabar).addTo(
@@ -71,12 +65,25 @@ function MapComponent() {
   const okrikaImage = imageOverlay(okrika_jetty_img, bounds.okrika).addTo(map);
   const warriImage = imageOverlay(warri_jetty_img, bounds.warri).addTo(map);
 
+  const icon = (img, name) => {
+    return divIcon({
+      className: "MapMarker__Marker",
+      iconSize: [12, 12],
+      html: `<div class="MapMarker__div"> 
+              <div class="MapMarker__alarm-div">
+                <img class="MapMarker__image" src='${img}')}/>  
+              </div>
+              <span class="MapMarker__span">${name}</span> 
+        </div`,
+    });
+  };
+
   // Setting the right pan for our Jetty
   useEffect(() => {
     switch (state.SectionId) {
       case 21: // setting ATLAS Jetty
         map.panTo(state.Center);
-        map.setZoom(16);
+        map.setZoom(17);
         break;
       case 20: // Setting APAPA Jetty
         map.panTo(state.Center);
@@ -99,18 +106,54 @@ function MapComponent() {
     }
   }, [state]);
 
+  // useEffect(() => {
+  //   state.integration.forEach((device) => {
+  //     if (device.LocationX !== 0) {
+  //       setMarkers([
+  //         ...markers,
+  //         {
+  //           coordinates: { lat: device.LocationX, lng: device.LocationY },
+  //           icon: hadleImageType(device.Type),
+  //           id: device.Id,
+  //           name: device.Name,
+  //         },
+  //       ]);
+  //       dispatch(
+  //         setMarkersState([
+  //           ...markers,
+  //           {
+  //             coordinates: { lat: device.LocationX, lng: device.LocationY },
+  //             icon: hadleImageType(device.Type),
+  //             id: device.Id,
+  //             name: device.Name,
+  //           },
+  //         ])
+  //       );
+  //     }
+  //   });
+  // }, []);
+
   return (
     <div>
-      {markers.lenth === 0
+      {state.markers.lenth === 0
         ? ""
-        : markers.map((marker) => {
+        : state.markers.map((marker) => {
             return (
               <Marker
                 key={marker.id}
                 position={marker.coordinates}
-                icon={icon({ iconUrl: marker.icon, iconSize: [28, 28] })}
+                icon={icon(marker.icon, marker.name)}
                 draggable={false}
-              ></Marker>
+              >
+                {/* <Tooltip
+                  className="mapSettings__tooltip"
+                  direction="bottom"
+                  offset={[0, 12]}
+                  permanent
+                >
+                  {marker.name}
+                </Tooltip> */}
+              </Marker>
             );
           })}
     </div>

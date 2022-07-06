@@ -7,7 +7,7 @@ import "./Settings.css";
 import { MapContainer } from "react-leaflet";
 import MapSettingsComponent from "../MapComponent/MapSettingsComponent";
 import { setCoordinatesJetty, setSectionId } from "../../redux/ISMS_Slice";
-import gateway_on from "../../iconImage/gateway_on.png";
+// import gateway_on from "../../iconImage/gateway_on.png";
 import emergency_idle from "../../iconImage/emergency_idle.png";
 import doorphone_on from "../../iconImage/doorphone_on.png";
 import camera_on from "../../iconImage/camera_on.png";
@@ -15,6 +15,7 @@ import main_device_door_close from "../../iconImage/main_device_door_close.png";
 // import main_device_door_open from "../../iconImage/main_device_door_open.png";
 import main_device_panic_detecting from "../../iconImage/main_device_panic_detecting.png";
 import main_device_siren_normal from "../../iconImage/main_device_siren_normal.png";
+import main_device_panic_idle from "../../iconImage/main_device_panic_idle.png";
 import {
   Paper,
   Table,
@@ -29,35 +30,34 @@ function Settings() {
   const [devices, setDevices] = useState([]);
   const dispatch = useDispatch();
 
-  const handleSelectJetty = (id) => {
-    let filterdDevices = state.Devices.filter(
-      (device) => device.SectionId === id
-    );
+  const handleSelectJetty = (id, name) => {
+    // let filterdDevices = state.Devices.filter(
+    //   (device) => device.SectionId === id
+    // );
     let temp = state.Sections.filter((section) =>
       // section.Name.toLowerCase().includes(state.Jetty.toLowerCase())
-      section.Name.toLowerCase().includes(id.toLowerCase())
+      section.Name.toLowerCase().includes(name.toLowerCase())
     );
-
     setDevices(temp);
 
-    switch (id) {
-      case 21: //selecting ATLAS Jetty for map
+    switch (String(id)) {
+      case "5ed1000d-3fdc-a4f7-7934-6f2a3afb88bf": //selecting ATLAS Jetty for map
         dispatch(setCoordinatesJetty([6.4112, 3.3921]));
 
         break;
-      case 20: //selecting APAPA Jetty for map
+      case "8646221c-b254-180e-13f6-4008481434d0": //selecting APAPA Jetty for map
         dispatch(setCoordinatesJetty([6.454467, 3.37155]));
         break;
 
-      case 22: //selecting CALABAR Jetty for map
+      case "319891cf-d6dc-5f86-5681-16060b7ba2b5": //selecting CALABAR Jetty for map
         dispatch(setCoordinatesJetty([8.322446, 4.984032]));
         break;
 
-      case 23: //selecting WARRI Jetty for map
+      case "78c39611-5d8a-4df7-0340-89b45aad3dcf": //selecting WARRI Jetty for map
         dispatch(setCoordinatesJetty([5.695483, 5.537667]));
         break;
 
-      case 25: //selecting OKRIKA Jetty for map
+      case "c11d797c-2aea-226a-0625-24782d8bc9e1": //selecting OKRIKA Jetty for map
         dispatch(setCoordinatesJetty([7.086445, 4.721889]));
         break;
 
@@ -68,22 +68,22 @@ function Settings() {
 
   const hadleImageType = (deviceType) => {
     switch (deviceType) {
-      case 900:
-        return gateway_on;
-      case 811:
+      case 14:
+        return main_device_panic_idle;
+      case 8:
         return emergency_idle;
-      case 800:
+      case 9:
         return doorphone_on;
-      case 100:
+      case 77:
         return main_device_door_close;
-      case 700:
+      case 1:
         return camera_on;
       case 400:
         return main_device_siren_normal;
       case 108:
         return main_device_panic_detecting;
       default:
-        break;
+        return;
     }
   };
 
@@ -102,7 +102,8 @@ function Settings() {
                 nodeId={toString(section.Id)}
                 label={section.Name}
                 onClick={() => {
-                  handleSelectJetty(section.Name);
+                  handleSelectJetty(section.Id, section.Name);
+
                   dispatch(setSectionId(section.Id));
                 }}
               >
@@ -129,14 +130,27 @@ function Settings() {
                 return obj.Devices.length > 0 ? (
                   obj.Devices.map((obj) => (
                     <TableContainer
-                      sx={{ overflowX: "hidden" }}
+                      sx={{ overflowX: "hidden", backgroundColor: "#515151" }}
                       key={obj.Id}
                       component={Paper}
                     >
                       <Table size="small">
                         <TableBody>
                           <TableRow hover={true}>
-                            <TableCell id={obj.Id} draggable={true}>
+                            <TableCell
+                              id={obj.Id}
+                              name={`${obj.Name}`}
+                              type={obj.Type}
+                              draggable={true}
+                            >
+                              <img
+                                className="Settings__Table-img"
+                                // id={`${obj.Id}`}
+                                src={hadleImageType(obj.Type)}
+                                // alt={`${obj.Name}`}
+                                // type={obj.Type}
+                                draggable={false}
+                              />
                               {obj.Name}
                             </TableCell>
                           </TableRow>
@@ -146,14 +160,27 @@ function Settings() {
                   ))
                 ) : (
                   <TableContainer
-                    sx={{ overflowX: "hidden" }}
+                    sx={{ overflowX: "hidden", backgroundColor: "#515151" }}
                     key={obj.Id}
                     component={Paper}
                   >
                     <Table>
                       <TableBody>
                         <TableRow>
-                          <TableCell id={obj.Id} draggable={true}>
+                          <TableCell
+                            id={obj.Id}
+                            name={`${obj.Name}`}
+                            type={obj.Type}
+                            draggable={true}
+                          >
+                            <img
+                              className="Settings__Table-img"
+                              // id={`${obj.Id}`}
+                              src={hadleImageType(obj.Type)}
+                              // alt={`${obj.Name}`}
+                              // type={obj.Type}
+                              draggable={false}
+                            />
                             {obj.Name}
                           </TableCell>
                         </TableRow>

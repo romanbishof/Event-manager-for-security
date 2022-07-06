@@ -1,0 +1,42 @@
+.mapSettings__tooltip{
+    height: 25px;
+}
+
+/* .MapMarker__Marker{
+    display: flex;
+    flex-direction: column;
+    width: 130px;
+
+} */
+
+.MapMarker__div{
+    width: 100px;
+    margin-left: -64px;
+    margin-top: -10px;
+    text-align: center;
+}
+
+.MapMarker__alarm-div{
+    overflow: hidden;
+    display: inline-block;
+    justify-content: center;
+    border: 2px solid transparent;
+    border-radius: 20px; 
+    margin-bottom: -5px;
+}
+
+.MapMarker__image{
+    width: 24px;  
+    height: 24px;
+    vertical-align: bottom;
+    position: relative;
+    z-index: -1;
+}
+
+.MapMarker__span{
+    font-size: 11px;
+    background-color: #000;
+    opacity: 0.6;
+    color: #fff;
+    padding: 2px 5px;
+}

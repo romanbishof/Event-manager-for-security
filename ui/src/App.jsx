@@ -17,13 +17,13 @@ import {
   getIntegrationDevicesAsync,
 } from "./redux/ISMS_Slice";
 function App() {
-  const state = useSelector((state) => state.ISMS);
+  // const state = useSelector((state) => state.ISMS);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getSectionsAsync());
-    dispatch(getDevicesAsync());
-    dispatch(getPhysicalDevicesAsync());
+    // dispatch(getSectionsAsync());
+    // dispatch(getDevicesAsync());
+    // dispatch(getPhysicalDevicesAsync());
     dispatch(getIntegrationDevicesAsync());
   }, []);
 
