@@ -90,36 +90,28 @@ function Settings() {
   return (
     <div className="Settings">
       <div className="Settings__sections">
-        <TreeView
-          defaultCollapseIcon={<ExpandMoreIcon />}
-          defaultExpanded={["root"]}
-          defaultExpandIcon={<ChevronRightIcon />}
-        >
-          {state.Sections.map((section) => {
-            return (
-              <TreeItem
-                key={section.Id}
-                nodeId={toString(section.Id)}
-                label={section.Name}
-                onClick={() => {
-                  handleSelectJetty(section.Id, section.Name);
+        <TableContainer component={Paper} sx={{ backgroundColor: "#515151" }}>
+          <Table>
+            <TableBody>
+              {state.Sections.map((section) => {
+                return (
+                  <TableRow key={section.Id} hover sx={{ cursor: "pointer" }}>
+                    <TableCell
+                      className="Settings__TableCell"
+                      onClick={() => {
+                        handleSelectJetty(section.Id, section.Name);
 
-                  dispatch(setSectionId(section.Id));
-                }}
-              >
-                {/* {section.ZoneList.Zones.map((zone) => {
-                  return (
-                    <TreeItem
-                      key={zone.Id}
-                      nodeId={toString(zone.Id)}
-                      label={zone.Name}
-                    ></TreeItem>
-                  );
-                })} */}
-              </TreeItem>
-            );
-          })}
-        </TreeView>
+                        dispatch(setSectionId(section.Id));
+                      }}
+                    >
+                      <h4>{section.Name}</h4>
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
+        </TableContainer>
       </div>
       <div className="Settings__wrapper">
         <div className="Settings__wrapper-map" id="map">
@@ -136,22 +128,30 @@ function Settings() {
                     >
                       <Table size="small">
                         <TableBody>
-                          <TableRow hover={true}>
+                          <TableRow hover={true} sx={{ cursor: "pointer" }}>
                             <TableCell
+                              className="Settings__TableCell"
                               id={obj.Id}
                               name={`${obj.Name}`}
                               type={obj.Type}
                               draggable={true}
+                              sx={{
+                                overflow: "hidden",
+                                whiteSpace: "nowrap",
+                                textOverflow: "ellipsis",
+                              }}
                             >
-                              <img
-                                className="Settings__Table-img"
-                                // id={`${obj.Id}`}
-                                src={hadleImageType(obj.Type)}
-                                // alt={`${obj.Name}`}
-                                // type={obj.Type}
-                                draggable={false}
-                              />
-                              {obj.Name}
+                              <div className="Settings__table-div">
+                                <img
+                                  className="Settings__Table-img"
+                                  // id={`${obj.Id}`}
+                                  src={hadleImageType(obj.Type)}
+                                  // alt={`${obj.Name}`}
+                                  // type={obj.Type}
+                                  draggable={false}
+                                />
+                                <span>{obj.Name}</span>
+                              </div>
                             </TableCell>
                           </TableRow>
                         </TableBody>
@@ -164,24 +164,32 @@ function Settings() {
                     key={obj.Id}
                     component={Paper}
                   >
-                    <Table>
+                    <Table size="small">
                       <TableBody>
-                        <TableRow>
+                        <TableRow hover={true} sx={{ cursor: "pointer" }}>
                           <TableCell
+                            className="Settings__TableCell"
                             id={obj.Id}
                             name={`${obj.Name}`}
                             type={obj.Type}
                             draggable={true}
+                            sx={{
+                              overflow: "hidden",
+                              whiteSpace: "nowrap",
+                              textOverflow: "ellipsis",
+                            }}
                           >
-                            <img
-                              className="Settings__Table-img"
-                              // id={`${obj.Id}`}
-                              src={hadleImageType(obj.Type)}
-                              // alt={`${obj.Name}`}
-                              // type={obj.Type}
-                              draggable={false}
-                            />
-                            {obj.Name}
+                            <div className="Settings__table-div">
+                              <img
+                                className="Settings__Table-img"
+                                // id={`${obj.Id}`}
+                                src={hadleImageType(obj.Type)}
+                                // alt={`${obj.Name}`}
+                                // type={obj.Type}
+                                draggable={false}
+                              />
+                              <span>{obj.Name}</span>
+                            </div>
                           </TableCell>
                         </TableRow>
                       </TableBody>
@@ -190,34 +198,6 @@ function Settings() {
                 );
               });
             })}
-            {/* {devices.length === 0
-              ? ""
-              : devices.map((device, index) => {
-                  return (
-                    <table className="Settings__Table" key={index}>
-                      <tbody>
-                        <tr className="Settings__Table-tr">
-                          <td className="Settings__Table-td">
-                            <div
-                              className="Settings__Table-div"
-                              // draggable={true}
-                              id={`div${device.Id}`}
-                            >
-                              <img
-                                className="Settings__Table-img"
-                                id={`${device.Id}`}
-                                src={hadleImageType(device.DeviceType)}
-                                alt=""
-                                // draggable={false}
-                              />
-                              <span>{device.Name}</span>
-                            </div>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  );
-                })} */}
           </div>
           <div className="Settings__map">
             <MapContainer

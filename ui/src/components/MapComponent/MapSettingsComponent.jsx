@@ -1,18 +1,9 @@
-import { divIcon, icon, imageOverlay, marker, point } from "leaflet";
-import React, { useEffect, useMemo, useRef, useState } from "react";
-import {
-  ImageOverlay,
-  Marker,
-  Pane,
-  Popup,
-  TileLayer,
-  Tooltip,
-  useMap,
-  useMapEvent,
-} from "react-leaflet";
+import { divIcon, imageOverlay, point } from "leaflet";
+import React, { useEffect, useState } from "react";
+import { Marker, Popup, useMap } from "react-leaflet";
 import "./MapSettingsComponent.css";
 import DeleteIcon from "@mui/icons-material/Delete";
-import gateway_on from "../../iconImage/gateway_on.png";
+// import gateway_on from "../../iconImage/gateway_on.png";
 import emergency_idle from "../../iconImage/emergency_idle.png";
 import doorphone_on from "../../iconImage/doorphone_on.png";
 import camera_on from "../../iconImage/camera_on.png";
@@ -138,6 +129,9 @@ function MapSettingsComponent() {
     // let imagePath = e.dataTransfer.getData("text/plain");
     let coordinates = map.containerPointToLatLng(point([e.offsetX, e.offsetY]));
     let markerExist = state.markers.find((marker) => marker.id === id);
+    console.log(
+      `new marker to add -> ${coordinates} , id: ${id}, name: ${name}`
+    );
     if (!markerExist) {
       // setMarkers([
       //   ...markers,

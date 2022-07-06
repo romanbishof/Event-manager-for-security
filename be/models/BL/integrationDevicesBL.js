@@ -49,6 +49,7 @@ let getAllIntegrationDevices = () => {
 
 // update integrated Device location id DB
 let updateDeviceLocation = (id, deviceObj) => {
+
     return new Promise((resolve, reject) => {
         IntegrationDevices.findOneAndUpdate({ "Id": id }, {
             LocationX: deviceObj.coordinates.lat,
@@ -58,8 +59,8 @@ let updateDeviceLocation = (id, deviceObj) => {
                 reject(err)
                 console.log(`Diden't manadged to update Location for ${data.Name}`);
             } else {
-                // resolve(data)
-                console.log(`Location for ${data.Name}, ID: ${data.Id}successfully update`);
+                resolve(deviceObj)
+                console.log(`Location for ${data.Name}, ID: ${data.Id} successfully update`);
             }
         })
     })

@@ -1,22 +1,12 @@
-import { divIcon, icon, imageOverlay } from "leaflet";
-import React, { useEffect, useState } from "react";
-import {
-  ImageOverlay,
-  Marker,
-  Pane,
-  Rectangle,
-  TileLayer,
-  Tooltip,
-  useMap,
-  useMapEvent,
-} from "react-leaflet";
-import { useDispatch, useSelector } from "react-redux";
+import { divIcon, imageOverlay } from "leaflet";
+import React, { useEffect } from "react";
+import { Marker, useMap } from "react-leaflet";
+import { useSelector } from "react-redux";
 import apapa_jetty_img from "../../images/Apapa - Copy.jpg";
 import warri_jetty_img from "../../images/Warri - Copy.jpg";
 import atlas_jetty_img from "../../images/ATLAS COVE_2.jpg";
 import calabar_jetty_img from "../../images/Calabar - Copy.jpg";
 import okrika_jetty_img from "../../images/Okrika 2.jpg";
-import { setMarkersState } from "../../redux/ISMS_Slice";
 
 function MapComponent() {
   const state = useSelector((state) => state.ISMS);
@@ -73,6 +63,7 @@ function MapComponent() {
               <div class="MapMarker__alarm-div">
                 <img class="MapMarker__image" src='${img}')}/>  
               </div>
+              <br/>
               <span class="MapMarker__span">${name}</span> 
         </div`,
     });

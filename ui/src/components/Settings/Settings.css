@@ -26,33 +26,31 @@
 
 .Settings__devices_list{
     margin: 0px 5px;
-    min-width: 250px;
+    min-width: 300px;
     height: 100%;
     background-color:#515151;
     overflow-y: scroll;
     overflow-x: hidden;
+}::-webkit-scrollbar{
+    display: none;
 }
 
-.Settings__Table{
-    width: 100%;
-    /* height: 50px; */
-    border-bottom: 1px solid rgb(0, 0, 0);
+.Settings__TableCell {
+    background-color: "#515151"; 
 }
 
-.Settings__Table :hover{
-    background-color: #353535
+.Settings__TableCell:hover {
+    background-color: #8f8f8f;
 }
 
-.Settings__Table-td{
-    width: 187px;
-    
-}
-
-.Settings__Table-div{
+.Settings__table-div{
     display: flex;
-    /* overflow: hidden; */
-    width: 100%;
-    height: 50px;
+    height: 40px;
+    align-items: center;
+}
+
+.Settings__table-div span{
+    padding: 0px 10px;
 }
 
 .Settings__Table-img{
