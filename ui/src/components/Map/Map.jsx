@@ -14,10 +14,9 @@ function Map() {
           className="Map__body-NNPC"
           center={[6.4553, 3.3713]}
           attributionControl={false}
-          // maxZoom={19}
+          maxZoom={20}
           zoom={17}
           zoomSnap={0.25}
-          // zoomDelta={0.2}
           wheelPxPerZoomLevel={220}
         >
           <MapComponent />

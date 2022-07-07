@@ -1,6 +1,6 @@
 import { divIcon, imageOverlay } from "leaflet";
 import React, { useEffect } from "react";
-import { Marker, useMap, useMapEvent } from "react-leaflet";
+import { useMap, useMapEvent } from "react-leaflet";
 import { useSelector } from "react-redux";
 import apapa_jetty_img from "../../images/Apapa - Copy.jpg";
 import warri_jetty_img from "../../images/Warri - Copy.jpg";
@@ -11,8 +11,6 @@ import MapMarker from "./MapMarker";
 
 function MapComponent() {
   const state = useSelector((state) => state.ISMS);
-  // const [position, setPosition] = useState(null);
-  // const [markers, setMarkers] = useState(state.markers);
   const map = useMap();
 
   // const mapEvents = useMapEvent({
@@ -55,20 +53,6 @@ function MapComponent() {
   );
   const okrikaImage = imageOverlay(okrika_jetty_img, bounds.okrika).addTo(map);
   const warriImage = imageOverlay(warri_jetty_img, bounds.warri).addTo(map);
-
-  const icon = (img, name) => {
-    return divIcon({
-      className: "MapMarker__Marker",
-      iconSize: [12, 12],
-      html: `<div class="MapMarker__div"> 
-              <div class="MapMarker__alarm-div">
-                <img class="MapMarker__image" src='${img}')}/>  
-              </div>
-              <br/>
-              <span class="MapMarker__span">${name}</span> 
-        </div`,
-    });
-  };
 
   // Setting the right pan for our Jetty
   useEffect(() => {
@@ -141,21 +125,6 @@ function MapComponent() {
         ? ""
         : state.markers.map((marker) => {
             return (
-              // <Marker
-              //   key={marker.id}
-              //   position={marker.coordinates}
-              //   icon={icon(marker.icon, marker.name)}
-              //   draggable={false}
-              // >
-              //   {/* <Tooltip
-              //     className="mapSettings__tooltip"
-              //     direction="bottom"
-              //     offset={[0, 12]}
-              //     permanent
-              //   >
-              //     {marker.name}
-              //   </Tooltip> */}
-              // </Marker>
               <MapMarker
                 key={marker.id}
                 id={marker.id}

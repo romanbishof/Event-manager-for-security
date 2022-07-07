@@ -1,6 +1,6 @@
-import { divIcon, imageOverlay, point } from "leaflet";
+import { imageOverlay, point } from "leaflet";
 import React, { useEffect, useState } from "react";
-import { Marker, Popup, useMap, useMapEvent } from "react-leaflet";
+import { useMap, useMapEvent } from "react-leaflet";
 import "./MapSettingsComponent.css";
 // import DeleteIcon from "@mui/icons-material/Delete";
 // import gateway_on from "../../iconImage/gateway_on.png";
@@ -24,30 +24,22 @@ import {
   updateIntegrationLocationDeviceAsync,
 } from "../../redux/ISMS_Slice";
 import {
-  Alert,
-  Box,
   Button,
   Dialog,
   DialogActions,
   DialogContent,
   DialogContentText,
   DialogTitle,
-  Modal,
-  Popover,
-  Typography,
 } from "@mui/material";
 import MapMarker from "./MapMarker";
-// import MapMarker from "./MapMarker";
 
 function MapSettingsComponent() {
   const state = useSelector((state) => state.ISMS);
-  // const [markers, setMarkers] = useState(state.markers);
   const [section, setSection] = useState(false);
   const [open, setOpen] = useState(false);
   const [id, setId] = useState("");
   const [name, setName] = useState("");
   const [type, setType] = useState("");
-  const [display, setDisplay] = useState("none");
   const dispatch = useDispatch();
 
   const map = useMap();
@@ -115,13 +107,11 @@ function MapSettingsComponent() {
   };
 
   const handleOpenPopup = () => {
-    // setDisplay("flex");
     setOpen(true);
   };
 
   const handleClose = () => {
     setOpen(false);
-    // setDisplay("none");
   };
 
   let target = document.getElementById("map");
@@ -141,15 +131,6 @@ function MapSettingsComponent() {
     let markerExist = state.markers.find((marker) => marker.id === id);
 
     if (markerExist.id !== id) {
-      // setMarkers([
-      //   ...markers,
-      //   {
-      //     coordinates: coordinates,
-      //     icon: hadleImageType(type),
-      //     id: id,
-      //     name: name,
-      //   },
-      // ]);
       dispatch(
         setMarkersState([
           ...state.markers,
@@ -172,17 +153,6 @@ function MapSettingsComponent() {
       );
     } else {
       console.log(`Marker ${markerExist.name} exist, ID: ${markerExist.id}`);
-      // let alert = document.createElement("div");
-
-      // <Dialog open={open} onClose={handleClose} keepMounted>
-      //   <DialogTitle>{`Device ${name}`}</DialogTitle>
-      //   <DialogContent>
-      //     <DialogContentText>Alredy exist</DialogContentText>
-      //   </DialogContent>
-      //   <DialogActions>
-      //     <Button onClick={handleClose}>Close</Button>
-      //   </DialogActions>
-      // </Dialog>;
       handleOpenPopup();
     }
   };
@@ -290,17 +260,6 @@ function MapSettingsComponent() {
     }
   }, [state]);
 
-  const style = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: 400,
-    bgcolor: "background.paper",
-    border: "2px solid #000",
-    boxShadow: 24,
-    p: 4,
-  };
   return (
     <div>
       {/* <TileLayer></TileLayer> */}
@@ -316,97 +275,7 @@ function MapSettingsComponent() {
                   name={marker.name}
                   isDraggable={true}
                 ></MapMarker>
-                {/* <Popover
-                  open={open}
-                  onClose={handleClose}
-                  anchorEl={target}
-                  anchorOrigin={{
-                    vertical: "center",
-                    horizontal: "center",
-                  }}
-                >
-                  <Typography sx={{ h4: 2 }}>
-                    {`Device ${name} alredy exist, ID: ${id}`}
-                  </Typography>
-                  <Button onClick={handleClose}>Close</Button>
-                </Popover> */}
-                {/* <Dialog open={open} onClose={handleClose} keepMounted>
-                  <DialogTitle>{`Device ${name}`}</DialogTitle>
-                  <DialogContent>
-                    <DialogContentText>Alredy exist</DialogContentText>
-                  </DialogContent>
-                  <DialogActions>
-                    <Button onClick={handleClose}>Close</Button>
-                  </DialogActions>
-                </Dialog> */}
               </div>
-              // <Marker
-              //   key={marker.id}
-              //   position={marker.coordinates}
-              //   // icon={icon({ iconUrl: marker.icon, iconSize: [28, 28] })}
-              //   icon={icon(marker.icon, marker.name)}
-              //   draggable={true}
-              //   eventHandlers={{
-              //     moveend: (e) => {
-              //       // console.log(e.target._latlng);
-              //       handleMarkerNewLocation(e.target._latlng, marker.id);
-              //     },
-              //   }}
-              // >
-              //   <Dialog
-              //     open={open}
-              //     onClose={handleClose}
-              //     aria-labelledby="alert-dialog-title"
-              //     aria-describedby="alert-dialog-description"
-              //   >
-              //     <DialogTitle id="alert-dialog-title">
-              //       {`Device ${marker.name}`}
-              //     </DialogTitle>
-              //     <DialogContent>
-              //       <DialogContentText id="alert-dialog-description">
-              //         Alredy exist
-              //       </DialogContentText>
-              //     </DialogContent>
-              //     <DialogActions>
-              //       <Button onClick={handleClose}>Close</Button>
-              //     </DialogActions>
-              //   </Dialog>
-              //   <Popup>
-              //     <p>{`Delete ${marker.name}`}</p>
-              //     <DeleteIcon
-              //       sx={{ cursor: "pointer" }}
-              //       fontSize="small"
-              //       onClick={() => handleDeleteIcon(marker.id)}
-              //     ></DeleteIcon>
-              //   </Popup>
-              // </Marker>
-
-              //   <MapMarker
-              //     key={marker.id}
-              //     id={marker.id}
-              //     position={marker.coordinates}
-              //     img={marker.icon}
-              //     name={marker.name}
-              //   >
-              //     <Dialog
-              //       open={open}
-              //       onClose={handleClose}
-              //       aria-labelledby="alert-dialog-title"
-              //       aria-describedby="alert-dialog-description"
-              //     >
-              //       <DialogTitle id="alert-dialog-title">
-              //         {`Device ${marker.name}`}
-              //       </DialogTitle>
-              //       <DialogContent>
-              //         <DialogContentText id="alert-dialog-description">
-              //           Alredy exist
-              //         </DialogContentText>
-              //       </DialogContent>
-              //       <DialogActions>
-              //         <Button onClick={handleClose}>Close</Button>
-              //       </DialogActions>
-              //     </Dialog>
-              //   </MapMarker>
             );
           })}
 

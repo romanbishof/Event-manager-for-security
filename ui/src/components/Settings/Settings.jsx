@@ -1,8 +1,8 @@
-import { TreeItem, TreeView } from "@mui/lab";
+// import { TreeItem, TreeView } from "@mui/lab";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+// import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+// import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import "./Settings.css";
 import { MapContainer } from "react-leaflet";
 import MapSettingsComponent from "../MapComponent/MapSettingsComponent";
@@ -204,10 +204,9 @@ function Settings() {
               className="Settings__map__body"
               center={[6.4553, 3.3713]}
               attributionControl={false}
-              // maxZoom={19}
+              maxZoom={20}
               zoom={18}
               zoomSnap={0.25}
-              // zoomDelta={0.2}
               wheelPxPerZoomLevel={220}
             >
               {/* <TileLayer url={process.env.REACT_APP_API_MAP}></TileLayer> */}

@@ -7,20 +7,10 @@ import {
   updateIntegrationLocationDeviceAsync,
 } from "../../redux/ISMS_Slice";
 import DeleteIcon from "@mui/icons-material/Delete";
-import {
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-} from "@mui/material";
 import "./MapSettingsComponent.css";
 
 function MapMarker({ id, coordinates, img, name, isDraggable }) {
   const state = useSelector((state) => state.ISMS);
-  // const [markers, setMarkers] = useState(state.markers);
-  // const [open, setOpen] = useState(false);
 
   const dispatch = useDispatch();
 
