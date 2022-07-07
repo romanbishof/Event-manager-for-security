@@ -1,6 +1,6 @@
 import { imageOverlay, point } from "leaflet";
 import React, { useEffect, useState } from "react";
-import { TileLayer, useMap, useMapEvent } from "react-leaflet";
+import { useMap, useMapEvent } from "react-leaflet";
 import "./MapSettingsComponent.css";
 // import DeleteIcon from "@mui/icons-material/Delete";
 // import gateway_on from "../../iconImage/gateway_on.png";
@@ -262,7 +262,7 @@ function MapSettingsComponent() {
 
   return (
     <div>
-      <TileLayer></TileLayer>
+      {/* <TileLayer></TileLayer> */}
       {state.markers.length === 0
         ? ""
         : state.markers.map((marker) => {
