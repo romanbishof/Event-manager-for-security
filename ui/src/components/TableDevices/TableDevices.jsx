@@ -47,7 +47,7 @@ function TableDevices() {
   return (
     <div className="TableDevices">
       <div className="TableDevices__header header">
-        <span>Table Devices</span>
+        <span>Devices</span>
       </div>
       <div className="TableDevices__body">
         <TreeView
