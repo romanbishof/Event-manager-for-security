@@ -204,8 +204,11 @@ function Settings() {
               className="Settings__map__body"
               center={[6.4553, 3.3713]}
               attributionControl={false}
-              maxZoom={20}
+              // maxZoom={19}
               zoom={18}
+              zoomSnap={0.25}
+              // zoomDelta={0.2}
+              wheelPxPerZoomLevel={220}
             >
               {/* <TileLayer url={process.env.REACT_APP_API_MAP}></TileLayer> */}
               <MapSettingsComponent />

@@ -173,12 +173,12 @@ export const updateIntegrationLocationDeviceAsync = createAsyncThunk(
       .then((resp) => {
         data = resp.data;
 
-        localStorage.setItem("integrationDevices", JSON.stringify(data));
+        // localStorage.setItem("markersOnMap", JSON.stringify(state.markers));
         return data;
       })
       .catch((err) => {
         if (err.message === "Network Error") {
-          data = JSON.parse(localStorage.getItem("integrationDevices"));
+          data = JSON.parse(localStorage.getItem("markersOnMap"));
           return data;
         }
       });
@@ -266,6 +266,7 @@ const ISMS_Slice = createSlice({
     },
     [updateIntegrationLocationDeviceAsync.fulfilled]: (state, action) => {
       console.log(action.payload);
+      localStorage.setItem("markersOnMap", JSON.stringify(state.markers));
       // state.integrationDevices = state.integrationDevices.map((device) => {
       //   return device.Id === action.payload.id
       //     ? {

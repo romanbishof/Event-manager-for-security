@@ -1,12 +1,13 @@
 import { divIcon, imageOverlay } from "leaflet";
 import React, { useEffect } from "react";
-import { Marker, useMap } from "react-leaflet";
+import { Marker, useMap, useMapEvent } from "react-leaflet";
 import { useSelector } from "react-redux";
 import apapa_jetty_img from "../../images/Apapa - Copy.jpg";
 import warri_jetty_img from "../../images/Warri - Copy.jpg";
 import atlas_jetty_img from "../../images/ATLAS COVE_2.jpg";
 import calabar_jetty_img from "../../images/Calabar - Copy.jpg";
 import okrika_jetty_img from "../../images/Okrika 2.jpg";
+import MapMarker from "./MapMarker";
 
 function MapComponent() {
   const state = useSelector((state) => state.ISMS);
@@ -19,8 +20,8 @@ function MapComponent() {
   //     let coordinates = e.latlng;
   //     // setMarkers([...markers, coordinates]);
   //   },
-  //   load: () => {
-  //     console.log(markers);
+  //   zoom: (e) => {
+  //     console.log(e.target._zoom);
   //   },
   // });
 
@@ -74,23 +75,33 @@ function MapComponent() {
     switch (state.SectionId) {
       case 21: // setting ATLAS Jetty
         map.panTo(state.Center);
-        map.setZoom(17);
+        map.setZoom(16.5);
+        map.setMaxZoom(18);
+
         break;
       case 20: // Setting APAPA Jetty
         map.panTo(state.Center);
         map.setZoom(18);
+        map.setMaxZoom(19);
+
         break;
       case 22: // Setting CALABAR Jetty
         map.panTo(state.Center);
         map.setZoom(19);
+        map.setMaxZoom(20);
+
         break;
       case 25: // Setting OKRIKA Jetty
         map.panTo(state.Center);
-        map.setZoom(17);
+        map.setZoom(17.5);
+        map.setMaxZoom(18);
+
         break;
       case 23: // Setting WARRI Jetty
         map.panTo(state.Center);
-        map.setZoom(17);
+        map.setZoom(17.5);
+        map.setMaxZoom(18);
+
         break;
       default:
         break;
@@ -130,21 +141,29 @@ function MapComponent() {
         ? ""
         : state.markers.map((marker) => {
             return (
-              <Marker
+              // <Marker
+              //   key={marker.id}
+              //   position={marker.coordinates}
+              //   icon={icon(marker.icon, marker.name)}
+              //   draggable={false}
+              // >
+              //   {/* <Tooltip
+              //     className="mapSettings__tooltip"
+              //     direction="bottom"
+              //     offset={[0, 12]}
+              //     permanent
+              //   >
+              //     {marker.name}
+              //   </Tooltip> */}
+              // </Marker>
+              <MapMarker
                 key={marker.id}
-                position={marker.coordinates}
-                icon={icon(marker.icon, marker.name)}
-                draggable={false}
-              >
-                {/* <Tooltip
-                  className="mapSettings__tooltip"
-                  direction="bottom"
-                  offset={[0, 12]}
-                  permanent
-                >
-                  {marker.name}
-                </Tooltip> */}
-              </Marker>
+                id={marker.id}
+                coordinates={marker.coordinates}
+                img={marker.icon}
+                name={marker.name}
+                isDraggable={false}
+              />
             );
           })}
     </div>

@@ -1,8 +1,8 @@
 import { divIcon, imageOverlay, point } from "leaflet";
 import React, { useEffect, useState } from "react";
-import { Marker, Popup, useMap } from "react-leaflet";
+import { Marker, Popup, useMap, useMapEvent } from "react-leaflet";
 import "./MapSettingsComponent.css";
-import DeleteIcon from "@mui/icons-material/Delete";
+// import DeleteIcon from "@mui/icons-material/Delete";
 // import gateway_on from "../../iconImage/gateway_on.png";
 import emergency_idle from "../../iconImage/emergency_idle.png";
 import doorphone_on from "../../iconImage/doorphone_on.png";
@@ -24,22 +24,30 @@ import {
   updateIntegrationLocationDeviceAsync,
 } from "../../redux/ISMS_Slice";
 import {
+  Alert,
+  Box,
   Button,
   Dialog,
   DialogActions,
   DialogContent,
   DialogContentText,
   DialogTitle,
+  Modal,
+  Popover,
+  Typography,
 } from "@mui/material";
+import MapMarker from "./MapMarker";
 // import MapMarker from "./MapMarker";
 
 function MapSettingsComponent() {
   const state = useSelector((state) => state.ISMS);
   // const [markers, setMarkers] = useState(state.markers);
+  const [section, setSection] = useState(false);
   const [open, setOpen] = useState(false);
   const [id, setId] = useState("");
   const [name, setName] = useState("");
   const [type, setType] = useState("");
+  const [display, setDisplay] = useState("none");
   const dispatch = useDispatch();
 
   const map = useMap();
@@ -76,12 +84,12 @@ function MapSettingsComponent() {
   const warriImage = imageOverlay(warri_jetty_img, bounds.warri).addTo(map);
 
   // const mapEvents = useMapEvent({
-  //   mouseup: (e) => {
-  //     // let coordinates = e.latlng;
-  //     // console.log(e.target);
+  //   click: (e) => {
+  //     let coordinates = e.latlng;
+  //     // setMarkers([...markers, coordinates]);
   //   },
-  //   locationfound: (location) => {
-  //     console.log(location);
+  //   zoom: (e) => {
+  //     console.log(e.target._zoom);
   //   },
   // });
 
@@ -107,11 +115,13 @@ function MapSettingsComponent() {
   };
 
   const handleOpenPopup = () => {
+    // setDisplay("flex");
     setOpen(true);
   };
 
   const handleClose = () => {
     setOpen(false);
+    // setDisplay("none");
   };
 
   let target = document.getElementById("map");
@@ -129,10 +139,8 @@ function MapSettingsComponent() {
     // let imagePath = e.dataTransfer.getData("text/plain");
     let coordinates = map.containerPointToLatLng(point([e.offsetX, e.offsetY]));
     let markerExist = state.markers.find((marker) => marker.id === id);
-    console.log(
-      `new marker to add -> ${coordinates} , id: ${id}, name: ${name}`
-    );
-    if (!markerExist) {
+
+    if (markerExist.id !== id) {
       // setMarkers([
       //   ...markers,
       //   {
@@ -163,101 +171,136 @@ function MapSettingsComponent() {
         })
       );
     } else {
+      console.log(`Marker ${markerExist.name} exist, ID: ${markerExist.id}`);
+      // let alert = document.createElement("div");
+
+      // <Dialog open={open} onClose={handleClose} keepMounted>
+      //   <DialogTitle>{`Device ${name}`}</DialogTitle>
+      //   <DialogContent>
+      //     <DialogContentText>Alredy exist</DialogContentText>
+      //   </DialogContent>
+      //   <DialogActions>
+      //     <Button onClick={handleClose}>Close</Button>
+      //   </DialogActions>
+      // </Dialog>;
       handleOpenPopup();
     }
   };
 
-  // // const createMarker = (coordinates, imgIcon) => {
-  // //   // let myDivIcon = divIcon({
-  // //   //   className: "Settings__Icon",
-  // //   //   html: `<img className="Settings__Icon-img" src=${imgIcon}/>`,
-  // //   // });
+  // // // const createMarker = (coordinates, imgIcon) => {
+  // // //   // let myDivIcon = divIcon({
+  // // //   //   className: "Settings__Icon",
+  // // //   //   html: `<img className="Settings__Icon-img" src=${imgIcon}/>`,
+  // // //   // });
 
-  // //   marker(coordinates, {
-  // //     // icon: myDivIcon,
-  // //     icon: icon({ iconUrl: imgIcon, iconSize: [28, 28] }),
-  // //     draggable: true,
-  // //     attribution: "1",
-  // //     eventHandlers: {
-  // //       click: (e) => {
-  // //         console.log("marker clicked", e);
-  // //       },
-  // //     },
-  // //   }).addTo(map);
-  // // };
+  // // //   marker(coordinates, {
+  // // //     // icon: myDivIcon,
+  // // //     icon: icon({ iconUrl: imgIcon, iconSize: [28, 28] }),
+  // // //     draggable: true,
+  // // //     attribution: "1",
+  // // //     eventHandlers: {
+  // // //       click: (e) => {
+  // // //         console.log("marker clicked", e);
+  // // //       },
+  // // //     },
+  // // //   }).addTo(map);
+  // // // };
 
-  // // Deleting the marker from map / giving it 0 coordinates
-  const handleDeleteIcon = (_id) => {
-    let newMarkers = state.markers.filter((marker) => marker.id !== _id);
+  // // // Deleting the marker from map / giving it 0 coordinates
+  // const handleDeleteIcon = (_id) => {
+  //   let newMarkers = state.markers.filter((marker) => marker.id !== _id);
 
-    let markerToDeleteLocation = state.markers.find(
-      (marker) => marker.id === _id
-    );
+  //   let markerToDeleteLocation = state.markers.find(
+  //     (marker) => marker.id === _id
+  //   );
 
-    // setMarkers(newMarkers);
-    dispatch(setMarkersState(newMarkers));
-    dispatch(
-      updateIntegrationLocationDeviceAsync({
-        ...markerToDeleteLocation,
-        coordinates: { lat: 0, lng: 0 },
-      })
-    );
-  };
+  //   dispatch(setMarkersState(newMarkers));
+  //   dispatch(
+  //     updateIntegrationLocationDeviceAsync({
+  //       ...markerToDeleteLocation,
+  //       coordinates: { lat: 0, lng: 0 },
+  //     })
+  //   );
+  // };
 
-  // // save new location of marker after moving it
-  const handleMarkerNewLocation = (location, _id) => {
-    let newMarkers = state.markers.map((marker) => {
-      return marker.id === _id ? { ...marker, coordinates: location } : marker;
-    });
-    // find the marker for update
-    let markerToUpdate = newMarkers.find((marker) => marker.id === _id);
-    // setMarkers(newMarkers);
-    dispatch(setMarkersState(newMarkers));
-    dispatch(updateIntegrationLocationDeviceAsync(markerToUpdate));
-  };
+  // // // save new location of marker after moving it
+  // const handleMarkerNewLocation = (location, _id) => {
+  //   let newMarkers = state.markers.map((marker) => {
+  //     return marker.id === _id ? { ...marker, coordinates: location } : marker;
+  //   });
+  //   // find the marker for update
+  //   let markerToUpdate = newMarkers.find((marker) => marker.id === _id);
+  //   // setMarkers(newMarkers);
+  //   dispatch(setMarkersState(newMarkers));
+  //   dispatch(updateIntegrationLocationDeviceAsync(markerToUpdate));
+  // };
 
-  // making custom marker with label
-  const icon = (img, name) => {
-    return divIcon({
-      className: "MapMarker__Marker",
-      iconSize: [12, 12],
-      html: `<div class="MapMarker__div"> 
-              <div class="MapMarker__alarm-div">
-                <img class="MapMarker__image" src='${img}')}/>  
-              </div>
-              <br />
-              <span class="MapMarker__span">${name}</span> 
-        </div`,
-    });
-  };
+  // // making custom marker with label
+  // const icon = (img, name) => {
+  //   return divIcon({
+  //     className: "MapMarker__Marker",
+  //     iconSize: [12, 12],
+  //     html: `<div class="MapMarker__div">
+  //             <div class="MapMarker__alarm-div">
+  //               <img class="MapMarker__image" src='${img}')}/>
+  //             </div>
+  //             <br />
+  //             <span class="MapMarker__span" draggable={false}>${name}</span>
+  //       </div`,
+  //   });
+  // };
   // seeting the right pan for our Jetty
+
   useEffect(() => {
-    switch (state.SectionId) {
-      case "5ed1000d-3fdc-a4f7-7934-6f2a3afb88bf": // setting ATLAS Jetty
-        map.panTo(state.Center);
-        map.setZoom(17);
-        break;
-      case "8646221c-b254-180e-13f6-4008481434d0": // Setting APAPA Jetty
-        map.panTo(state.Center);
-        map.setZoom(18);
-        break;
-      case "319891cf-d6dc-5f86-5681-16060b7ba2b5": // Setting CALABAR Jetty
-        map.panTo(state.Center);
-        map.setZoom(19);
-        break;
-      case "c11d797c-2aea-226a-0625-24782d8bc9e1": // Setting OKRIKA Jetty
-        map.panTo(state.Center);
-        map.setZoom(17);
-        break;
-      case "78c39611-5d8a-4df7-0340-89b45aad3dcf": // Setting WARRI Jetty
-        map.panTo(state.Center);
-        map.setZoom(17);
-        break;
-      default:
-        break;
+    if (section !== state.SectionId) {
+      setSection(state.SectionId);
+      switch (state.SectionId) {
+        case "5ed1000d-3fdc-a4f7-7934-6f2a3afb88bf": // setting ATLAS Jetty
+          map.panTo(state.Center);
+          map.setZoom(17);
+          map.setMaxZoom(18);
+          break;
+        case "8646221c-b254-180e-13f6-4008481434d0": // Setting APAPA Jetty
+          map.panTo(state.Center);
+          map.setZoom(18);
+          map.setMaxZoom(19);
+
+          break;
+        case "319891cf-d6dc-5f86-5681-16060b7ba2b5": // Setting CALABAR Jetty
+          map.panTo(state.Center);
+          map.setZoom(19);
+          map.setMaxZoom(20);
+
+          break;
+        case "c11d797c-2aea-226a-0625-24782d8bc9e1": // Setting OKRIKA Jetty
+          map.panTo(state.Center);
+          map.setZoom(17);
+          map.setMaxZoom(18);
+
+          break;
+        case "78c39611-5d8a-4df7-0340-89b45aad3dcf": // Setting WARRI Jetty
+          map.panTo(state.Center);
+          map.setZoom(17);
+          map.setMaxZoom(19);
+
+          break;
+        default:
+          break;
+      }
     }
   }, [state]);
 
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 400,
+    bgcolor: "background.paper",
+    border: "2px solid #000",
+    boxShadow: 24,
+    p: 4,
+  };
   return (
     <div>
       {/* <TileLayer></TileLayer> */}
@@ -265,46 +308,78 @@ function MapSettingsComponent() {
         ? ""
         : state.markers.map((marker) => {
             return (
-              <Marker
-                key={marker.id}
-                position={marker.coordinates}
-                // icon={icon({ iconUrl: marker.icon, iconSize: [28, 28] })}
-                icon={icon(marker.icon, marker.name)}
-                draggable={true}
-                eventHandlers={{
-                  moveend: (e) => {
-                    // console.log(e.target._latlng);
-                    handleMarkerNewLocation(e.target._latlng, marker.id);
-                  },
-                }}
-              >
-                <Dialog
+              <div key={marker.id}>
+                <MapMarker
+                  id={marker.id}
+                  coordinates={marker.coordinates}
+                  img={marker.icon}
+                  name={marker.name}
+                  isDraggable={true}
+                ></MapMarker>
+                {/* <Popover
                   open={open}
                   onClose={handleClose}
-                  aria-labelledby="alert-dialog-title"
-                  aria-describedby="alert-dialog-description"
+                  anchorEl={target}
+                  anchorOrigin={{
+                    vertical: "center",
+                    horizontal: "center",
+                  }}
                 >
-                  <DialogTitle id="alert-dialog-title">
-                    {`Device ${marker.name}`}
-                  </DialogTitle>
+                  <Typography sx={{ h4: 2 }}>
+                    {`Device ${name} alredy exist, ID: ${id}`}
+                  </Typography>
+                  <Button onClick={handleClose}>Close</Button>
+                </Popover> */}
+                {/* <Dialog open={open} onClose={handleClose} keepMounted>
+                  <DialogTitle>{`Device ${name}`}</DialogTitle>
                   <DialogContent>
-                    <DialogContentText id="alert-dialog-description">
-                      Alredy exist
-                    </DialogContentText>
+                    <DialogContentText>Alredy exist</DialogContentText>
                   </DialogContent>
                   <DialogActions>
                     <Button onClick={handleClose}>Close</Button>
                   </DialogActions>
-                </Dialog>
-                <Popup>
-                  <p>{`Delete ${marker.name}`}</p>
-                  <DeleteIcon
-                    sx={{ cursor: "pointer" }}
-                    fontSize="small"
-                    onClick={() => handleDeleteIcon(marker.id)}
-                  ></DeleteIcon>
-                </Popup>
-              </Marker>
+                </Dialog> */}
+              </div>
+              // <Marker
+              //   key={marker.id}
+              //   position={marker.coordinates}
+              //   // icon={icon({ iconUrl: marker.icon, iconSize: [28, 28] })}
+              //   icon={icon(marker.icon, marker.name)}
+              //   draggable={true}
+              //   eventHandlers={{
+              //     moveend: (e) => {
+              //       // console.log(e.target._latlng);
+              //       handleMarkerNewLocation(e.target._latlng, marker.id);
+              //     },
+              //   }}
+              // >
+              //   <Dialog
+              //     open={open}
+              //     onClose={handleClose}
+              //     aria-labelledby="alert-dialog-title"
+              //     aria-describedby="alert-dialog-description"
+              //   >
+              //     <DialogTitle id="alert-dialog-title">
+              //       {`Device ${marker.name}`}
+              //     </DialogTitle>
+              //     <DialogContent>
+              //       <DialogContentText id="alert-dialog-description">
+              //         Alredy exist
+              //       </DialogContentText>
+              //     </DialogContent>
+              //     <DialogActions>
+              //       <Button onClick={handleClose}>Close</Button>
+              //     </DialogActions>
+              //   </Dialog>
+              //   <Popup>
+              //     <p>{`Delete ${marker.name}`}</p>
+              //     <DeleteIcon
+              //       sx={{ cursor: "pointer" }}
+              //       fontSize="small"
+              //       onClick={() => handleDeleteIcon(marker.id)}
+              //     ></DeleteIcon>
+              //   </Popup>
+              // </Marker>
 
               //   <MapMarker
               //     key={marker.id}
@@ -334,6 +409,16 @@ function MapSettingsComponent() {
               //   </MapMarker>
             );
           })}
+
+      <Dialog open={open} onClose={handleClose} keepMounted>
+        <DialogTitle>{`Device ${name}`}</DialogTitle>
+        <DialogContent>
+          <DialogContentText>Alredy exist</DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Close</Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }
