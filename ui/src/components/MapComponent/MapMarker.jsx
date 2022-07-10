@@ -36,12 +36,12 @@ function MapMarker({ id, coordinates, img, name, isDraggable, isSettings }) {
     });
     // find the marker for update
     let markerToUpdate = newMarkers.find((marker) => marker.id === _id);
-    // setMarkers(newMarkers);
+
     dispatch(setMarkersState(newMarkers));
     dispatch(updateIntegrationLocationDeviceAsync(markerToUpdate));
   };
 
-  // // Deleting the marker from map / giving it 0 coordinates
+  // Deleting the marker from map / setting its coordinates to 0
   const handleDeleteIcon = (_id) => {
     let newMarkers = state.markers.filter((marker) => marker.id !== _id);
 

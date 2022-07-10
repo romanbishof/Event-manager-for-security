@@ -31,6 +31,7 @@ function Settings() {
   const [devices, setDevices] = useState([]);
   const dispatch = useDispatch();
 
+  // selecting jetty
   const handleSelectJetty = (id, name) => {
     // let filterdDevices = state.Devices.filter(
     //   (device) => device.SectionId === id
@@ -41,6 +42,7 @@ function Settings() {
     );
     setDevices(temp);
 
+    // sending comand to pan map at specific jetty
     switch (String(id)) {
       case "5ed1000d-3fdc-a4f7-7934-6f2a3afb88bf": //selecting ATLAS Jetty for map
         dispatch(setCoordinatesJetty([6.4112, 3.3921]));
@@ -83,7 +85,6 @@ function Settings() {
                       className="Settings__TableCell"
                       onClick={() => {
                         handleSelectJetty(section.Id, section.Name);
-
                         dispatch(setSectionId(section.Id));
                       }}
                     >

@@ -23,6 +23,7 @@ function MapComponent() {
   //   },
   // });
 
+  // map image overlay bounds
   const bounds = {
     apapa: [
       [6.45241, 3.36908],
@@ -91,33 +92,6 @@ function MapComponent() {
         break;
     }
   }, [state]);
-
-  // useEffect(() => {
-  //   state.integration.forEach((device) => {
-  //     if (device.LocationX !== 0) {
-  //       setMarkers([
-  //         ...markers,
-  //         {
-  //           coordinates: { lat: device.LocationX, lng: device.LocationY },
-  //           icon: hadleImageType(device.Type),
-  //           id: device.Id,
-  //           name: device.Name,
-  //         },
-  //       ]);
-  //       dispatch(
-  //         setMarkersState([
-  //           ...markers,
-  //           {
-  //             coordinates: { lat: device.LocationX, lng: device.LocationY },
-  //             icon: hadleImageType(device.Type),
-  //             id: device.Id,
-  //             name: device.Name,
-  //           },
-  //         ])
-  //       );
-  //     }
-  //   });
-  // }, []);
 
   return (
     <div>

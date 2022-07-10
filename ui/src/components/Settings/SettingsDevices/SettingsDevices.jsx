@@ -23,8 +23,7 @@ function SettingsDevices({ _devices }) {
   const state = useSelector((state) => state.ISMS);
   const [searchText, setSearchText] = useState("");
 
-  //   const [devices, setDevices] = useState([]);
-
+  //   checkes device type and sets image acordenly
   const hadleImageType = (deviceType) => {
     switch (deviceType) {
       case 14:
@@ -46,10 +45,6 @@ function SettingsDevices({ _devices }) {
     }
   };
 
-  let temp = _devices;
-
-  console.log(temp);
-
   return (
     <div className="SettingsDevices">
       <div className="SettingsDevices__Header header span">
@@ -59,11 +54,11 @@ function SettingsDevices({ _devices }) {
           onChange={(e) => setSearchText(e.target.value.toLocaleLowerCase())}
         ></input>
       </div>
+      {/* rendering jetty device */}
       {_devices[0]?.Zones?.map((obj) => {
         return obj.PhysicalDevices.filter((device) =>
           device.Name.toLocaleLowerCase().includes(searchText)
         ).map((obj) => {
-          // console.log(obj);
           return obj.Devices.length > 0 ? (
             obj.Devices.filter((device) =>
               device.Name.toLocaleLowerCase().includes(searchText)

@@ -44,6 +44,7 @@ function MapSettingsComponent() {
 
   const map = useMap();
 
+  // overlay bounds image on map for each jetty
   const bounds = {
     apapa: [
       [6.45241, 3.36908],
@@ -85,6 +86,7 @@ function MapSettingsComponent() {
   //   },
   // });
 
+  // set image based on device type
   const hadleImageType = (deviceType) => {
     switch (Number(deviceType)) {
       case 14:
@@ -114,6 +116,7 @@ function MapSettingsComponent() {
     setOpen(false);
   };
 
+  // choosing the element that will have the drag and drop event hendler
   let target = document.getElementById("map");
   target.ondragstart = function (e) {
     console.log(e.target.id);
@@ -131,6 +134,7 @@ function MapSettingsComponent() {
     let coordinates = map.containerPointToLatLng(point([e.offsetX, e.offsetY]));
     let markerExist = state.markers.some((marker) => marker.id === id);
 
+    // check if marker alredy exist
     if (!markerExist) {
       dispatch(
         setMarkersState([
@@ -158,70 +162,7 @@ function MapSettingsComponent() {
     }
   };
 
-  // // // const createMarker = (coordinates, imgIcon) => {
-  // // //   // let myDivIcon = divIcon({
-  // // //   //   className: "Settings__Icon",
-  // // //   //   html: `<img className="Settings__Icon-img" src=${imgIcon}/>`,
-  // // //   // });
-
-  // // //   marker(coordinates, {
-  // // //     // icon: myDivIcon,
-  // // //     icon: icon({ iconUrl: imgIcon, iconSize: [28, 28] }),
-  // // //     draggable: true,
-  // // //     attribution: "1",
-  // // //     eventHandlers: {
-  // // //       click: (e) => {
-  // // //         console.log("marker clicked", e);
-  // // //       },
-  // // //     },
-  // // //   }).addTo(map);
-  // // // };
-
-  // // // Deleting the marker from map / giving it 0 coordinates
-  // const handleDeleteIcon = (_id) => {
-  //   let newMarkers = state.markers.filter((marker) => marker.id !== _id);
-
-  //   let markerToDeleteLocation = state.markers.find(
-  //     (marker) => marker.id === _id
-  //   );
-
-  //   dispatch(setMarkersState(newMarkers));
-  //   dispatch(
-  //     updateIntegrationLocationDeviceAsync({
-  //       ...markerToDeleteLocation,
-  //       coordinates: { lat: 0, lng: 0 },
-  //     })
-  //   );
-  // };
-
-  // // // save new location of marker after moving it
-  // const handleMarkerNewLocation = (location, _id) => {
-  //   let newMarkers = state.markers.map((marker) => {
-  //     return marker.id === _id ? { ...marker, coordinates: location } : marker;
-  //   });
-  //   // find the marker for update
-  //   let markerToUpdate = newMarkers.find((marker) => marker.id === _id);
-  //   // setMarkers(newMarkers);
-  //   dispatch(setMarkersState(newMarkers));
-  //   dispatch(updateIntegrationLocationDeviceAsync(markerToUpdate));
-  // };
-
-  // // making custom marker with label
-  // const icon = (img, name) => {
-  //   return divIcon({
-  //     className: "MapMarker__Marker",
-  //     iconSize: [12, 12],
-  //     html: `<div class="MapMarker__div">
-  //             <div class="MapMarker__alarm-div">
-  //               <img class="MapMarker__image" src='${img}')}/>
-  //             </div>
-  //             <br />
-  //             <span class="MapMarker__span" draggable={false}>${name}</span>
-  //       </div`,
-  //   });
-  // };
   // seeting the right pan for our Jetty
-
   useEffect(() => {
     if (section !== state.SectionId) {
       setSection(state.SectionId);

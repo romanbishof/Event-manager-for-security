@@ -102,34 +102,8 @@ function Devices() {
   // localStorage.setItem("temp", JSON.stringify(temp));
 
   const handleClickNode = (physicalDevices) => {
-    // dispatch(setZoneId(Id));
     dispatch(setPhysicalDevices(physicalDevices));
   };
-
-  // const renderTree = (nodes) => {
-  //   if (nodes.ZoneList !== undefined) {
-  //     return (
-  //       <div>
-  //         {nodes.ZoneList.Zones.map((_node) => {
-  //           return (
-  //             <TreeItem
-  //               key={_node.Id}
-  //               nodeId={String(_node.Id)}
-  //               label={_node.Name}
-  //               onClick={() => {
-  //                 handleClickNode(_node.Id);
-  //               }}
-  //               sx={{ borderBottom: "1px solid #a0bd11" }}
-  //             ></TreeItem>
-  //           );
-  //         })}
-  //       </div>
-  //     );
-  //   } else {
-  //     console.log("The data is undefined", nodes.ZoneList);
-  //     return [];
-  //   }
-  // };
 
   const renderTree = (nodes) => {
     if (nodes?.Zones) {
@@ -177,6 +151,7 @@ function Devices() {
             {renderTree(parentTree)}
           </TreeView>
         </div>
+        <div className="Devices__body-footer"></div>
       </div>
     </div>
   );

@@ -58,6 +58,7 @@ function TableDevices({ _devices, _label }) {
         ></input>
       </div>
       <div className="TableDevices__body">
+        <div class="shadow shadow--bottom"></div>
         <TreeView
           aria-label="Table Devices"
           defaultCollapseIcon={<ExpandMoreIcon />}
@@ -107,7 +108,7 @@ function TableDevices({ _devices, _label }) {
                 );
               })
           ) : (
-            <span>{`NO Physical Devices`}</span>
+            <span className="span">{`NO Physical Devices`}</span>
           )}
           {/* <TableItem _device={device} /> */}
           {/* <TableItem
