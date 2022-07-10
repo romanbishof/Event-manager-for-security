@@ -23,11 +23,15 @@ code {
   background: linear-gradient(#393939,#202020);
   align-items: center;
   font-weight: bold;
-    font-size: 15px;
-    letter-spacing: 1px;
+  font-size: 15px;
+  letter-spacing: 1px;
 }
 
 .span{
-  padding: 0px 10px;
   color: white;
+  font-size: 15px;
+  font-weight: bold;
+  font-family: helvetica,arial,verdana,sans-serif;
+  line-height: 16px;
+  padding: 3px 3px 3px 10px
 }

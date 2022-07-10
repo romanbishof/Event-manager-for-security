@@ -66,31 +66,11 @@ function Settings() {
         break;
     }
   };
-  // const hadleImageType = (deviceType) => {
-  //   switch (deviceType) {
-  //     case 14:
-  //       return main_device_panic_idle;
-  //     case 8:
-  //       return emergency_idle;
-  //     case 9:
-  //       return doorphone_on;
-  //     case 77:
-  //       return main_device_door_close;
-  //     case 1:
-  //       return camera_on;
-  //     case 400:
-  //       return main_device_siren_normal;
-  //     case 108:
-  //       return main_device_panic_detecting;
-  //     default:
-  //       return;
-  //   }
-  // };
 
   return (
     <div className="Settings">
       <div className="Settings__sections">
-        <div className="Settings__Header header">
+        <div className="Settings__Header header span">
           <span>{`NNPC Jetty`}</span>
         </div>
         <TableContainer component={Paper} sx={{ backgroundColor: "#515151" }}>
@@ -118,96 +98,9 @@ function Settings() {
       </div>
       <div className="Settings__wrapper">
         <div className="Settings__wrapper-map" id="map">
-          {/* <div className="Settings__devices_list">
-            <div className="Settings__Header header">
-              <span>{`Jetty Devices`}</span>
-            </div>
-            {devices[0]?.Zones?.map((obj) => {
-              return obj.PhysicalDevices.map((obj) => {
-                // console.log(obj);
-                return obj.Devices.length > 0 ? (
-                  obj.Devices.map((obj) => (
-                    <TableContainer
-                      sx={{ overflowX: "hidden", backgroundColor: "#515151" }}
-                      key={obj.Id}
-                      component={Paper}
-                    >
-                      <Table size="small">
-                        <TableBody>
-                          <TableRow hover={true} sx={{ cursor: "pointer" }}>
-                            <TableCell
-                              className="Settings__TableCell"
-                              id={obj.Id}
-                              name={`${obj.Name}`}
-                              type={obj.Type}
-                              draggable={true}
-                              sx={{
-                                overflow: "hidden",
-                                whiteSpace: "nowrap",
-                                textOverflow: "ellipsis",
-                              }}
-                            >
-                              <div className="Settings__table-div">
-                                <img
-                                  className="Settings__Table-img"
-                                  // id={`${obj.Id}`}
-                                  src={hadleImageType(obj.Type)}
-                                  // alt={`${obj.Name}`}
-                                  // type={obj.Type}
-                                  draggable={false}
-                                />
-                                <span>{obj.Name}</span>
-                              </div>
-                            </TableCell>
-                          </TableRow>
-                        </TableBody>
-                      </Table>
-                    </TableContainer>
-                  ))
-                ) : (
-                  <TableContainer
-                    sx={{ overflowX: "hidden", backgroundColor: "#515151" }}
-                    key={obj.Id}
-                    component={Paper}
-                  >
-                    <Table size="small">
-                      <TableBody>
-                        <TableRow hover={true} sx={{ cursor: "pointer" }}>
-                          <TableCell
-                            className="Settings__TableCell"
-                            id={obj.Id}
-                            name={`${obj.Name}`}
-                            type={obj.Type}
-                            draggable={true}
-                            sx={{
-                              overflow: "hidden",
-                              whiteSpace: "nowrap",
-                              textOverflow: "ellipsis",
-                            }}
-                          >
-                            <div className="Settings__table-div">
-                              <img
-                                className="Settings__Table-img"
-                                // id={`${obj.Id}`}
-                                src={hadleImageType(obj.Type)}
-                                // alt={`${obj.Name}`}
-                                // type={obj.Type}
-                                draggable={false}
-                              />
-                              <span>{obj.Name}</span>
-                            </div>
-                          </TableCell>
-                        </TableRow>
-                      </TableBody>
-                    </Table>
-                  </TableContainer>
-                );
-              });
-            })}
-          </div> */}
           <SettingsDevices _devices={devices} />
           <div className="Settings__map">
-            <div className="Settings__Header header">
+            <div className="Settings__Header header span">
               <span>{`NNPC Map`}</span>
             </div>
             <MapContainer

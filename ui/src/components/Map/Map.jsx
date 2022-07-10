@@ -6,7 +6,7 @@ import "./Map.css";
 function Map() {
   return (
     <div className="Map">
-      <div className="Map__header header">
+      <div className="Map__header header span">
         <span>Map</span>
       </div>
       <div className="Map__body">

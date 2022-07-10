@@ -1,19 +1,11 @@
 .Devices{
     width: 932px;
     padding: 5px 5px 5px 0px;
+    height: 100%;
 }
 
 .Devices__header{
     display: flex;
-}
-
-.Devices__header span{
-    color: white;
-    font-size: 15px;
-    font-weight: bold;
-    font-family: helvetica,arial,verdana,sans-serif;
-    line-height: 16px;
-    padding: 3px 3px 3px 10px;
 }
 
 .Devices__body{

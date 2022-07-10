@@ -3,8 +3,8 @@
     flex-direction: row;
     color: white;
     width: 100%;
-    height: 850px;
-    padding: 5px;
+    height: 862px;
+    padding: 5px 0px 5px 0px;
 }
 
 .Settings__Header{
@@ -14,8 +14,7 @@
 .Settings__sections{
     background-color:#515151;
     width: 185px;
-    /* min-height: 100%; */
-    height: 850px;
+    height: 100%;
 }
 
 .Settings__wrapper{
@@ -30,17 +29,6 @@
     width: 100%;
 }
 
-/* .Settings__devices_list{
-    margin: 0px 5px;
-    min-width: 300px;
-    height: 100%;
-    background-color:#515151;
-    overflow-y: scroll;
-    overflow-x: hidden;
-}::-webkit-scrollbar{
-    display: none;
-} */
-
 .Settings__TableCell {
     background-color: "#515151"; 
 }
@@ -54,24 +42,6 @@
     font-weight: bold;
     font-family: sans-serif;
 }
-
-/* .Settings__table-div{
-    display: flex;
-    height: 40px;
-    align-items: center;
-}
-
-.Settings__table-div span{
-    padding: 0px 10px;
-    color: white;
-}
-
-.Settings__Table-img{
-    width: 35px;
-    height: 35px;
-    object-fit: cover;
-    cursor: pointer;
-} */
 
 .Settings__map{
     width: 100%;

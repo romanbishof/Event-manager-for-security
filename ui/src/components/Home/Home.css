@@ -1,14 +1,19 @@
 .Home{
     display: flex;
     flex-direction: row;
+    height: 862px;
 }
 .Home__left{
     display: flex;
-    flex-direction: column
+    flex-direction: column;
 }
 
 .Home__left-Devices{
     display: flex;
     flex-direction: row;
     width: 100%;
+}
+
+.Home__right{
+    
 }

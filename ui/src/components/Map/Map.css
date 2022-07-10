@@ -1,6 +1,7 @@
 .Map{
     width: 988px;
-    padding: 5px 5px 5px 0px;
+    padding: 5px 0px 5px 0px;
+    height: 100%;
 }
 
 .Map__header{
@@ -8,19 +9,10 @@
     width: 100%;
 }
 
-.Map__header span{
-    color: white;
-    font-size: 15px;
-    font-weight: bold;
-    font-family: helvetica,arial,verdana,sans-serif;
-    line-height: 16px;
-    padding: 3px 3px 3px 10px;
-}
-
 .Map__body{
     width: 100%;
     background: #3b3b3b;
-    height: 820px;
+    height: 830px;
 }
 
 .Map__body-NNPC{

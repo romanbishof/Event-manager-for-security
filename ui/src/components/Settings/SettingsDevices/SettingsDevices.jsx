@@ -21,8 +21,9 @@ import "./SettingsDevices.css";
 
 function SettingsDevices({ _devices }) {
   const state = useSelector((state) => state.ISMS);
+  const [searchText, setSearchText] = useState("");
 
-  const [devices, setDevices] = useState([]);
+  //   const [devices, setDevices] = useState([]);
 
   const hadleImageType = (deviceType) => {
     switch (deviceType) {
@@ -45,16 +46,28 @@ function SettingsDevices({ _devices }) {
     }
   };
 
+  let temp = _devices;
+
+  console.log(temp);
+
   return (
     <div className="SettingsDevices">
-      <div className="SettingsDevices__Header header">
+      <div className="SettingsDevices__Header header span">
         <span>{`Jetty Devices`}</span>
+        <input
+          placeholder="Search Device..."
+          onChange={(e) => setSearchText(e.target.value.toLocaleLowerCase())}
+        ></input>
       </div>
       {_devices[0]?.Zones?.map((obj) => {
-        return obj.PhysicalDevices.map((obj) => {
+        return obj.PhysicalDevices.filter((device) =>
+          device.Name.toLocaleLowerCase().includes(searchText)
+        ).map((obj) => {
           // console.log(obj);
           return obj.Devices.length > 0 ? (
-            obj.Devices.map((obj) => (
+            obj.Devices.filter((device) =>
+              device.Name.toLocaleLowerCase().includes(searchText)
+            ).map((obj) => (
               <TableContainer
                 sx={{ overflowX: "hidden", backgroundColor: "#515151" }}
                 key={obj.Id}

@@ -5,7 +5,7 @@ import "./Sections.css";
 function Sections() {
   return (
     <div className="Sections">
-      <div className="Sections__header header">
+      <div className="Sections__header header span">
         <span>Section</span>
       </div>
       <div className="Section__body">

@@ -16,15 +16,6 @@ function TableDevices({ _devices, _label }) {
 
   const [searchText, setSearchText] = useState("");
 
-  // console.log(searchText);
-  // let temp =
-  //   _devices.length > 0
-  //     ? _devices?.filter((device) =>
-  //         device.Name.toLocaleLowerCase().includes(searchText)
-  //       )
-  //     : "";
-
-  // console.log(temp);
   //////////////////////////////////////////////////////////////////////////////
   // let { PhysicalDevices, Devices } = state.JsonData;
   // console.log(NonCategorizedDevices);
@@ -59,7 +50,7 @@ function TableDevices({ _devices, _label }) {
 
   return (
     <div className="TableDevices">
-      <div className="TableDevices__header header">
+      <div className="TableDevices__header header span">
         <span>{_label}</span>
         <input
           placeholder="Search Device..."

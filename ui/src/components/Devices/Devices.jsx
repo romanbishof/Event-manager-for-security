@@ -157,7 +157,7 @@ function Devices() {
   };
   return (
     <div className="Devices">
-      <div className="Devices__header header">
+      <div className="Devices__header header span">
         <span>{`Jetty Zones - (${state.Jetty.toUpperCase()})`}</span>
       </div>
       <div className="Devices__body">
