@@ -11,9 +11,6 @@ function Devices() {
   const state = useSelector((state) => state.ISMS);
   const [parentTree, setParentTree] = useState(state.integrationDevices);
   const dispatch = useDispatch();
-  // let { integrationDevices } = state;
-
-  // let treeList = state.Sections;
 
   useEffect(() => {
     let [treeRoot] = state.Sections.filter((obj) =>

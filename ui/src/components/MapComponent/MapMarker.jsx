@@ -9,7 +9,7 @@ import {
 import DeleteIcon from "@mui/icons-material/Delete";
 import "./MapSettingsComponent.css";
 
-function MapMarker({ id, coordinates, img, name, isDraggable }) {
+function MapMarker({ id, coordinates, img, name, isDraggable, isSettings }) {
   const state = useSelector((state) => state.ISMS);
 
   const dispatch = useDispatch();
@@ -70,14 +70,19 @@ function MapMarker({ id, coordinates, img, name, isDraggable }) {
         },
       }}
     >
-      <Popup>
-        <p>{`Delete ${name}`}</p>
-        <DeleteIcon
-          sx={{ cursor: "pointer" }}
-          fontSize="small"
-          onClick={() => handleDeleteIcon(id)}
-        ></DeleteIcon>
-      </Popup>
+      {" "}
+      {isSettings === true ? (
+        <Popup>
+          <p>{`Delete ${name}`}</p>
+          <DeleteIcon
+            sx={{ cursor: "pointer" }}
+            fontSize="small"
+            onClick={() => handleDeleteIcon(id)}
+          ></DeleteIcon>
+        </Popup>
+      ) : (
+        ""
+      )}
     </Marker>
   );
 }

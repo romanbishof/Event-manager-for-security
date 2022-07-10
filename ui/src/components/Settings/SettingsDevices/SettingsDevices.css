@@ -1,0 +1,48 @@
+.SettingsDevices{
+    /* display: flex; */
+    /* flex-direction: column; */
+    color: white;
+    height: 850px;
+    margin: 0px 5px;
+    min-width: 300px;
+    background-color:#515151;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    
+}::-webkit-scrollbar{
+    display: none;
+}
+
+.SettingsDevices__Header{
+    display: flex;
+}
+
+.SettingsDevices__TableCell{
+    background-color: "#515151";
+}
+
+.SettingsDevices__TableCell:hover {
+    background-color: #8f8f8f;
+}
+
+.SettingsDevices__TableCell {
+    background-color: "#515151"; 
+}
+
+.SettingsDevices__TableCell:hover {
+    background-color: #8f8f8f;
+}
+
+.SettingsDevicess__table-div{
+    display: flex;
+    height: 40px;
+    align-items: center;
+}
+
+
+.SettingsDevices__Table-img{
+    width: 35px;
+    height: 35px;
+    object-fit: cover;
+    cursor: pointer;
+}

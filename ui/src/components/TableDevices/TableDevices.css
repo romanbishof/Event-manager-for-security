@@ -1,10 +1,29 @@
 .TableDevices{
-    width: 932px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
     padding: 5px 5px 5px 0px;
 }
 
 .TableDevices__header{
     display: flex;
+    justify-content: space-between;
+}
+
+.TableDevices__header input{
+    /* height:100%; */
+    width: 122px;
+    padding: 1px 10px;
+    border: none;
+    border-radius: 10px 0px 0px 10px;
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+    outline: none !important;
+    transition: ease-in-out 0.2s;
+}
+
+.TableDevices__header input:focus{
+    width: 155px;
 }
 
 .TableDevices__header span{

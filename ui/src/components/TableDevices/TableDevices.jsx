@@ -6,13 +6,26 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import "./TableDevices.css";
 import TableItem from "./TableItem/TableItem";
 
-function TableDevices() {
+function TableDevices({ _devices, _label }) {
   // const [nonCategorizedDevices, setNonCategorizedDevices] = useState([]);
   // const [physicalZoneDevices, setPhysicalZoneDevices] = useState([]);
   //   const [physicalZoneDevices, setPhysicalZoneDevices] = useState(null);
   const state = useSelector((state) => state.ISMS);
-  let { PhysicalDevices, NonCategorizedDevices } = state;
+  // const [device, setDevice] = useState("");
+  // let { PhysicalDevices, NonCategorizedDevices } = state;
 
+  const [searchText, setSearchText] = useState("");
+
+  // console.log(searchText);
+  // let temp =
+  //   _devices.length > 0
+  //     ? _devices?.filter((device) =>
+  //         device.Name.toLocaleLowerCase().includes(searchText)
+  //       )
+  //     : "";
+
+  // console.log(temp);
+  //////////////////////////////////////////////////////////////////////////////
   // let { PhysicalDevices, Devices } = state.JsonData;
   // console.log(NonCategorizedDevices);
 
@@ -47,7 +60,11 @@ function TableDevices() {
   return (
     <div className="TableDevices">
       <div className="TableDevices__header header">
-        <span>Devices</span>
+        <span>{_label}</span>
+        <input
+          placeholder="Search Device..."
+          onChange={(e) => setSearchText(e.target.value.toLocaleLowerCase())}
+        ></input>
       </div>
       <div className="TableDevices__body">
         <TreeView
@@ -62,10 +79,50 @@ function TableDevices() {
             overflowY: "auto",
           }}
         >
-          <TableItem
+          {_devices.length > 0 ? (
+            _devices
+              .filter((device) =>
+                device.Name.toLocaleLowerCase().includes(searchText)
+              )
+              .map((obj) => {
+                return (
+                  <TreeItem
+                    key={obj.Id}
+                    nodeId={String(obj.Id)}
+                    label={obj.Name}
+                    sx={{ borderBottom: "1px solid #a0bd11" }}
+                    onClick={() => {
+                      // setDevice(obj);
+                      // handlePopupItem(obj);
+                    }}
+                  >
+                    {obj?.Devices?.length > 0
+                      ? obj.Devices.map((obj) => {
+                          return (
+                            <TreeItem
+                              key={obj.Id}
+                              nodeId={String(obj.Id)}
+                              label={obj.Name}
+                              sx={{ borderBottom: "1px solid #a0bd11" }}
+                              onClick={() => {
+                                // setDevice(obj);
+                                // handlePopupItem(obj);
+                              }}
+                            ></TreeItem>
+                          );
+                        })
+                      : ""}
+                  </TreeItem>
+                );
+              })
+          ) : (
+            <span>{`NO Physical Devices`}</span>
+          )}
+          {/* <TableItem _device={device} /> */}
+          {/* <TableItem
             _devices={NonCategorizedDevices}
             _label="Non Categorized Devices"
-          />
+          /> */}
           {/* <TableItem
             _devices={NonCategorizedDevices.filter((obj) =>
               obj.Name.toLowerCase().includes(
@@ -74,7 +131,7 @@ function TableDevices() {
             )}
             _label="Non Categorized Devices"
           /> */}
-          <TableItem _devices={PhysicalDevices} _label="Physical Devices" />
+          {/* <TableItem _devices={PhysicalDevices} _label="Physical Devices" /> */}
         </TreeView>
       </div>
     </div>

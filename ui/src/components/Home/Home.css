@@ -2,3 +2,13 @@
     display: flex;
     flex-direction: row;
 }
+.Home__left{
+    display: flex;
+    flex-direction: column
+}
+
+.Home__left-Devices{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}

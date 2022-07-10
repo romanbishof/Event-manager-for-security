@@ -24,6 +24,7 @@ import {
   TableContainer,
   TableRow,
 } from "@mui/material";
+import SettingsDevices from "./SettingsDevices/SettingsDevices";
 
 function Settings() {
   const state = useSelector((state) => state.ISMS);
@@ -65,31 +66,33 @@ function Settings() {
         break;
     }
   };
-
-  const hadleImageType = (deviceType) => {
-    switch (deviceType) {
-      case 14:
-        return main_device_panic_idle;
-      case 8:
-        return emergency_idle;
-      case 9:
-        return doorphone_on;
-      case 77:
-        return main_device_door_close;
-      case 1:
-        return camera_on;
-      case 400:
-        return main_device_siren_normal;
-      case 108:
-        return main_device_panic_detecting;
-      default:
-        return;
-    }
-  };
+  // const hadleImageType = (deviceType) => {
+  //   switch (deviceType) {
+  //     case 14:
+  //       return main_device_panic_idle;
+  //     case 8:
+  //       return emergency_idle;
+  //     case 9:
+  //       return doorphone_on;
+  //     case 77:
+  //       return main_device_door_close;
+  //     case 1:
+  //       return camera_on;
+  //     case 400:
+  //       return main_device_siren_normal;
+  //     case 108:
+  //       return main_device_panic_detecting;
+  //     default:
+  //       return;
+  //   }
+  // };
 
   return (
     <div className="Settings">
       <div className="Settings__sections">
+        <div className="Settings__Header header">
+          <span>{`NNPC Jetty`}</span>
+        </div>
         <TableContainer component={Paper} sx={{ backgroundColor: "#515151" }}>
           <Table>
             <TableBody>
@@ -115,7 +118,10 @@ function Settings() {
       </div>
       <div className="Settings__wrapper">
         <div className="Settings__wrapper-map" id="map">
-          <div className="Settings__devices_list">
+          {/* <div className="Settings__devices_list">
+            <div className="Settings__Header header">
+              <span>{`Jetty Devices`}</span>
+            </div>
             {devices[0]?.Zones?.map((obj) => {
               return obj.PhysicalDevices.map((obj) => {
                 // console.log(obj);
@@ -198,8 +204,12 @@ function Settings() {
                 );
               });
             })}
-          </div>
+          </div> */}
+          <SettingsDevices _devices={devices} />
           <div className="Settings__map">
+            <div className="Settings__Header header">
+              <span>{`NNPC Map`}</span>
+            </div>
             <MapContainer
               className="Settings__map__body"
               center={[6.4553, 3.3713]}

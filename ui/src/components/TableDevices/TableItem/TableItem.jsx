@@ -18,7 +18,7 @@ import Paper from "@mui/material/Paper";
 import React, { useEffect, useState } from "react";
 import "./TableItem.css";
 
-function TableItem({ _devices, _label }) {
+function TableItem({ _device }) {
   const [open, setOpen] = useState(false);
   const [device, setDevice] = useState({});
   const [deviceKeys, setDeviceKeys] = useState([]);
@@ -31,13 +31,20 @@ function TableItem({ _devices, _label }) {
     setDeviceKeys(Object.keys(device));
   };
 
+  // useEffect(() => {
+  //   setDeviceKeys(Object.keys(device));
+  // }, [_device]);
+
   useEffect(() => {
     setDeviceKeys(Object.keys(device));
-  }, [device]);
+    if (Object.keys(_device).length !== 0) {
+      handlePopupItem();
+    }
+  }, [_device]);
 
   return (
     <div className="TableItem">
-      {_devices.length > 0 ? (
+      {/* {_devices.length > 0 ? (
         <TreeItem
           key={`${_label}+1`}
           nodeId={`${_label}+2`}
@@ -78,9 +85,7 @@ function TableItem({ _devices, _label }) {
         </TreeItem>
       ) : (
         ""
-      )}
-
-      {/* {renderTree(_devices)} */}
+      )} */}
 
       <Dialog
         open={open}
@@ -88,7 +93,7 @@ function TableItem({ _devices, _label }) {
         onClose={handleClose}
         aria-describedby="dialog-popup-device-form"
       >
-        <DialogTitle>{`Device - ${device.Name}`}</DialogTitle>
+        <DialogTitle>{`Device - ${_device.Name}`}</DialogTitle>
         <DialogContent>
           <DialogContentText id="dialog-popup-device-form"></DialogContentText>
           <TableContainer component={Paper}>
@@ -104,14 +109,15 @@ function TableItem({ _devices, _label }) {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {deviceKeys.map((key, index) => {
+                {/* {deviceKeys.map((key, index) => {
                   return (
                     <TableRow key={`${index}`}>
                       <TableCell>{key}</TableCell>
                       <TableCell>{device[key]}</TableCell>
                     </TableRow>
                   );
-                })}
+                })} */}
+                {}
               </TableBody>
             </Table>
           </TableContainer>

@@ -116,6 +116,7 @@ function MapSettingsComponent() {
 
   let target = document.getElementById("map");
   target.ondragstart = function (e) {
+    console.log(e.target.id);
     setId(e.target.id);
     setName(e.target.getAttribute("name"));
     setType(e.target.getAttribute("type"));
@@ -128,9 +129,9 @@ function MapSettingsComponent() {
     e.preventDefault();
     // let imagePath = e.dataTransfer.getData("text/plain");
     let coordinates = map.containerPointToLatLng(point([e.offsetX, e.offsetY]));
-    let markerExist = state.markers.find((marker) => marker.id === id);
+    let markerExist = state.markers.some((marker) => marker.id === id);
 
-    if (markerExist.id !== id) {
+    if (!markerExist) {
       dispatch(
         setMarkersState([
           ...state.markers,
@@ -274,6 +275,7 @@ function MapSettingsComponent() {
                   img={marker.icon}
                   name={marker.name}
                   isDraggable={true}
+                  isSettings={true}
                 ></MapMarker>
               </div>
             );

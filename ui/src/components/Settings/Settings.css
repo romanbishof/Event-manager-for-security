@@ -6,10 +6,16 @@
     height: 850px;
     padding: 5px;
 }
+
+.Settings__Header{
+    display: flex;
+}
+
 .Settings__sections{
     background-color:#515151;
     width: 185px;
-    min-height: 100%;
+    /* min-height: 100%; */
+    height: 850px;
 }
 
 .Settings__wrapper{
@@ -24,7 +30,7 @@
     width: 100%;
 }
 
-.Settings__devices_list{
+/* .Settings__devices_list{
     margin: 0px 5px;
     min-width: 300px;
     height: 100%;
@@ -33,7 +39,7 @@
     overflow-x: hidden;
 }::-webkit-scrollbar{
     display: none;
-}
+} */
 
 .Settings__TableCell {
     background-color: "#515151"; 
@@ -49,7 +55,7 @@
     font-family: sans-serif;
 }
 
-.Settings__table-div{
+/* .Settings__table-div{
     display: flex;
     height: 40px;
     align-items: center;
@@ -65,11 +71,11 @@
     height: 35px;
     object-fit: cover;
     cursor: pointer;
-}
+} */
 
 .Settings__map{
     width: 100%;
-    height: 100%;
+    height: 830px;
 }
 
 .Settings__map__body{

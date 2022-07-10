@@ -22,4 +22,12 @@ code {
   width: 100%;
   background: linear-gradient(#393939,#202020);
   align-items: center;
+  font-weight: bold;
+    font-size: 15px;
+    letter-spacing: 1px;
+}
+
+.span{
+  padding: 0px 10px;
+  color: white;
 }

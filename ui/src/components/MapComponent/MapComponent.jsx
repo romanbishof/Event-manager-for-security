@@ -132,6 +132,7 @@ function MapComponent() {
                 img={marker.icon}
                 name={marker.name}
                 isDraggable={false}
+                isSettings={false}
               />
             );
           })}
