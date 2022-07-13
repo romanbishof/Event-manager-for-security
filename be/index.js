@@ -1,8 +1,9 @@
 import express from 'express'
 import cors from 'cors'
 import bodyParser from 'body-parser'
+import { Server } from "socket.io";
+import { createServer } from 'http'
 import integrationDevicesController from './controllers/integrationDevicesController.js'
-
 import './configs/subscriptionsDB.js'
 // import './configs/integrationDevicesColection.js'
 import './configs/subscriptionExchangeRabbitMQ.js'
@@ -10,6 +11,9 @@ import './configs/subscriptionExchangeRabbitMQ.js'
 
 const PORT = 8080;
 const app = express();
+const httpServer = createServer(app)
+const io = new Server(httpServer, { cors: { origin: "*" } })
+
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true })).use(bodyParser.json())
 
@@ -21,6 +25,10 @@ app.get('/api/v1', (req, res) => {
 app.use('/api/v1/integrationDevices', integrationDevicesController)
 
 
-app.listen(PORT, () => {
+httpServer.listen(PORT, () => {
     console.log(`the server is running on port ${PORT}`);
+})
+
+io.on('connection', (socket) => {
+    console.log(socket);
 })

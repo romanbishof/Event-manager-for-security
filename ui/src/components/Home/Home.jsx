@@ -4,10 +4,15 @@ import Devices from "../Devices/Devices";
 import Map from "../Map/Map";
 import Sections from "../Sections/Sections";
 import TableDevices from "../TableDevices/TableDevices";
+import io from "socket.io-client";
 import "./Home.css";
+
+const socket = io();
 
 function Home() {
   const state = useSelector((state) => state.ISMS);
+
+  socket.on("connection");
 
   return (
     <div className="Home">
@@ -26,7 +31,9 @@ function Home() {
         </div>
       </div>
       <div className="Home__right">
-        <Map />
+        <div className="Home__right-wrapper">
+          <Map />
+        </div>
       </div>
     </div>
   );

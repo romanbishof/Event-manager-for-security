@@ -14,7 +14,7 @@ router.get('/', async (req, resp) => {
 router.put('/updateLocation', async (req, resp) => {
     // let {Id} = req.params
     let body = req.body
-    let updateDeviceLocation = await integrationDevicesBL.updateDeviceLocation(body.id, body)
+    let updateDeviceLocation = await integrationDevicesBL.updateDeviceLocation(body)
     resp.status(201).send(updateDeviceLocation)
 })
 

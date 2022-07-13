@@ -106,38 +106,6 @@ const hadleImageType = (deviceType) => {
   }
 };
 
-// getting sections of jetty from DB
-export const getSectionsAsync = createAsyncThunk(
-  "isms/getSectionsAsync",
-  async () => {
-    let sections = await axios.get(`http://localhost:8080/api/v1/sections`);
-
-    return sections.data;
-  }
-);
-
-// getting Devices from DB
-export const getDevicesAsync = createAsyncThunk(
-  "isms/getDevicesAsync",
-  async () => {
-    let { data } = await axios.get(`http://localhost:8080/api/v1/devices`);
-
-    return data;
-  }
-);
-
-// getting Physical Devices from DB
-export const getPhysicalDevicesAsync = createAsyncThunk(
-  "isms/getPhysicalDevicesAsync",
-  async () => {
-    let { data } = await axios.get(
-      `http://localhost:8080/api/v1/physicaldevices`
-    );
-
-    return data;
-  }
-);
-
 // getting integration Devices From DB
 export const getIntegrationDevicesAsync = createAsyncThunk(
   "isms/getIntegrationDevicesAsync",
@@ -228,15 +196,6 @@ const ISMS_Slice = createSlice({
     },
   },
   extraReducers: {
-    // [getSectionsAsync.fulfilled]: (state, action) => {
-    //   state.Sections = action.payload;
-    // },
-    // [getDevicesAsync.fulfilled]: (state, action) => {
-    //   state.Devices = action.payload;
-    // },
-    // [getPhysicalDevicesAsync.fulfilled]: (state, action) => {
-    //   state.PhysicalDevices = action.payload;
-    // },
     [getIntegrationDevicesAsync.fulfilled]: (state, action) => {
       let markers = action.payload.filter((marker) => marker.LocationX !== 0);
 

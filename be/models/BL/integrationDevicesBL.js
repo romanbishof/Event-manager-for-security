@@ -6,7 +6,6 @@ let addIntegrationDevice = (device) => {
     return new Promise((resolve, reject) => {
         let newIntegrationDevice = new IntegrationDevices({
             IsSensor: device.IsSensor,
-            IsPhysicalDevice: device.IsPhysicalDevice,
             IsFieldDevice: device.IsFieldDevice,
             Type: device.Type,
             Family: device.Family,
@@ -49,12 +48,20 @@ let getAllIntegrationDevices = () => {
 }
 
 // update integrated Device location id DB
-let updateDeviceLocation = (id, deviceObj) => {
+let updateDeviceLocation = (deviceObj) => {
 
     return new Promise((resolve, reject) => {
-        IntegrationDevices.findOneAndUpdate({ "Id": id }, {
+        let location = false
+        if (deviceObj.coordinates.lat !== 0) {
+
+            location = true
+        } else {
+            location = false
+        }
+        IntegrationDevices.findOneAndUpdate({ "Id": deviceObj.id }, {
             LocationX: deviceObj.coordinates.lat,
-            LocationY: deviceObj.coordinates.lng
+            LocationY: deviceObj.coordinates.lng,
+            HasLocation: location,
         }, (err, data) => {
             if (err) {
                 reject(err)

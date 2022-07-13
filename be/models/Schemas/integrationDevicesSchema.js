@@ -2,7 +2,6 @@ import mongoose from "mongoose"
 
 const integrationDevicesSchema = new mongoose.Schema({
     IsSensor: Boolean,
-    IsPhysicalDevice: Boolean,
     IsFieldDevice: Boolean,
     Type: Number,
     Family: Number,
