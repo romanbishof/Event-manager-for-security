@@ -11,6 +11,7 @@ import './configs/subscriptionsDB.js'
 // import './configs/devicesColection.js'
 // import './configs/physicalDevicesColection.js'
 // import './configs/integrationDevicesColection.js'
+import './configs/integrationDeviceCollection.js'
 
 const PORT = 8080;
 const app = express();
