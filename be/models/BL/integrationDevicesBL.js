@@ -33,6 +33,7 @@ let addIntegrationDevice = (device) => {
     })
 
 }
+
 // get All the integraated Devices from DB
 let getAllIntegrationDevices = () => {
 
