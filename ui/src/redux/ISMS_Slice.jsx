@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
 // import gateway_on from "../iconImage/gateway_on.png";
 import emergency_idle from "../iconImage/emergency_idle.png";
 import doorphone_on from "../iconImage/doorphone_on.png";
@@ -168,6 +168,7 @@ const initialState = {
   integrationDevices: [],
   integrationTree: [],
   markers: [],
+  events: [],
 };
 
 // our Action for Reducer
@@ -193,6 +194,11 @@ const ISMS_Slice = createSlice({
     },
     setMarkersState: (state, action) => {
       state.markers = action.payload;
+    },
+    addEventState: (state, action) => {
+      console.log(current(state));
+      state.events = [...state.events, action.payload];
+      console.log(current(state));
     },
   },
   extraReducers: {
@@ -226,15 +232,6 @@ const ISMS_Slice = createSlice({
     [updateIntegrationLocationDeviceAsync.fulfilled]: (state, action) => {
       console.log(action.payload);
       localStorage.setItem("markersOnMap", JSON.stringify(state.markers));
-      // state.integrationDevices = state.integrationDevices.map((device) => {
-      //   return device.Id === action.payload.id
-      //     ? {
-      //         ...device,
-      //         LocationX: action.payload.coordinates.lat,
-      //         LocationY: action.payload.coordinates.lng,
-      //       }
-      //     : { ...device };
-      // });
     },
   },
 });
@@ -247,6 +244,7 @@ export const {
   setZoneId,
   setSectionId,
   setPhysicalDevices,
+  addEventState,
 } = ISMS_Slice.actions;
 
 export default ISMS_Slice.reducer;
