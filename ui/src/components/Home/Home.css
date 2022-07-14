@@ -1,7 +1,7 @@
 .Home{
     display: flex;
     flex-direction: row;
-    height: 862px;
+    height: 100%;
 }
 .Home__left{
     display: flex;
@@ -15,5 +15,15 @@
 }
 
 .Home__right{
-    
+    display: flex;
+    flex-direction: column;
 }
+
+ .Home__right-map{
+    flex: 2;
+}
+
+.Home__right-history{
+    flex: 1;
+    height: 100%;
+} 

@@ -4,36 +4,13 @@ import Devices from "../Devices/Devices";
 import Map from "../Map/Map";
 import Sections from "../Sections/Sections";
 import TableDevices from "../TableDevices/TableDevices";
-import io from "socket.io-client";
 import "./Home.css";
-// import { addEventState } from "../../redux/ISMS_Slice";
+import History from "../History/History";
 
 // connecting to server via socket
-const socket = io.connect("http://localhost:8080");
 
 function Home() {
   const state = useSelector((state) => state.ISMS);
-  // const dispatch = useDispatch();
-
-  // const sendMessage = () => {
-  //   socket.emit("send_message", { message: "Hello" });
-  // };
-
-  useEffect(() => {
-    // socket.on("receive_message", (data) => {
-    //   // console.log(data);
-    //   dispatch(addEventState(data));
-    // });
-    socket.on("eventEmiter", (data) => {
-      console.log(data);
-    });
-
-    socket.on("statusEmiter", (data) => {
-      console.log(data);
-    });
-
-    console.log(state);
-  }, [socket]);
 
   return (
     <div className="Home">
@@ -52,9 +29,11 @@ function Home() {
         </div>
       </div>
       <div className="Home__right">
-        <div className="Home__right-wrapper">
+        <div className="Home__right-map">
           <Map />
-          {/* <button onClick={sendMessage}>test</button> */}
+        </div>
+        <div className="Home__right-history">
+          <History />
         </div>
       </div>
     </div>

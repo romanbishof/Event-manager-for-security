@@ -1,7 +1,7 @@
 .Map{
     width: 988px;
     padding: 5px 0px 5px 0px;
-    height: 100%;
+    height: 96%;
 }
 
 .Map__header{
@@ -12,7 +12,8 @@
 .Map__body{
     width: 100%;
     background: #3b3b3b;
-    height: 830px;
+    /* height: 830px; */
+    height: 100%;
 }
 
 .Map__body-NNPC{

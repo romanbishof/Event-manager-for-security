@@ -5,7 +5,6 @@ import { createServer } from 'http'
 import { Server } from "socket.io";
 import integrationDevicesController from './controllers/integrationDevicesController.js'
 import './configs/subscriptionsDB.js'
-// import './configs/integrationDevicesColection.js'
 import './configs/subscriptionExchangeRabbitMQ.js'
 const PORT = 8080;
 

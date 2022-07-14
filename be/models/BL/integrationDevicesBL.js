@@ -4,23 +4,23 @@ import IntegrationDevices from "../Schemas/integrationDevicesSchema.js";
 let addIntegrationDevice = (device) => {
 
     return new Promise((resolve, reject) => {
-        let newIntegrationDevice = new IntegrationDevices({
-            IsSensor: device.IsSensor,
-            IsFieldDevice: device.IsFieldDevice,
-            Type: device.Type,
-            Family: device.Family,
-            SyncType: device.SyncType,
-            LinkedObjectId: device.LinkedObjectId,
-            LocationX: device.LocationX,
-            LocationY: device.LocationY,
-            ImplementationClassType: device.ImplementationClassType,
-            HasLocation: device.HasLocation,
-            Id: device.Id,
-            Name: device.Name,
-            ParentObjectId: device.ParentObjectId,
-            ComponentManagerId: device.ComponentManagerId,
-            ImportanceLevel: device.ImportanceLevel,
-        })
+        // let newIntegrationDevice = new IntegrationDevices({
+        //     IsSensor: device.IsSensor,
+        //     IsFieldDevice: device.IsFieldDevice,
+        //     Type: device.Type,
+        //     Family: device.Family,
+        //     SyncType: device.SyncType,
+        //     LinkedObjectId: device.LinkedObjectId,
+        //     LocationX: device.LocationX,
+        //     LocationY: device.LocationY,
+        //     ImplementationClassType: device.ImplementationClassType,
+        //     HasLocation: device.HasLocation,
+        //     Id: device.Id,
+        //     Name: device.Name,
+        //     ParentObjectId: device.ParentObjectId,
+        //     ComponentManagerId: device.ComponentManagerId,
+        //     ImportanceLevel: device.ImportanceLevel,
+        // })
 
         // newIntegrationDevice.save((err, data) => {
         //     if (err) {

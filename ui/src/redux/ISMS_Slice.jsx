@@ -196,9 +196,7 @@ const ISMS_Slice = createSlice({
       state.markers = action.payload;
     },
     addEventState: (state, action) => {
-      console.log(current(state));
       state.events = [...state.events, action.payload];
-      console.log(current(state));
     },
   },
   extraReducers: {

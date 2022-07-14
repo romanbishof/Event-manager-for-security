@@ -4,49 +4,11 @@ import { useSelector } from "react-redux";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import "./TableDevices.css";
-import TableItem from "./TableItem/TableItem";
+// import TableItem from "./TableItem/TableItem";
 
 function TableDevices({ _devices, _label }) {
-  // const [nonCategorizedDevices, setNonCategorizedDevices] = useState([]);
-  // const [physicalZoneDevices, setPhysicalZoneDevices] = useState([]);
-  //   const [physicalZoneDevices, setPhysicalZoneDevices] = useState(null);
   const state = useSelector((state) => state.ISMS);
-  // const [device, setDevice] = useState("");
-  // let { PhysicalDevices, NonCategorizedDevices } = state;
-
   const [searchText, setSearchText] = useState("");
-
-  //////////////////////////////////////////////////////////////////////////////
-  // let { PhysicalDevices, Devices } = state.JsonData;
-  // console.log(NonCategorizedDevices);
-
-  // useEffect(() => {
-  //   let physicalFilterdDevices = PhysicalDevices.filter(
-  //     (obj) => obj.ZoneId === state.ZoneId
-  //   );
-  //   setPhysicalZoneDevices(physicalFilterdDevices);
-  //   let filterdDevices = Devices.filter((obj) => obj.ZoneId === state.ZoneId);
-  //   setZoneDevices(filterdDevices);
-  // }, [state]);
-
-  // useEffect(() => {
-  //   if (NonCategorizedDevices) {
-  //     let fiterdNonCategorizedDevices = NonCategorizedDevices.filter((obj) =>
-  //       obj.Name.toLowerCase().includes(
-  //         state.Jetty.toLowerCase().substring(0, 3)
-  //       )
-  //     );
-
-  //     // console.log(fiterdNonCategorizedDevices);
-  //     setNonCategorizedDevices(fiterdNonCategorizedDevices);
-  //   }
-  // }, [state]);
-
-  // const filterNonCategorizedDevices = (devices) => {
-  //   return NonCategorizedDevices.filter((obj) =>
-  //     obj.Name.toLowerCase().includes(state.Jetty.toLowerCase().substring(0, 3))
-  //   );
-  // };
 
   return (
     <div className="TableDevices">
