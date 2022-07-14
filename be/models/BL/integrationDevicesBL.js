@@ -22,13 +22,44 @@ let addIntegrationDevice = (device) => {
             ImportanceLevel: device.ImportanceLevel,
         })
 
-        newIntegrationDevice.save((err, data) => {
-            if (err) {
-                reject(err)
-            } else {
-                resolve(data)
-            }
-        })
+        // newIntegrationDevice.save((err, data) => {
+        //     if (err) {
+        //         reject(err)
+        //     } else {
+        //         resolve(data)
+        //     }
+        // })
+
+        IntegrationDevices.findOneAndUpdate({ "Id": device.Id },
+            {
+                IsSensor: device.IsSensor,
+                IsFieldDevice: device.IsFieldDevice,
+                Type: device.Type,
+                Family: device.Family,
+                SyncType: device.SyncType,
+                LinkedObjectId: device.LinkedObjectId,
+                // LocationX: device.LocationX,
+                // LocationY: device.LocationY,
+                ImplementationClassType: device.ImplementationClassType,
+                HasLocation: device.HasLocation,
+                Id: device.Id,
+                Name: device.Name,
+                ParentObjectId: device.ParentObjectId,
+                ComponentManagerId: device.ComponentManagerId,
+                ImportanceLevel: device.ImportanceLevel,
+            },
+            {
+                upsert: true,
+                new: true,
+            },
+            ((err, data) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve(data)
+                }
+            })
+        )
     })
 
 }

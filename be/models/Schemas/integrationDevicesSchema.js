@@ -7,8 +7,14 @@ const integrationDevicesSchema = new mongoose.Schema({
     Family: Number,
     SyncType: Number,
     LinkedObjectId: String,
-    LocationX: Number,
-    LocationY: Number,
+    LocationX: {
+        type: Number,
+        default: 0
+    },
+    LocationY: {
+        type: Number,
+        default: 0
+    },
     ImplementationClassType: Number,
     HasLocation: Boolean,
     Id: String,

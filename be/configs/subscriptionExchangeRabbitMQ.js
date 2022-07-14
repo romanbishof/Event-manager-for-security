@@ -35,11 +35,9 @@ amqp.connect('amqp://admin:Aa123456@10.0.0.92:5672/', function (err, connection)
                 channel.consume(q.queue, async function (msg) {
 
                     if (msg.content) {
-                        let devicesInDB = await integrationDevicesBL.getAllIntegrationDevices()
                         let queueFromRabbitMQ = JSON.parse(msg.content.toString())
                         let dataFromRabbitMQ = JSON.parse(queueFromRabbitMQ.Payload)
-                        let newDevice = devicesInDB.concat(dataFromRabbitMQ.filter(deviceRMQ => devicesInDB.every(deviceDB => deviceDB.Id !== deviceRMQ.Id)))
-                        newDevice.forEach(async (device) => {
+                        dataFromRabbitMQ.forEach(async (device) => {
                             let temp = await integrationDevicesBL.addIntegrationDevice(device)
                         })
                     }
@@ -66,8 +64,8 @@ amqp.connect('amqp://admin:Aa123456@10.0.0.92:5672/', function (err, connection)
                 channel.consume(q.queue, function (msg) {
                     if (msg.content) {
                         let event = JSON.parse(msg.content.toString())
-                        console.log('recieved mesege from event');
-                        console.log(event.Payload);
+                        // console.log('recieved mesege from event');
+                        // console.log(event.Payload);
                         global.io.emit("eventEmiter", event.Payload)
 
                     }
@@ -96,8 +94,8 @@ amqp.connect('amqp://admin:Aa123456@10.0.0.92:5672/', function (err, connection)
 
                     if (msg.content) {
                         let status = JSON.parse(msg.content.toString())
-                        console.log('recieved mesege from status');
-                        console.log(status.Payload);
+                        // console.log('recieved mesege from status');
+                        // console.log(status.Payload);
                         global.io.emit("statusEmiter", status.Payload)
 
                     }
