@@ -169,6 +169,7 @@ const initialState = {
   integrationTree: [],
   markers: [],
   events: [],
+  event: {},
 };
 
 // our Action for Reducer
@@ -196,7 +197,20 @@ const ISMS_Slice = createSlice({
       state.markers = action.payload;
     },
     addEventState: (state, action) => {
-      state.events = [...state.events, action.payload];
+      console.log(action.payload);
+      if (state.events.length > 10) {
+        state.events = state.events.slice(0, 9);
+      }
+      if (
+        action.payload.CodeDescription !== null &&
+        !state.events.some((obj) => obj.EventId === action.payload.EventId)
+      ) {
+        state.events = [...state.events, action.payload];
+      }
+      console.log(current(state));
+    },
+    saveEvent: (state, action) => {
+      state.event = action.payload;
     },
   },
   extraReducers: {
@@ -243,6 +257,7 @@ export const {
   setSectionId,
   setPhysicalDevices,
   addEventState,
+  saveEvent,
 } = ISMS_Slice.actions;
 
 export default ISMS_Slice.reducer;

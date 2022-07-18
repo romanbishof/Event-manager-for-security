@@ -1,5 +1,5 @@
 import { divIcon, imageOverlay } from "leaflet";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useMap, useMapEvent } from "react-leaflet";
 import { useSelector } from "react-redux";
 import apapa_jetty_img from "../../images/Apapa - Copy.jpg";
@@ -12,6 +12,7 @@ import MapMarker from "./MapMarker";
 function MapComponent() {
   const state = useSelector((state) => state.ISMS);
   const map = useMap();
+  const [event, setEvent] = useState(false);
 
   // const mapEvents = useMapEvent({
   //   click: (e) => {
@@ -93,6 +94,22 @@ function MapComponent() {
     }
   }, [state]);
 
+  useEffect(() => {
+    if (JSON.stringify(state.event) === "{}") {
+      console.log("the event is emty");
+      return;
+    } else {
+      let marker = state.markers.find(
+        (marker) => marker.id === state.event.InvokerId
+      );
+      if (marker.coordinates !== undefined) {
+        map.panTo(marker.coordinates);
+        console.log(marker);
+      }
+      console.log("new event show");
+      // map.setMinZoom(17.5);
+    }
+  }, [state.event]);
   return (
     <div>
       {state.markers.lenth === 0
@@ -107,6 +124,7 @@ function MapComponent() {
                 name={marker.name}
                 isDraggable={false}
                 isSettings={false}
+                event={event}
               />
             );
           })}

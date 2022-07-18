@@ -41,7 +41,7 @@ let addIntegrationDevice = (device) => {
                 // LocationX: device.LocationX,
                 // LocationY: device.LocationY,
                 ImplementationClassType: device.ImplementationClassType,
-                HasLocation: device.HasLocation,
+                // HasLocation: device.HasLocation,
                 Id: device.Id,
                 Name: device.Name,
                 ParentObjectId: device.ParentObjectId,

@@ -16,7 +16,10 @@ const integrationDevicesSchema = new mongoose.Schema({
         default: 0
     },
     ImplementationClassType: Number,
-    HasLocation: Boolean,
+    HasLocation: {
+        type: Boolean,
+        default: false
+    },
     Id: String,
     Name: String,
     ParentObjectId: String,

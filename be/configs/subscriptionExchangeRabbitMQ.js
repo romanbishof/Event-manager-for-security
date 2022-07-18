@@ -66,7 +66,7 @@ amqp.connect('amqp://admin:Aa123456@10.0.0.92:5672/', function (err, connection)
                         let event = JSON.parse(msg.content.toString())
                         // console.log('recieved mesege from event');
                         // console.log(event.Payload);
-                        global.io.emit("eventEmiter", event.Payload)
+                        global.io.emit("eventEmiter", JSON.parse(event.Payload))
 
                     }
                 }, {
@@ -96,7 +96,8 @@ amqp.connect('amqp://admin:Aa123456@10.0.0.92:5672/', function (err, connection)
                         let status = JSON.parse(msg.content.toString())
                         // console.log('recieved mesege from status');
                         // console.log(status.Payload);
-                        global.io.emit("statusEmiter", status.Payload)
+                        global.io.emit("statusEmiter", JSON.parse(status.Payload))
+                        // console.log(JSON.parse(status.Payload));
 
                     }
                 }, {

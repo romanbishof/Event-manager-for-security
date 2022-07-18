@@ -9,23 +9,31 @@ import {
 import DeleteIcon from "@mui/icons-material/Delete";
 import "./MapSettingsComponent.css";
 
-function MapMarker({ id, coordinates, img, name, isDraggable, isSettings }) {
+function MapMarker({
+  id,
+  coordinates,
+  img,
+  name,
+  isDraggable,
+  isSettings,
+  event,
+}) {
   const state = useSelector((state) => state.ISMS);
 
   const dispatch = useDispatch();
 
   // making custom marker with label
-  const icon = (img, name) => {
+  const icon = (img, name, event) => {
     return divIcon({
       className: "MapMarker__Marker",
       iconSize: [12, 12],
       html: `<div class="MapMarker__div"> 
-              <div class="MapMarker__alarm-div">
+              <div class="MapMarker__alarm-div ${event ? "alert" : ""}">
                 <img class="MapMarker__image" src='${img}')}/>  
               </div>
               <br />
               <span class="MapMarker__span" draggable={false}>${name}</span> 
-        </div`,
+            </div`,
     });
   };
 
@@ -61,7 +69,7 @@ function MapMarker({ id, coordinates, img, name, isDraggable, isSettings }) {
   return (
     <Marker
       position={coordinates}
-      icon={icon(img, name)}
+      icon={icon(img, name, event)}
       draggable={isDraggable}
       eventHandlers={{
         moveend: (e) => {
