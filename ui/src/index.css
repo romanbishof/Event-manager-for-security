@@ -45,7 +45,7 @@ code {
 
 .alertBounce{
   animation: bounce 1s ease;
-  animation-iteration-count: 3;
+  animation-iteration-count: 1;
   /* animation: bounce 2s ease 10; */
 }
 
