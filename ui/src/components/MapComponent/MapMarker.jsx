@@ -13,14 +13,15 @@ function MapMarker({ id, coordinates, img, name, isDraggable, isSettings }) {
   const state = useSelector((state) => state.ISMS);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (!isSettings) {
-      let temp = document.getElementById(state.event.InvokerId);
-      temp?.classList.add("alert");
-    }
-  }, [state.event]);
-
-  // console.log(event);
+  // useEffect(() => {
+  //   if (!isSettings) {
+  //     let temp = document.getElementById(state.event.InvokerId);
+  //     let temp2 = temp?.parentElement;
+  //     temp2?.classList.add("alertBounce");
+  //     console.log(temp2);
+  //     temp?.classList.add("alert");
+  //   }
+  // }, [state.event]);
 
   // making custom marker with label
   const icon = (img, name) => {

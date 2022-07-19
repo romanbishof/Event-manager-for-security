@@ -8,24 +8,23 @@ import atlas_jetty_img from "../../images/ATLAS COVE_2.jpg";
 import calabar_jetty_img from "../../images/Calabar - Copy.jpg";
 import okrika_jetty_img from "../../images/Okrika 2.jpg";
 import MapMarker from "./MapMarker";
-import { $CombinedState } from "@reduxjs/toolkit";
 
 function MapComponent() {
   const state = useSelector((state) => state.ISMS);
   window.mainMap = useMap();
 
-  const mapEvents = useMapEvent({
-    click: (e) => {
-      let coordinates = e.latlng;
-      // setMarkers([...markers, coordinates]);
-    },
-    zoom: (e) => {
-      console.log(e.target._zoom);
-    },
-    // moveend: (e) => {
-    //   console.log(e.target);
-    // },
-  });
+  // const mapEvents = useMapEvent({
+  //   click: (e) => {
+  //     let coordinates = e.latlng;
+  //     // setMarkers([...markers, coordinates]);
+  //   },
+  //   zoom: (e) => {
+  //     console.log(e.target._zoom);
+  //   },
+  //   // moveend: (e) => {
+  //   //   console.log(e.target);
+  //   // },
+  // });
 
   // map image overlay bounds
 
@@ -72,8 +71,8 @@ function MapComponent() {
   useEffect(() => {
     switch (state.SectionId) {
       case 21: // setting ATLAS Jetty
-        window.mainMap.setView(state.Center);
-        window.mainMap.setZoom(16.5);
+        window.mainMap.setView(state.Center, 16.5, { setMaxZoom: 18 });
+        // window.mainMap.setZoom(16.5);
         window.mainMap.setMaxZoom(18);
 
         break;
@@ -84,7 +83,7 @@ function MapComponent() {
 
         break;
       case 22: // Setting CALABAR Jetty
-        window.mainMap.setView(state.Center);
+        window.mainMap.setView(state.Center, 19);
         window.mainMap.setZoom(19);
         window.mainMap.setMaxZoom(20);
 
@@ -113,10 +112,24 @@ function MapComponent() {
     } else {
       console.log("Selected new event");
       window.mainMap.setView(state.event.coordinates, 17.5);
-      // window.setZoom()
+      let temp = document.getElementById(state.event.InvokerId);
+      let temp2 = temp?.parentElement;
+      temp2?.classList.add("alertBounce");
+      console.log(temp2);
+      temp?.classList.add("alert");
     }
     console.log(state);
-  }, [state.event]);
+  }, [state.event.show]);
+
+  // useEffect(() => {
+  //   // if (!isSettings) {
+  //   let temp = document.getElementById(state.event.InvokerId);
+  //   let temp2 = temp?.parentElement;
+  //   temp2?.classList.add("alertBounce");
+  //   console.log(temp2);
+  //   temp?.classList.add("alert");
+  //   // }
+  // }, [state.event]);
   return (
     <div>
       {state.markers.lenth === 0

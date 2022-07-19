@@ -12,11 +12,9 @@ function History() {
   const state = useSelector((state) => state.ISMS);
   let dispatch = useDispatch();
 
+  // show marker on map by blinking - saving event in global state
   const handleShowMarkerEvent = (event, markerDevice) => {
-    // let divMarker = document.querySelector(`#${event.InvokerId}`);
-    // let temp = document.querySelectorAll(`.MapMarker__alarm-div`);
     let markerElement = document.getElementById(event.InvokerId);
-    // console.log(temp2);
     dispatch(
       saveEvent({
         ...event,
@@ -42,43 +40,9 @@ function History() {
         })
       );
     }, 5000);
-    // temp2.classList.add("alert");
-    // temp.forEach((obj) => {
-    //   // obj.classList.remove("alert");
-
-    //   if (String(obj.id) === event.InvokerId) {
-    //     // console.log(obj);
-    //     // obj.classList.add("alert");
-
-    //     dispatch(
-    //       saveEvent({
-    //         ...event,
-    //         coordinates: {
-    //           lat: markerDevice.LocationX,
-    //           lng: markerDevice.LocationY,
-    //         },
-    //         markerElement: obj,
-    //       })
-    //     );
-    // obj.classList.add("alert");
-    // setTimeout(() => {
-    //   obj.classList.remove("alert");
-    //   dispatch(
-    //     saveEvent({
-    //       ...event,
-    //       coordinates: {
-    //         lat: markerDevice.LocationX,
-    //         lng: markerDevice.LocationY,
-    //       },
-    //       // show: false,
-    //     })
-    //   );
-    // }, 10000);
-    //   return;
-    // }
-    // });
   };
 
+  // lisening to Back-end
   useEffect(() => {
     socket.on("eventEmiter", (data) => {
       dispatch(addEventState(data));

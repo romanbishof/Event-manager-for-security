@@ -17,14 +17,9 @@
     overflow: hidden;
     display: inline-block;
     justify-content: center;
-    border: 4px solid transparent;
-    /* animation: blink 1s;
-    animation-iteration-count: 10; */
+    border: 3px solid transparent;
     border-radius: 20px; 
     margin-bottom: -5px;
-}
-.MapMarker__alert{
-    background-color: #fff;
 }
 
 .MapMarker__image{

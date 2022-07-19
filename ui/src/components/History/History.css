@@ -60,12 +60,5 @@
     overflow: hidden;
     white-space: nowrap;
     border-right: 1px solid #a0bd11;
-    /* border-left: 1px solid #a0bd11; */
 }
 
-/* .alert{
-    animation: blink 1s;
-    animation-iteration-count: 10;
-}
-
-@keyframes blink { 50% { border-color:rgb(238, 255, 0) ; }  } */

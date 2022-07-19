@@ -38,7 +38,35 @@ code {
 
 .alert{
   animation: blink 1s;
-  animation-iteration-count: 10;
+  animation-iteration-count: 5;
 }
 
 @keyframes blink { 50% { border-color:rgb(255, 255, 0) ; }  }
+
+.alertBounce{
+  animation: bounce 1s ease;
+  animation-iteration-count: 3;
+  /* animation: bounce 2s ease 10; */
+}
+
+@keyframes bounce {
+  0%   { transform: scale(1,1)    translateY(0); }
+  10%  { transform: scale(1.2,.9) translateY(0); }
+  30%  { transform: scale(.9,1.2) translateY(-30px); }
+  50%  { transform: scale(1,1)    translateY(0); }
+  57%  { transform: scale(1,1)    translateY(-7px); }
+  64%  { transform: scale(1,1)    translateY(0); }
+  100% { transform: scale(1,1)    translateY(0); }
+  
+}
+
+/* .hithere {
+  animation: hithere 1s ease infinite;
+}
+@keyframes hithere {
+  30% { transform: scale(1.2); }
+  40%, 60% { transform: rotate(-20deg) scale(1.2); }
+  50% { transform: rotate(20deg) scale(1.2); }
+  70% { transform: rotate(0deg) scale(1.2); }
+  100% { transform: scale(1); }
+} */
