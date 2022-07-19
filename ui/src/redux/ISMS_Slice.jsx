@@ -164,7 +164,7 @@ const initialState = {
   NonCategorizedDevices: [],
   Devices: [],
   PhysicalDevices: [],
-  SectionId: "",
+  SectionId: 20,
   integrationDevices: [],
   integrationTree: [],
   markers: [],
@@ -197,7 +197,7 @@ const ISMS_Slice = createSlice({
       state.markers = action.payload;
     },
     addEventState: (state, action) => {
-      console.log(action.payload);
+      // console.log(action.payload);
       if (state.events.length > 10) {
         state.events = state.events.slice(0, 9);
       }
@@ -207,7 +207,7 @@ const ISMS_Slice = createSlice({
       ) {
         state.events = [...state.events, action.payload];
       }
-      console.log(current(state));
+      // console.log(current(state));
     },
     saveEvent: (state, action) => {
       state.event = action.payload;

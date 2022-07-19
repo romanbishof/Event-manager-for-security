@@ -1,5 +1,5 @@
 import { divIcon } from "leaflet";
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { Marker, Popup } from "react-leaflet";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -9,26 +9,26 @@ import {
 import DeleteIcon from "@mui/icons-material/Delete";
 import "./MapSettingsComponent.css";
 
-function MapMarker({
-  id,
-  coordinates,
-  img,
-  name,
-  isDraggable,
-  isSettings,
-  event,
-}) {
+function MapMarker({ id, coordinates, img, name, isDraggable, isSettings }) {
   const state = useSelector((state) => state.ISMS);
-
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    if (!isSettings) {
+      let temp = document.getElementById(state.event.InvokerId);
+      temp?.classList.add("alert");
+    }
+  }, [state.event]);
+
+  // console.log(event);
+
   // making custom marker with label
-  const icon = (img, name, event) => {
+  const icon = (img, name) => {
     return divIcon({
       className: "MapMarker__Marker",
       iconSize: [12, 12],
       html: `<div class="MapMarker__div"> 
-              <div class="MapMarker__alarm-div ${event ? "alert" : ""}">
+              <div class="MapMarker__alarm-div" id=${id}>
                 <img class="MapMarker__image" src='${img}')}/>  
               </div>
               <br />
@@ -69,7 +69,7 @@ function MapMarker({
   return (
     <Marker
       position={coordinates}
-      icon={icon(img, name, event)}
+      icon={icon(img, name)}
       draggable={isDraggable}
       eventHandlers={{
         moveend: (e) => {
@@ -78,7 +78,6 @@ function MapMarker({
         },
       }}
     >
-      {" "}
       {isSettings === true ? (
         <Popup>
           <p>{`Delete ${name}`}</p>

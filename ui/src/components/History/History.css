@@ -22,14 +22,13 @@
 .History__table-header h4 {
     font-weight: bold;
     font-family: Arial, Helvetica, sans-serif;
-    /* width: 100%; */
     display: flex;
-    justify-content: center;
-    text-align: center;
+    justify-content: flex-start;
+    /* text-align: left; */
+    padding-left: 5px;
     align-items: center;
     height: 35px;
     border-right: 2px solid #a0bd11;
-    /* border-left: 1px solid #a0bd11; */
 }
 
 .History__table-body{
@@ -51,10 +50,12 @@
 
 .History__table-body__row span{
     font-weight: 300;
-    font-size: 17px;
+    font-size: 12px;
+    letter-spacing: 0.5px;
     font-family: Arial, Helvetica, sans-serif;
     width: 100%;
-    text-align: center;
+    text-align: left;
+    padding-left: 5px;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
@@ -62,6 +63,9 @@
     /* border-left: 1px solid #a0bd11; */
 }
 
-.History__table-body__row span :nth-last-child(){
-    /* background-color: rebeccapurple; */
+/* .alert{
+    animation: blink 1s;
+    animation-iteration-count: 10;
 }
+
+@keyframes blink { 50% { border-color:rgb(238, 255, 0) ; }  } */

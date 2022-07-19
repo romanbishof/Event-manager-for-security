@@ -6,6 +6,9 @@ import Header from "./components/Header/Header";
 import Home from "./components/Home/Home";
 import Settings from "./components/Settings/Settings";
 import { getIntegrationDevicesAsync } from "./redux/ISMS_Slice";
+
+window.mainMap = "";
+
 function App() {
   const dispatch = useDispatch();
 

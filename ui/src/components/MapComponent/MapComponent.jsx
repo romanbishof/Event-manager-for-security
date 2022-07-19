@@ -8,23 +8,27 @@ import atlas_jetty_img from "../../images/ATLAS COVE_2.jpg";
 import calabar_jetty_img from "../../images/Calabar - Copy.jpg";
 import okrika_jetty_img from "../../images/Okrika 2.jpg";
 import MapMarker from "./MapMarker";
+import { $CombinedState } from "@reduxjs/toolkit";
 
 function MapComponent() {
   const state = useSelector((state) => state.ISMS);
-  const map = useMap();
-  const [event, setEvent] = useState(false);
+  window.mainMap = useMap();
 
-  // const mapEvents = useMapEvent({
-  //   click: (e) => {
-  //     let coordinates = e.latlng;
-  //     // setMarkers([...markers, coordinates]);
-  //   },
-  //   zoom: (e) => {
-  //     console.log(e.target._zoom);
-  //   },
-  // });
+  const mapEvents = useMapEvent({
+    click: (e) => {
+      let coordinates = e.latlng;
+      // setMarkers([...markers, coordinates]);
+    },
+    zoom: (e) => {
+      console.log(e.target._zoom);
+    },
+    // moveend: (e) => {
+    //   console.log(e.target);
+    // },
+  });
 
   // map image overlay bounds
+
   const bounds = {
     apapa: [
       [6.45241, 3.36908],
@@ -48,45 +52,53 @@ function MapComponent() {
     ],
   };
 
-  const apapaImage = imageOverlay(apapa_jetty_img, bounds.apapa).addTo(map);
-  const atlasImage = imageOverlay(atlas_jetty_img, bounds.atlas).addTo(map);
-  const calabarImage = imageOverlay(calabar_jetty_img, bounds.calabar).addTo(
-    map
+  const apapaImage = imageOverlay(apapa_jetty_img, bounds.apapa).addTo(
+    window.mainMap
   );
-  const okrikaImage = imageOverlay(okrika_jetty_img, bounds.okrika).addTo(map);
-  const warriImage = imageOverlay(warri_jetty_img, bounds.warri).addTo(map);
+  const atlasImage = imageOverlay(atlas_jetty_img, bounds.atlas).addTo(
+    window.mainMap
+  );
+  const calabarImage = imageOverlay(calabar_jetty_img, bounds.calabar).addTo(
+    window.mainMap
+  );
+  const okrikaImage = imageOverlay(okrika_jetty_img, bounds.okrika).addTo(
+    window.mainMap
+  );
+  const warriImage = imageOverlay(warri_jetty_img, bounds.warri).addTo(
+    window.mainMap
+  );
 
   // Setting the right pan for our Jetty
   useEffect(() => {
     switch (state.SectionId) {
       case 21: // setting ATLAS Jetty
-        map.panTo(state.Center);
-        map.setZoom(16.5);
-        map.setMaxZoom(18);
+        window.mainMap.setView(state.Center);
+        window.mainMap.setZoom(16.5);
+        window.mainMap.setMaxZoom(18);
 
         break;
       case 20: // Setting APAPA Jetty
-        map.panTo(state.Center);
-        map.setZoom(18);
-        map.setMaxZoom(19);
+        window.mainMap.setView(state.Center);
+        window.mainMap.setZoom(17);
+        window.mainMap.setMaxZoom(19);
 
         break;
       case 22: // Setting CALABAR Jetty
-        map.panTo(state.Center);
-        map.setZoom(19);
-        map.setMaxZoom(20);
+        window.mainMap.setView(state.Center);
+        window.mainMap.setZoom(19);
+        window.mainMap.setMaxZoom(20);
 
         break;
       case 25: // Setting OKRIKA Jetty
-        map.panTo(state.Center);
-        map.setZoom(17.5);
-        map.setMaxZoom(18);
+        window.mainMap.setView(state.Center);
+        window.mainMap.setZoom(17.5);
+        window.mainMap.setMaxZoom(18);
 
         break;
       case 23: // Setting WARRI Jetty
-        map.panTo(state.Center);
-        map.setZoom(17.5);
-        map.setMaxZoom(18);
+        window.mainMap.setView(state.Center);
+        window.mainMap.setZoom(17.5);
+        window.mainMap.setMaxZoom(18);
 
         break;
       default:
@@ -95,20 +107,15 @@ function MapComponent() {
   }, [state]);
 
   useEffect(() => {
-    if (JSON.stringify(state.event) === "{}") {
-      console.log("the event is emty");
+    if (!state.event?.show) {
+      console.log("No event selected");
       return;
     } else {
-      let marker = state.markers.find(
-        (marker) => marker.id === state.event.InvokerId
-      );
-      if (marker.coordinates !== undefined) {
-        map.panTo(marker.coordinates);
-        console.log(marker);
-      }
-      console.log("new event show");
-      // map.setMinZoom(17.5);
+      console.log("Selected new event");
+      window.mainMap.setView(state.event.coordinates, 17.5);
+      // window.setZoom()
     }
+    console.log(state);
   }, [state.event]);
   return (
     <div>
@@ -124,7 +131,6 @@ function MapComponent() {
                 name={marker.name}
                 isDraggable={false}
                 isSettings={false}
-                event={event}
               />
             );
           })}

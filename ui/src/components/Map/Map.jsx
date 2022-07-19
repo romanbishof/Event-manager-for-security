@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { MapContainer } from "react-leaflet";
+import { useSelector } from "react-redux";
 import MapComponent from "../MapComponent/MapComponent";
 import "./Map.css";
 
 function Map() {
+  const state = useSelector((state) => state.ISMS);
+  useEffect(() => {}, [state]);
+
   return (
     <div className="Map">
       <div className="Map__header header span">
-        <span>Map</span>
+        <span>{`Map - (${state.Jetty})`}</span>
       </div>
       <div className="Map__body">
         <MapContainer

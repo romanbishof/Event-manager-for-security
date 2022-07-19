@@ -3,7 +3,7 @@ import "./History.css";
 import io from "socket.io-client";
 import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
-import { addEventState, saveEvent } from "../../redux/ISMS_Slice";
+import { addEventState, saveEvent, setZoneId } from "../../redux/ISMS_Slice";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 
 const socket = io.connect("http://localhost:8080");
@@ -12,11 +12,71 @@ function History() {
   const state = useSelector((state) => state.ISMS);
   let dispatch = useDispatch();
 
-  const handleShowMarkerEvent = (event) => {
-    dispatch(saveEvent(event));
+  const handleShowMarkerEvent = (event, markerDevice) => {
+    // let divMarker = document.querySelector(`#${event.InvokerId}`);
+    // let temp = document.querySelectorAll(`.MapMarker__alarm-div`);
+    let markerElement = document.getElementById(event.InvokerId);
+    // console.log(temp2);
+    dispatch(
+      saveEvent({
+        ...event,
+        coordinates: {
+          lat: markerDevice.LocationX,
+          lng: markerDevice.LocationY,
+        },
+        markerElement: markerElement,
+        show: true,
+      })
+    );
+
     setTimeout(() => {
-      dispatch(saveEvent({}));
-    }, 10000);
+      dispatch(
+        saveEvent({
+          ...event,
+          coordinates: {
+            lat: markerDevice.LocationX,
+            lng: markerDevice.LocationY,
+          },
+          markerElement: markerElement,
+          show: false,
+        })
+      );
+    }, 5000);
+    // temp2.classList.add("alert");
+    // temp.forEach((obj) => {
+    //   // obj.classList.remove("alert");
+
+    //   if (String(obj.id) === event.InvokerId) {
+    //     // console.log(obj);
+    //     // obj.classList.add("alert");
+
+    //     dispatch(
+    //       saveEvent({
+    //         ...event,
+    //         coordinates: {
+    //           lat: markerDevice.LocationX,
+    //           lng: markerDevice.LocationY,
+    //         },
+    //         markerElement: obj,
+    //       })
+    //     );
+    // obj.classList.add("alert");
+    // setTimeout(() => {
+    //   obj.classList.remove("alert");
+    //   dispatch(
+    //     saveEvent({
+    //       ...event,
+    //       coordinates: {
+    //         lat: markerDevice.LocationX,
+    //         lng: markerDevice.LocationY,
+    //       },
+    //       // show: false,
+    //     })
+    //   );
+    // }, 10000);
+    //   return;
+    // }
+    // });
   };
 
   useEffect(() => {
@@ -34,7 +94,7 @@ function History() {
   return (
     <div className="History">
       <div className="History__header header span">
-        <span>History</span>
+        <span>{`History - (${state.Jetty})`}</span>
       </div>
       <div className="History__wrapper">
         <div className="History__table-header">
@@ -56,11 +116,24 @@ function History() {
                 <div key={event.EventId} className="History__table-body__row">
                   <span
                     className="History__table-body__row-td"
-                    style={{ flex: 0.88 }}
+                    style={{
+                      flex: 0.88,
+                      textAlign: "center",
+                      paddingLeft: "5px",
+                    }}
                   >
                     <VisibilityIcon
                       onClick={() => {
-                        handleShowMarkerEvent(event);
+                        // handleShowMarkerEvent(event);
+                        let markerDevice = state.integrationDevices.find(
+                          (device) => device.Id === event.InvokerId
+                        );
+                        if (markerDevice.HasLocation) {
+                          handleShowMarkerEvent(event, markerDevice);
+                        }
+
+                        // console.log(markerDevice);
+                        // dispatch(setZoneId(temp))
                       }}
                       sx={{ cursor: "pointer" }}
                     />
@@ -74,7 +147,11 @@ function History() {
                     )}`}
                   </span>
                   <span
-                    style={{ flex: 0.8 }}
+                    style={{
+                      flex: 0.8,
+                      textAlign: "center",
+                      paddingLeft: "5px",
+                    }}
                     className="History__table-body__row-td"
                   >
                     {event.ImportanceLevel}

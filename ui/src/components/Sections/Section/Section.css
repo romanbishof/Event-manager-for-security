@@ -1,12 +1,5 @@
 .Section{
-    /* background-color: #5e5e5e; */
-    /* border-radius: 5px; */
-    /* color: white; */
-    /* width: 100px; */
-    /* display: flex; */
-    /* justify-content: center; */
-    /* align-items: center; */
-    /* cursor: pointer; */
+    
     border-radius: 10px;
     border: #a0bd11;
 }
@@ -24,9 +17,3 @@
     font-family: helvetica,arial,verdana,sans-serif;
     
 }
-
-/* .Section span{
-    font-size: 20px;
-    font-weight: bold;
-    font-family: helvetica,arial,verdana,sans-serif;;
-} */
