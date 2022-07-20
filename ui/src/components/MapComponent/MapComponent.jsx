@@ -113,23 +113,10 @@ function MapComponent() {
       console.log("Selected new event");
       window.mainMap.setView(state.event.coordinates, 17.5);
       let temp = document.getElementById(state.event.InvokerId);
-      let temp2 = temp?.parentElement;
-      temp2?.classList.add("alertBounce");
-      console.log(temp2);
       temp?.classList.add("alert");
     }
-    console.log(state);
-  }, [state.event?.show]);
+  }, [state.event]);
 
-  // useEffect(() => {
-  //   // if (!isSettings) {
-  //   let temp = document.getElementById(state.event.InvokerId);
-  //   let temp2 = temp?.parentElement;
-  //   temp2?.classList.add("alertBounce");
-  //   console.log(temp2);
-  //   temp?.classList.add("alert");
-  //   // }
-  // }, [state.event]);
   return (
     <div>
       {state.markers.lenth === 0

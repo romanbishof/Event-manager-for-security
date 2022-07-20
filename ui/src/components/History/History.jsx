@@ -27,19 +27,19 @@ function History() {
       })
     );
 
-    setTimeout(() => {
-      dispatch(
-        saveEvent({
-          ...event,
-          coordinates: {
-            lat: markerDevice.LocationX,
-            lng: markerDevice.LocationY,
-          },
-          markerElement: markerElement,
-          show: false,
-        })
-      );
-    }, 5000);
+    // setTimeout(() => {
+    //   dispatch(
+    //     saveEvent({
+    //       ...event,
+    //       coordinates: {
+    //         lat: markerDevice.LocationX,
+    //         lng: markerDevice.LocationY,
+    //       },
+    //       markerElement: markerElement,
+    //       show: false,
+    //     })
+    //   );
+    // }, 5000);
   };
 
   // lisening to Back-end
