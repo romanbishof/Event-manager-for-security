@@ -119,7 +119,7 @@ function MapComponent() {
       temp?.classList.add("alert");
     }
     console.log(state);
-  }, [state.event.show]);
+  }, [state.event?.show]);
 
   // useEffect(() => {
   //   // if (!isSettings) {

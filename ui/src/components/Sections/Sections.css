@@ -1,6 +1,6 @@
 .Sections{
     width: 932px;
-    padding: 5px 5px 5px 0px;
+    padding: 5px 5px 0px 0px;
 }
 
 .Sections__header{
@@ -10,7 +10,7 @@
 .Section__body{
     background: #3b3b3b;
     color: #d5d5d5;
-    height: 106px;
+    height: 90px;
 }
 
 .Section__body-wrapper{

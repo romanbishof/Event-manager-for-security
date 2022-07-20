@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 // import gateway_on from "../iconImage/gateway_on.png";
 import emergency_idle from "../iconImage/emergency_idle.png";
 import doorphone_on from "../iconImage/doorphone_on.png";
