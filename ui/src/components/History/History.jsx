@@ -3,7 +3,7 @@ import "./History.css";
 import io from "socket.io-client";
 import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
-import { addEventState, saveEvent, setZoneId } from "../../redux/ISMS_Slice";
+import { addEventState, saveEvent } from "../../redux/ISMS_Slice";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 
 const socket = io.connect("http://localhost:8080");
@@ -14,7 +14,6 @@ function History() {
 
   // show marker on map by blinking - saving event in global state
   const handleShowMarkerEvent = (event, markerDevice) => {
-    let markerElement = document.getElementById(event.InvokerId);
     dispatch(
       saveEvent({
         ...event,
@@ -22,24 +21,10 @@ function History() {
           lat: markerDevice.LocationX,
           lng: markerDevice.LocationY,
         },
-        markerElement: markerElement,
+
         show: true,
       })
     );
-
-    // setTimeout(() => {
-    //   dispatch(
-    //     saveEvent({
-    //       ...event,
-    //       coordinates: {
-    //         lat: markerDevice.LocationX,
-    //         lng: markerDevice.LocationY,
-    //       },
-    //       markerElement: markerElement,
-    //       show: false,
-    //     })
-    //   );
-    // }, 5000);
   };
 
   // lisening to Back-end
@@ -51,7 +36,6 @@ function History() {
 
     socket.on("statusEmiter", (data) => {
       sessionStorage.setItem("status", JSON.stringify(data));
-      //   console.log(data);
     });
   }, [socket]);
 
@@ -70,10 +54,13 @@ function History() {
           <h4 style={{ flex: 4 }}>{`Message`}</h4>
         </div>
         <div className="History__table-body">
-          {state.events
-            .map((event) => {
+          {
+            state.events.map((event) => {
               let { Name } = state.integrationDevices.find(
                 (device) => device.Id === event.InvokerId
+              );
+              let markerOnMap = state.markers.find(
+                (marker) => marker.id === event.InvokerId
               );
 
               return (
@@ -86,21 +73,24 @@ function History() {
                       paddingLeft: "5px",
                     }}
                   >
-                    <VisibilityIcon
-                      onClick={() => {
-                        // handleShowMarkerEvent(event);
-                        let markerDevice = state.integrationDevices.find(
-                          (device) => device.Id === event.InvokerId
-                        );
-                        if (markerDevice.HasLocation) {
-                          handleShowMarkerEvent(event, markerDevice);
-                        }
-
-                        // console.log(markerDevice);
-                        // dispatch(setZoneId(temp))
-                      }}
-                      sx={{ cursor: "pointer" }}
-                    />
+                    {markerOnMap === undefined ? (
+                      <div
+                        style={{ borderBottom: "none" }}
+                        className="History__table-body__row"
+                      ></div>
+                    ) : (
+                      <VisibilityIcon
+                        onClick={() => {
+                          let markerDevice = state.integrationDevices.find(
+                            (device) => device.Id === event.InvokerId
+                          );
+                          if (markerDevice.HasLocation) {
+                            handleShowMarkerEvent(event, markerDevice);
+                          }
+                        }}
+                        sx={{ cursor: "pointer" }}
+                      />
+                    )}
                   </span>
                   <span
                     className="History__table-body__row-td"
@@ -140,7 +130,8 @@ function History() {
                 </div>
               );
             }) // reverse the order of array
-            .reverse()}
+            // .reverse()
+          }
         </div>
       </div>
     </div>

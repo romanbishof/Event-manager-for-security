@@ -1,20 +1,14 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  setCoordinatesJetty,
-  setDevicesJetty,
-  setSectionId,
-} from "../../../redux/ISMS_Slice";
+import { setCoordinatesJetty, setSectionId } from "../../../redux/ISMS_Slice";
 import "./Section.css";
 
 function Section({ jetty, coordinates, sectionId }) {
   const state = useSelector((state) => state.ISMS);
   const dispatch = useDispatch();
-  // const [selectedJetty, setSeletedJetty] = useState(null);
 
   const handleJettyClick = () => {
     dispatch(setCoordinatesJetty(coordinates));
-    dispatch(setDevicesJetty(jetty));
     dispatch(setSectionId(sectionId));
   };
 

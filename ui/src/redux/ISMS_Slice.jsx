@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
 // import gateway_on from "../iconImage/gateway_on.png";
 import emergency_idle from "../iconImage/emergency_idle.png";
 import doorphone_on from "../iconImage/doorphone_on.png";
@@ -192,20 +192,40 @@ const ISMS_Slice = createSlice({
     setSectionId: (state, action) => {
       state.SectionId = action.payload;
       state.PhysicalDevices = [];
+      switch (action.payload) {
+        case 20:
+          state.Jetty = "APAPA";
+          break;
+        case 21:
+          state.Jetty = "ATLAS";
+          break;
+        case 22:
+          state.Jetty = "CALABAR";
+          break;
+        case 25:
+          state.Jetty = "OKRIKA";
+          break;
+        case 23:
+          state.Jetty = "WARRI";
+          break;
+        default:
+          break;
+      }
     },
     setMarkersState: (state, action) => {
       state.markers = action.payload;
     },
     addEventState: (state, action) => {
       // console.log(action.payload);
-      if (state.events.length > 10) {
-        state.events = state.events.slice(0, 9);
-      }
+      // if (state.events.length > 10) {
+      //   state.events = state.events.slice(0, 9);
+      // } else
       if (
         action.payload.CodeDescription !== null &&
         !state.events.some((obj) => obj.EventId === action.payload.EventId)
       ) {
-        state.events = [...state.events, action.payload];
+        // state.events = [...state.events, action.payload];
+        state.events = [action.payload, ...current(state.events).slice(0, 9)];
       }
       // console.log(current(state));
     },

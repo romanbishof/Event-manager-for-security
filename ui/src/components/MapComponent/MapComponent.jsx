@@ -1,16 +1,19 @@
 import { divIcon, imageOverlay } from "leaflet";
 import React, { useEffect, useState } from "react";
 import { useMap, useMapEvent } from "react-leaflet";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import apapa_jetty_img from "../../images/Apapa - Copy.jpg";
 import warri_jetty_img from "../../images/Warri - Copy.jpg";
 import atlas_jetty_img from "../../images/ATLAS COVE_2.jpg";
 import calabar_jetty_img from "../../images/Calabar - Copy.jpg";
 import okrika_jetty_img from "../../images/Okrika 2.jpg";
 import MapMarker from "./MapMarker";
+import { setDevicesJetty, setSectionId } from "../../redux/ISMS_Slice";
 
 function MapComponent() {
   const state = useSelector((state) => state.ISMS);
+  const dispatch = useDispatch();
+
   window.mainMap = useMap();
 
   // const mapEvents = useMapEvent({
@@ -71,39 +74,39 @@ function MapComponent() {
   useEffect(() => {
     switch (state.SectionId) {
       case 21: // setting ATLAS Jetty
-        window.mainMap.setView(state.Center, 16.5, { setMaxZoom: 18 });
+        window.mainMap.setView(state.Center, 16.5);
         // window.mainMap.setZoom(16.5);
         window.mainMap.setMaxZoom(18);
 
         break;
       case 20: // Setting APAPA Jetty
-        window.mainMap.setView(state.Center);
-        window.mainMap.setZoom(17);
+        window.mainMap.setView(state.Center, 17);
+        // window.mainMap.setZoom(17);
         window.mainMap.setMaxZoom(19);
 
         break;
       case 22: // Setting CALABAR Jetty
         window.mainMap.setView(state.Center, 19);
-        window.mainMap.setZoom(19);
+        // window.mainMap.setZoom(19);
         window.mainMap.setMaxZoom(20);
 
         break;
       case 25: // Setting OKRIKA Jetty
-        window.mainMap.setView(state.Center);
-        window.mainMap.setZoom(17.5);
+        window.mainMap.setView(state.Center, 17.5);
+        // window.mainMap.setZoom(17.5);
         window.mainMap.setMaxZoom(18);
 
         break;
       case 23: // Setting WARRI Jetty
-        window.mainMap.setView(state.Center);
-        window.mainMap.setZoom(17.5);
+        window.mainMap.setView(state.Center, 17.5);
+        // window.mainMap.setZoom(17.5);
         window.mainMap.setMaxZoom(18);
 
         break;
       default:
         break;
     }
-  }, [state]);
+  }, [state.SectionId]);
 
   useEffect(() => {
     if (!state.event?.show) {
@@ -111,9 +114,11 @@ function MapComponent() {
       return;
     } else {
       console.log("Selected new event");
-      window.mainMap.setView(state.event.coordinates, 17.5);
-      let temp = document.getElementById(state.event.InvokerId);
-      temp?.classList.add("alert");
+      window.mainMap.setView(state.event.coordinates, 17);
+      document.getElementById(state.event.InvokerId).classList.add("alert");
+      if (apapaImage.getBounds().contains(state.event.coordinates)) {
+        // dispatch(setSectionId(20));
+      }
     }
   }, [state.event]);
 
