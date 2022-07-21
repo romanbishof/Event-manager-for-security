@@ -114,8 +114,8 @@ function MapComponent() {
       return;
     } else {
       console.log("Selected new event");
-      window.mainMap.setView(state.event.coordinates, 17);
-      document.getElementById(state.event.InvokerId).classList.add("alert");
+      // window.mainMap.setView(state.event.coordinates, 17);
+      // document.getElementById(state.event.InvokerId).classList.add("alert");
       if (apapaImage.getBounds().contains(state.event.coordinates)) {
         dispatch(setDevicesJetty(20));
         setTimeout(() => {
@@ -125,18 +125,24 @@ function MapComponent() {
       }
       if (atlasImage.getBounds().contains(state.event.coordinates)) {
         dispatch(setDevicesJetty(21));
-        window.mainMap.setView(state.event.coordinates, 17);
-        document.getElementById(state.event.InvokerId).classList.add("alert");
+        setTimeout(() => {
+          window.mainMap.setView(state.event.coordinates, 17);
+          document.getElementById(state.event.InvokerId).classList.add("alert");
+        }, 100);
       }
       if (calabarImage.getBounds().contains(state.event.coordinates)) {
         dispatch(setDevicesJetty(22));
-        window.mainMap.setView(state.event.coordinates, 17);
-        document.getElementById(state.event.InvokerId).classList.add("alert");
+        setTimeout(() => {
+          window.mainMap.setView(state.event.coordinates, 17);
+          document.getElementById(state.event.InvokerId).classList.add("alert");
+        }, 100);
       }
       if (okrikaImage.getBounds().contains(state.event.coordinates)) {
         dispatch(setDevicesJetty(25));
-        window.mainMap.setView(state.event.coordinates, 17);
-        document.getElementById(state.event.InvokerId).classList.add("alert");
+        setTimeout(() => {
+          window.mainMap.setView(state.event.coordinates, 17);
+          document.getElementById(state.event.InvokerId).classList.add("alert");
+        }, 100);
       }
       if (warriImage.getBounds().contains(state.event.coordinates)) {
         dispatch(setDevicesJetty(23));
