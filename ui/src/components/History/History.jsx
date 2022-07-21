@@ -25,6 +25,11 @@ function History() {
         show: true,
       })
     );
+    // window.mainMap.setView(
+    //   [markerDevice.LocationX, markerDevice.LocationY],
+    //   17
+    // );
+    // document.getElementById(event.InvokerId).classList.add("alert");
   };
 
   // lisening to Back-end

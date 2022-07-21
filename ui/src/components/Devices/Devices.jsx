@@ -16,6 +16,7 @@ function Devices() {
     let [treeRoot] = state.Sections.filter((obj) =>
       obj.Name.toLowerCase().includes(state.Jetty.toLowerCase())
     );
+
     setParentTree(treeRoot);
   }, [state]);
 

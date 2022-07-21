@@ -184,7 +184,32 @@ const ISMS_Slice = createSlice({
       state.Center = action.payload;
     },
     setDevicesJetty: (state, action) => {
-      state.Jetty = action.payload;
+      // state.Jetty = action.payload;
+
+      switch (action.payload) {
+        case 20:
+          state.Jetty = "APAPA";
+          state.SectionId = 20;
+          break;
+        case 21:
+          state.Jetty = "ATLAS";
+          state.SectionId = 21;
+          break;
+        case 22:
+          state.Jetty = "CALABAR";
+          state.SectionId = 22;
+          break;
+        case 25:
+          state.Jetty = "OKRIKA";
+          state.SectionId = 25;
+          break;
+        case 23:
+          state.Jetty = "WARRI";
+          state.SectionId = 23;
+          break;
+        default:
+          break;
+      }
     },
     setZoneId: (state, action) => {
       state.ZoneId = action.payload;

@@ -106,7 +106,7 @@ function MapComponent() {
       default:
         break;
     }
-  }, [state.SectionId]);
+  }, [state.Center]);
 
   useEffect(() => {
     if (!state.event?.show) {
@@ -117,7 +117,33 @@ function MapComponent() {
       window.mainMap.setView(state.event.coordinates, 17);
       document.getElementById(state.event.InvokerId).classList.add("alert");
       if (apapaImage.getBounds().contains(state.event.coordinates)) {
-        // dispatch(setSectionId(20));
+        dispatch(setDevicesJetty(20));
+        setTimeout(() => {
+          window.mainMap.setView(state.event.coordinates, 17);
+          document.getElementById(state.event.InvokerId).classList.add("alert");
+        }, 100);
+      }
+      if (atlasImage.getBounds().contains(state.event.coordinates)) {
+        dispatch(setDevicesJetty(21));
+        window.mainMap.setView(state.event.coordinates, 17);
+        document.getElementById(state.event.InvokerId).classList.add("alert");
+      }
+      if (calabarImage.getBounds().contains(state.event.coordinates)) {
+        dispatch(setDevicesJetty(22));
+        window.mainMap.setView(state.event.coordinates, 17);
+        document.getElementById(state.event.InvokerId).classList.add("alert");
+      }
+      if (okrikaImage.getBounds().contains(state.event.coordinates)) {
+        dispatch(setDevicesJetty(25));
+        window.mainMap.setView(state.event.coordinates, 17);
+        document.getElementById(state.event.InvokerId).classList.add("alert");
+      }
+      if (warriImage.getBounds().contains(state.event.coordinates)) {
+        dispatch(setDevicesJetty(23));
+        setTimeout(() => {
+          window.mainMap.setView(state.event.coordinates, 17);
+          document.getElementById(state.event.InvokerId).classList.add("alert");
+        }, 100);
       }
     }
   }, [state.event]);
