@@ -39,20 +39,20 @@ function StatusesList() {
               <TableBody className="StatusesList__table">
                 {state.deviceStatusList?.map((obj) => (
                   <TableRow
-                    classes="StatusesList__table-row"
                     key={obj.Id}
+                    sx={{ height: 62.5 }}
                     className="Settings__TableCell"
                   >
-                    <TableCell sx={{ color: "white" }} align="left">
+                    <TableCell className="History__td" align="left">
                       {obj.Id}
                     </TableCell>
-                    <TableCell sx={{ color: "white" }} align="left">
+                    <TableCell className="History__td" align="left">
                       {obj.Name}
                     </TableCell>
-                    <TableCell sx={{ color: "white" }} align="left">
+                    <TableCell className="History__td" align="left">
                       {obj.EnumValue}
                     </TableCell>
-                    <TableCell sx={{ color: "white" }} align="left">
+                    <TableCell className="History__td" align="left">
                       {obj.Description}
                     </TableCell>
                   </TableRow>

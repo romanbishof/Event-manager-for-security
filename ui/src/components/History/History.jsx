@@ -57,7 +57,13 @@ function History() {
         <span>{`History - (${state.Jetty})`}</span>
       </div>
       <div className="History__wrapper">
-        <Paper sx={{ width: "100%", overflow: "hidden" }}>
+        <Paper
+          sx={{
+            width: "100%",
+            overflow: "hidden",
+            borderRadius: "0px 0px 6px 6px",
+          }}
+        >
           <TableContainer
             sx={{ maxHeight: 256, color: "white", backgroundColor: "#515151" }}
           >
@@ -89,13 +95,9 @@ function History() {
                       key={event.EventId}
                       className="Settings__TableCell"
                     >
-                      <TableCell
-                        className="History__td"
-                        sx={{ color: "white" }}
-                        align="center"
-                      >
+                      <TableCell className="History__td" align="center">
                         {markerOnMap === undefined ? (
-                          <div></div>
+                          <VisibilityIcon color="disabled" />
                         ) : (
                           <VisibilityIcon
                             onClick={() => {

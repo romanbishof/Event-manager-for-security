@@ -60,18 +60,11 @@
     white-space: nowrap;
     border-right: 1px solid #a0bd11;
 }
-.History__table{
-    
-}
 
-.History__thTd{
-    min-width: 166px;
-}
 
 .History__td{
     max-width: 284px;
     font-size: 12.9px;
-    
     border-bottom: 1px solid #a0bd11;
     color: white;
 }
