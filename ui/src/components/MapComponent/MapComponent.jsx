@@ -108,6 +108,7 @@ function MapComponent() {
     }
   }, [state.Center]);
 
+  // check if event selected to see on map - pan to marker and change the jetty selection
   useEffect(() => {
     if (!state.event?.show) {
       console.log("No event selected");

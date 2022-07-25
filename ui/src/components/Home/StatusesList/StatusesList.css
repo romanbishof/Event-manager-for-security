@@ -1,0 +1,15 @@
+.StatusesList{
+    display: flex;
+    flex: 1;
+    /* height: 100vh; */
+    /* color: white; */
+    /* background-color: #3b3b3b; */
+    border-top: 5px solid black;
+    border-right: 5px solid black;
+    border-bottom: 5px solid black;
+}
+
+.StatusesList__wrapper{
+    width: 100%;
+    height: 818px;
+}

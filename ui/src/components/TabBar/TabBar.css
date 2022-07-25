@@ -1,0 +1,29 @@
+.TabBar{
+    color: white;
+    background-color: #5d5d5d;
+}
+
+.TabBar__TabList{
+    display: flex;
+    flex-direction: row;
+    /* background-color: red; */
+    border-top: 1px solid black;
+    /* padding: 5px; */
+    list-style-type: none;
+    cursor: pointer;
+}
+
+.TabBar__TabList li{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    /* background-color: blue; */
+    padding: 5px 10px 5px 5px;
+    gap: 5px;
+    /* border: 1px solid purple; */
+}
+
+.TabBar__TabList :hover{
+    background-color: #3a3a3a;
+}

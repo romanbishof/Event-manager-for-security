@@ -5,7 +5,10 @@ import "./App.css";
 import Header from "./components/Header/Header";
 import Home from "./components/Home/Home";
 import Settings from "./components/Settings/Settings";
-import { getIntegrationDevicesAsync } from "./redux/ISMS_Slice";
+import {
+  getIntegrationDevicesAsync,
+  getIntegrationStatusTypeListAsync,
+} from "./redux/ISMS_Slice";
 
 window.mainMap = "";
 
@@ -14,6 +17,7 @@ function App() {
 
   useEffect(() => {
     dispatch(getIntegrationDevicesAsync());
+    dispatch(getIntegrationStatusTypeListAsync());
   }, []);
 
   return (
@@ -21,7 +25,7 @@ function App() {
       <Header />
       <div className="App__wrapper">
         <Routes>
-          <Route path="/" element={<Home />}></Route>
+          <Route path="/*" element={<Home />}></Route>
           <Route path="/settings" element={<Settings />}></Route>
         </Routes>
       </div>

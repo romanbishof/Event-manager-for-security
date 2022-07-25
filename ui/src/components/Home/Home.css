@@ -1,22 +1,37 @@
 .Home{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     height: 100%;
+    flex: 1;
+}
+
+.Home__tabBar{
+    width: 100%;
+    min-height: 30px;
+}
+
+.Home__wrapper{
+    display: flex;
+    flex-direction: row;
+    /* height: 100%; */
 }
 .Home__left{
     display: flex;
     flex-direction: column;
+    flex: 1;
+    /* padding: 5px 5px 0px 0px; */
 }
 
-.Home__left-Devices{
+/* .Home__left-Devices{
     display: flex;
     flex-direction: row;
     width: 100%;
-}
+} */
 
 .Home__right{
     display: flex;
     flex-direction: column;
+    flex: 1;
 }
 
  .Home__right-map{

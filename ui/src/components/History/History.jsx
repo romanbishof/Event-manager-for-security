@@ -5,6 +5,15 @@ import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import { addEventState, saveEvent } from "../../redux/ISMS_Slice";
 import VisibilityIcon from "@mui/icons-material/Visibility";
+import {
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from "@mui/material";
 
 const socket = io.connect("http://localhost:8080");
 
@@ -25,11 +34,6 @@ function History() {
         show: true,
       })
     );
-    // window.mainMap.setView(
-    //   [markerDevice.LocationX, markerDevice.LocationY],
-    //   17
-    // );
-    // document.getElementById(event.InvokerId).classList.add("alert");
   };
 
   // lisening to Back-end
@@ -37,7 +41,10 @@ function History() {
     socket.on("eventEmiter", (data) => {
       dispatch(addEventState(data));
       sessionStorage.setItem("event", JSON.stringify(data));
+      // console.log("EVENT: ");
+      console.log(data);
     });
+    console.log(state);
 
     socket.on("statusEmiter", (data) => {
       sessionStorage.setItem("status", JSON.stringify(data));
@@ -50,7 +57,86 @@ function History() {
         <span>{`History - (${state.Jetty})`}</span>
       </div>
       <div className="History__wrapper">
-        <div className="History__table-header">
+        <Paper sx={{ width: "100%", overflow: "hidden" }}>
+          <TableContainer
+            sx={{ maxHeight: 256, color: "white", backgroundColor: "#515151" }}
+          >
+            <Table
+              stickyHeader
+              sx={{ maxWidth: "100%" }}
+              aria-label="simple table"
+            >
+              <TableHead>
+                <TableRow>
+                  <TableCell align="left">Show</TableCell>
+                  <TableCell align="left">Date Time</TableCell>
+                  <TableCell align="left">Level</TableCell>
+                  <TableCell align="left">Name</TableCell>
+                  <TableCell align="left">Device ID</TableCell>
+                  <TableCell align="left">Message</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody className="History__table">
+                {state.events.map((event) => {
+                  let { Name } = state.integrationDevices.find(
+                    (device) => device.Id === event.InvokerId
+                  );
+                  let markerOnMap = state.markers.find(
+                    (marker) => marker.id === event.InvokerId
+                  );
+                  return (
+                    <TableRow
+                      key={event.EventId}
+                      className="Settings__TableCell"
+                    >
+                      <TableCell
+                        className="History__td"
+                        sx={{ color: "white" }}
+                        align="center"
+                      >
+                        {markerOnMap === undefined ? (
+                          <div></div>
+                        ) : (
+                          <VisibilityIcon
+                            onClick={() => {
+                              let markerDevice = state.integrationDevices.find(
+                                (device) => device.Id === event.InvokerId
+                              );
+                              if (markerDevice.HasLocation) {
+                                handleShowMarkerEvent(event, markerDevice);
+                              }
+                            }}
+                            sx={{ cursor: "pointer" }}
+                          />
+                        )}
+                      </TableCell>
+                      <TableCell className="History__td" align="left">
+                        {`${moment(event.RegistrationTime).format(
+                          "DD-MM-YYYY HH:mm:ss"
+                        )}`}
+                      </TableCell>
+                      <TableCell className="History__td" align="center">
+                        {event.ImportanceLevel}
+                      </TableCell>
+                      <TableCell className="History__td" align="left">
+                        {Name}
+                      </TableCell>
+                      <TableCell
+                        className="History__td"
+                        align="left"
+                      >{`${event.InvokerId}`}</TableCell>
+                      <TableCell className="History__td" align="left">
+                        {event.CodeDescription}
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Paper>
+
+        {/* <div className="History__table-header">
           <h4 style={{ flex: 0.88 }}>{`Show`}</h4>
           <h4 style={{ flex: 2.8 }}>{`Date Time`}</h4>
           <h4 style={{ flex: 0.8 }}>{`Level`}</h4>
@@ -137,7 +223,7 @@ function History() {
             }) // reverse the order of array
             // .reverse()
           }
-        </div>
+        </div> */}
       </div>
     </div>
   );

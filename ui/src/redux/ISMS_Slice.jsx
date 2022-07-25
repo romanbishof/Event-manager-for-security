@@ -155,6 +155,46 @@ export const updateIntegrationLocationDeviceAsync = createAsyncThunk(
   }
 );
 
+export const getIntegrationStatusTypeListAsync = createAsyncThunk(
+  "isms/getIntegrationStatusTypeListAsync",
+  async () => {
+    let deviceStatusList;
+    await axios
+      .post(
+        `http://nnpcbe:89/api/v2/IntegrationUI/GetIntegrationStatusTypeList`
+      )
+      .then((resp) => {
+        deviceStatusList = resp.data;
+        sessionStorage.setItem(
+          "DevicesStatusTypeList",
+          JSON.stringify(resp.data)
+        );
+        return deviceStatusList;
+      })
+      .catch((error) => {
+        if (error.response) {
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+          deviceStatusList = JSON.parse(sessionStorage.getItem("Devices"));
+          return;
+        } else if (error.request) {
+          console.log(error.request);
+          deviceStatusList = JSON.parse(sessionStorage.getItem("Devices"));
+
+          return deviceStatusList;
+        } else {
+          console.log("Error", error.message);
+          deviceStatusList = JSON.parse(sessionStorage.getItem("Devices"));
+
+          return deviceStatusList;
+        }
+      });
+
+    return deviceStatusList;
+  }
+);
+
 const initialState = {
   Center: [6.4553, 3.3713],
   Jetty: "APAPA",
@@ -170,6 +210,7 @@ const initialState = {
   markers: [],
   events: [],
   event: {},
+  deviceStatusList: [],
 };
 
 // our Action for Reducer
@@ -241,15 +282,10 @@ const ISMS_Slice = createSlice({
       state.markers = action.payload;
     },
     addEventState: (state, action) => {
-      // console.log(action.payload);
-      // if (state.events.length > 10) {
-      //   state.events = state.events.slice(0, 9);
-      // } else
       if (
         action.payload.CodeDescription !== null &&
         !state.events.some((obj) => obj.EventId === action.payload.EventId)
       ) {
-        // state.events = [...state.events, action.payload];
         state.events = [action.payload, ...current(state.events).slice(0, 9)];
       }
       // console.log(current(state));
@@ -289,6 +325,9 @@ const ISMS_Slice = createSlice({
     [updateIntegrationLocationDeviceAsync.fulfilled]: (state, action) => {
       console.log(action.payload);
       localStorage.setItem("markersOnMap", JSON.stringify(state.markers));
+    },
+    [getIntegrationStatusTypeListAsync.fulfilled]: (state, action) => {
+      state.deviceStatusList = action.payload;
     },
   },
 });

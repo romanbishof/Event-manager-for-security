@@ -7,7 +7,7 @@
 .Section button{
     height: 50px;
     width: 150px;
-    border-radius: 10px;
+    border-radius: 8px;
     border: 2px solid #a0bd11;;
     cursor: pointer;
     color: white;
@@ -15,7 +15,7 @@
     font-size: 24px;
     font-weight: bold;
     font-family: 'Ropa Sans', sans-serif;;
-    transition: 0.3s ease-in-out;
+    transition: 0.3s ease-in;
 }
 
 .Section__selected button{
