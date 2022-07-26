@@ -1,9 +1,9 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import Devices from "../Devices/Devices";
+// import Devices from "../Devices/Devices";
 import Map from "../Map/Map";
-import Sections from "../Sections/Sections";
-import TableDevices from "../TableDevices/TableDevices";
+// import Sections from "../Sections/Sections";
+// import TableDevices from "../TableDevices/TableDevices";
 import "./Home.css";
 import History from "../History/History";
 import TabBar from "../TabBar/TabBar";

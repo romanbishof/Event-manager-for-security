@@ -37,7 +37,9 @@ function Devices() {
                 onClick={() => {
                   handleClickNode(_node.PhysicalDevices);
                 }}
-                sx={{ borderBottom: "1px solid #a0bd11" }}
+                sx={{
+                  borderBottom: "1px solid #a0bd11",
+                }}
               ></TreeItem>
             );
           })}
@@ -65,6 +67,7 @@ function Devices() {
               flexGrow: 1,
               maxWidth: "100%",
               overflowY: "auto",
+              lineHeight: 1.55,
             }}
           >
             {renderTree(parentTree)}

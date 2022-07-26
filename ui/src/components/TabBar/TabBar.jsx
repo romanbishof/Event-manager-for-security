@@ -12,9 +12,11 @@ function TabBar() {
     switch (e.target.innerText.toUpperCase()) {
       case "DASHBOARD":
         navigate("/");
+        setTab("DASHBOARD");
         break;
       case "STATUS":
         navigate("/status");
+        setTab("STATUS");
       default:
         break;
     }
@@ -22,11 +24,11 @@ function TabBar() {
   return (
     <div className="TabBar">
       <ul className="TabBar__TabList" onClick={handleSelectTab}>
-        <li>
+        <li className={tab === "DASHBOARD" ? "TabBar__active" : ""}>
           <DashboardIcon />
           <span>{`DashBoard`}</span>
         </li>
-        <li>
+        <li className={tab === "STATUS" ? "TabBar__active" : ""}>
           <img src={dashBoard} alt="" />
           <span>{`Status`}</span>
         </li>

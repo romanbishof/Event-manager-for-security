@@ -9,6 +9,7 @@ import main_device_panic_detecting from "../iconImage/main_device_panic_detectin
 import main_device_siren_normal from "../iconImage/main_device_siren_normal.png";
 import main_device_panic_idle from "../iconImage/main_device_panic_idle.png";
 import axios from "axios";
+import { marker } from "leaflet";
 
 // import data from "../data/cloud_devices.json";
 
@@ -226,7 +227,7 @@ const ISMS_Slice = createSlice({
     },
     setDevicesJetty: (state, action) => {
       // state.Jetty = action.payload;
-
+      state.PhysicalDevices = [];
       switch (action.payload) {
         case 20:
           state.Jetty = "APAPA";
@@ -293,6 +294,15 @@ const ISMS_Slice = createSlice({
     saveEvent: (state, action) => {
       state.event = action.payload;
     },
+    setMarkerStatus: (state, action) => {
+      action.payload.forEach((status) => {
+        state.markers = current(state.markers).map((marker) => {
+          return marker.id === status.ObjectId
+            ? { ...marker, status: status.State }
+            : { ...marker };
+        });
+      });
+    },
   },
   extraReducers: {
     [getIntegrationDevicesAsync.fulfilled]: (state, action) => {
@@ -304,6 +314,7 @@ const ISMS_Slice = createSlice({
           icon: hadleImageType(marker.Type),
           id: marker.Id,
           name: marker.Name,
+          status: 3,
         };
       });
 
@@ -323,6 +334,7 @@ const ISMS_Slice = createSlice({
       );
     },
     [updateIntegrationLocationDeviceAsync.fulfilled]: (state, action) => {
+      console.log(`marker udated location: `);
       console.log(action.payload);
       localStorage.setItem("markersOnMap", JSON.stringify(state.markers));
     },
@@ -342,6 +354,7 @@ export const {
   setPhysicalDevices,
   addEventState,
   saveEvent,
+  setMarkerStatus,
 } = ISMS_Slice.actions;
 
 export default ISMS_Slice.reducer;

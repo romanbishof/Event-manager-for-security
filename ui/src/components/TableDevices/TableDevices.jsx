@@ -43,7 +43,9 @@ function TableDevices({ _devices, _label }) {
                     key={obj.Id}
                     nodeId={String(obj.Id)}
                     label={obj.Name}
-                    sx={{ borderBottom: "1px solid #a0bd11" }}
+                    sx={{
+                      borderBottom: "1px solid #a0bd11",
+                    }}
                     onClick={() => {
                       // setDevice(obj);
                       // handlePopupItem(obj);

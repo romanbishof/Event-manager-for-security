@@ -97,7 +97,7 @@ amqp.connect('amqp://admin:Aa123456@10.0.0.92:5672/', function (err, connection)
                         // console.log('recieved mesege from status');
                         // console.log(status.Payload);
                         global.io.emit("statusEmiter", JSON.parse(status.Payload))
-                        // console.log(JSON.parse(status.Payload));
+                        console.log(JSON.parse(status.Payload));
 
                     }
                 }, {

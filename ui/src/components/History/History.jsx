@@ -3,7 +3,11 @@ import "./History.css";
 import io from "socket.io-client";
 import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
-import { addEventState, saveEvent } from "../../redux/ISMS_Slice";
+import {
+  addEventState,
+  saveEvent,
+  setMarkerStatus,
+} from "../../redux/ISMS_Slice";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import {
   Paper,
@@ -41,13 +45,12 @@ function History() {
     socket.on("eventEmiter", (data) => {
       dispatch(addEventState(data));
       sessionStorage.setItem("event", JSON.stringify(data));
-      // console.log("EVENT: ");
-      console.log(data);
     });
-    console.log(state);
 
     socket.on("statusEmiter", (data) => {
       sessionStorage.setItem("status", JSON.stringify(data));
+      // console.log(data);
+      dispatch(setMarkerStatus(data));
     });
   }, [socket]);
 
@@ -65,15 +68,21 @@ function History() {
           }}
         >
           <TableContainer
-            sx={{ maxHeight: 256, color: "white", backgroundColor: "#515151" }}
+            sx={{
+              minHeight: 256,
+              maxHeight: 256,
+              color: "white",
+              backgroundColor: "#515151",
+            }}
           >
             <Table
+              size="small"
               stickyHeader
               sx={{ maxWidth: "100%" }}
               aria-label="simple table"
             >
               <TableHead>
-                <TableRow>
+                <TableRow sx={{ height: 42 }}>
                   <TableCell align="left">Show</TableCell>
                   <TableCell align="left">Date Time</TableCell>
                   <TableCell align="left">Level</TableCell>
@@ -93,9 +102,17 @@ function History() {
                   return (
                     <TableRow
                       key={event.EventId}
-                      className="Settings__TableCell"
+                      className="Settings__TableCell "
                     >
-                      <TableCell className="History__td" align="center">
+                      <TableCell
+                        sx={{
+                          color: "white",
+                          borderBottom: "1px solid #a0bd11",
+                          maxWidth: "284px",
+                          fontSize: 12.6,
+                        }}
+                        align="center"
+                      >
                         {markerOnMap === undefined ? (
                           <VisibilityIcon color="disabled" />
                         ) : (
@@ -112,22 +129,59 @@ function History() {
                           />
                         )}
                       </TableCell>
-                      <TableCell className="History__td" align="left">
+                      <TableCell
+                        sx={{
+                          color: "white",
+                          borderBottom: "1px solid #a0bd11",
+                          maxWidth: "284px",
+                          fontSize: 12.6,
+                        }}
+                        align="left"
+                      >
                         {`${moment(event.RegistrationTime).format(
                           "DD-MM-YYYY HH:mm:ss"
                         )}`}
                       </TableCell>
-                      <TableCell className="History__td" align="center">
+                      <TableCell
+                        sx={{
+                          color: "white",
+                          borderBottom: "1px solid #a0bd11",
+                          maxWidth: "284px",
+                          fontSize: 12.6,
+                        }}
+                        align="center"
+                      >
                         {event.ImportanceLevel}
                       </TableCell>
-                      <TableCell className="History__td" align="left">
+                      <TableCell
+                        sx={{
+                          color: "white",
+                          borderBottom: "1px solid #a0bd11",
+                          maxWidth: "284px",
+                          fontSize: 12.6,
+                        }}
+                        align="left"
+                      >
                         {Name}
                       </TableCell>
                       <TableCell
-                        className="History__td"
+                        sx={{
+                          color: "white",
+                          borderBottom: "1px solid #a0bd11",
+                          maxWidth: "284px",
+                          fontSize: 12.6,
+                        }}
                         align="left"
                       >{`${event.InvokerId}`}</TableCell>
-                      <TableCell className="History__td" align="left">
+                      <TableCell
+                        sx={{
+                          color: "white",
+                          borderBottom: "1px solid #a0bd11",
+                          maxWidth: "284px",
+                          fontSize: 12.6,
+                        }}
+                        align="left"
+                      >
                         {event.CodeDescription}
                       </TableCell>
                     </TableRow>

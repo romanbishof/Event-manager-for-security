@@ -144,6 +144,7 @@ function MapSettingsComponent() {
             icon: hadleImageType(type),
             id: id,
             name: name,
+            // status: 3,
           },
         ])
       );

@@ -1,6 +1,6 @@
 import { divIcon } from "leaflet";
 import React, { useEffect } from "react";
-import { Marker, Popup } from "react-leaflet";
+import { Marker, Popup, Tooltip } from "react-leaflet";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setMarkersState,
@@ -9,19 +9,17 @@ import {
 import DeleteIcon from "@mui/icons-material/Delete";
 import "./MapSettingsComponent.css";
 
-function MapMarker({ id, coordinates, img, name, isDraggable, isSettings }) {
+function MapMarker({
+  id,
+  coordinates,
+  img,
+  name,
+  isDraggable,
+  isSettings,
+  status,
+}) {
   const state = useSelector((state) => state.ISMS);
   const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   if (!isSettings) {
-  //     let temp = document.getElementById(state.event.InvokerId);
-  //     let temp2 = temp?.parentElement;
-  //     temp2?.classList.add("alertBounce");
-  //     console.log(temp2);
-  //     temp?.classList.add("alert");
-  //   }
-  // }, [state.event]);
 
   // making custom marker with label
   const icon = (img, name) => {
@@ -67,6 +65,42 @@ function MapMarker({ id, coordinates, img, name, isDraggable, isSettings }) {
     );
   };
 
+  const hendleStatusType = (markerStatus) => {
+    switch (markerStatus) {
+      case 0:
+        return "Inactive";
+      case 1:
+        return "Unknown";
+      case 2:
+        return "Default";
+      case 3:
+        return "Idle";
+      case 4:
+        return "On";
+      case 5:
+        return "Off";
+      case 6:
+        return "Active";
+      case 7:
+        return "Connected";
+      case 8:
+        return "Disconnected";
+      case 9:
+        return "Disabled";
+      case 10:
+        return "Locked";
+      case 11:
+        return "Unlocked";
+      case 12:
+        return "Accessed";
+      case 13:
+        return "Malfunction";
+      case 14:
+        return "Faulty";
+      default:
+        break;
+    }
+  };
   return (
     <Marker
       position={coordinates}
@@ -74,7 +108,6 @@ function MapMarker({ id, coordinates, img, name, isDraggable, isSettings }) {
       draggable={isDraggable}
       eventHandlers={{
         moveend: (e) => {
-          console.log(id);
           handleMarkerNewLocation(e.target._latlng, id);
         },
       }}
@@ -89,7 +122,10 @@ function MapMarker({ id, coordinates, img, name, isDraggable, isSettings }) {
           ></DeleteIcon>
         </Popup>
       ) : (
-        ""
+        <Tooltip
+          direction="top"
+          offset={[-5, -10]}
+        >{`Status: ${hendleStatusType(status)}`}</Tooltip>
       )}
     </Marker>
   );
