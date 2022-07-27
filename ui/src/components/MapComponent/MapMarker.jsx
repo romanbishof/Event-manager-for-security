@@ -17,6 +17,7 @@ function MapMarker({
   isDraggable,
   isSettings,
   status,
+  type,
 }) {
   const state = useSelector((state) => state.ISMS);
   const dispatch = useDispatch();
@@ -97,10 +98,83 @@ function MapMarker({
         return "Malfunction";
       case 14:
         return "Faulty";
+      case 15:
+        return "Alarmed";
+      case 16:
+        return "AlarmDisappeared";
+      case 17:
+        return "Tamper";
+      case 18:
+        return "Busy";
+      case 19:
+        return "LockedAndMaskedDoorBroken";
+      case 20:
+        return "DefaultAndMaskedDoorBroken";
+      case 21:
+        return "DefaultAndMaskedDoorLeftOpened";
+      case 22:
+        return "AlarmedLeftOpened";
+      case 23:
+        return "AlarmedBroken";
+      case 24:
+        return "Masked";
+      case 25:
+        return "SurmiseAlarm";
+      case 27:
+        return "Tripped";
+      case 26:
+        return "Bypassed";
+      case 28:
+        return "BypassedAndTripped";
+      case 29:
+        return "ManualControl";
+      case 30:
+        return "Armed";
+      case 31:
+        return "Disarmed";
+      case 32:
+        return "ReadyToArm";
+      case 33:
+        return "Prealarm";
+      case 34:
+        return "TwentyFourHour";
+      case 35:
+        return "Duress";
+      case 36:
+        return "ConnectionOverride";
+      case 37:
+        return "Overflow";
+      case 38:
+        return "Empty";
+      case 39:
+        return "Semifull";
+      case 40:
+        return "Full";
       default:
         break;
     }
   };
+
+  // console.log(`${name}, ${hendleStatusType(status)}`);
+  // const hendleMarkerType = (_type) => {
+  //   switch (_type) {
+  //     case 14:
+  //       return "panic";
+  //     case 8:
+  //       return "emergency";
+  //     case 9:
+  //       return "doorphone";
+  //     case 77:
+  //       return "door";
+  //     case 1:
+  //       return "camera";
+  //     case 400:
+  //       return "siren";
+  //     default:
+  //       return;
+  //   }
+  // };
+
   return (
     <Marker
       position={coordinates}

@@ -1,12 +1,30 @@
 import React, { useEffect } from "react";
 import { MapContainer } from "react-leaflet";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setMarkerStatus } from "../../redux/ISMS_Slice";
 import MapComponent from "../MapComponent/MapComponent";
 import "./Map.css";
+// import { io } from "socket.io-client";
+// const statusSocket = io("http://localhost:8082");
 
 function Map() {
   const state = useSelector((state) => state.ISMS);
-  useEffect(() => {}, [state]);
+  let dispatch = useDispatch();
+
+  useEffect(() => {
+    window.statusSocket.on("statusEmiter", (data) => {
+      sessionStorage.setItem("status", JSON.stringify(data));
+      console.log("status");
+      console.log(data);
+      dispatch(setMarkerStatus(data));
+    });
+    window.statusSocket.on("connect", () => {
+      console.log(window.statusSocket.id);
+    });
+    window.statusSocket.on("disconnect", () => {
+      console.log(window.statusSocket.id);
+    });
+  }, [window.statusSocket]);
 
   return (
     <div className="Map">

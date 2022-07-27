@@ -33,13 +33,10 @@ function Settings() {
 
   // selecting jetty
   const handleSelectJetty = (id, name) => {
-    // let filterdDevices = state.Devices.filter(
-    //   (device) => device.SectionId === id
-    // );
     let temp = state.Sections.filter((section) =>
-      // section.Name.toLowerCase().includes(state.Jetty.toLowerCase())
       section.Name.toLowerCase().includes(name.toLowerCase())
     );
+
     setDevices(temp);
 
     // sending comand to pan map at specific jetty

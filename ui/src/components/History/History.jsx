@@ -1,13 +1,9 @@
 import React, { useEffect } from "react";
 import "./History.css";
-import io from "socket.io-client";
+// import { io } from "socket.io-client";
 import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  addEventState,
-  saveEvent,
-  setMarkerStatus,
-} from "../../redux/ISMS_Slice";
+import { addEventState, saveEvent } from "../../redux/ISMS_Slice";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import {
   Paper,
@@ -19,7 +15,7 @@ import {
   TableRow,
 } from "@mui/material";
 
-const socket = io.connect("http://localhost:8080");
+// const eventSocket = io("http://localhost:8081");
 
 function History() {
   const state = useSelector((state) => state.ISMS);
@@ -42,17 +38,19 @@ function History() {
 
   // lisening to Back-end
   useEffect(() => {
-    socket.on("eventEmiter", (data) => {
+    window.eventSocket.on("eventEmiter", (data) => {
       dispatch(addEventState(data));
       sessionStorage.setItem("event", JSON.stringify(data));
     });
 
-    socket.on("statusEmiter", (data) => {
-      sessionStorage.setItem("status", JSON.stringify(data));
-      // console.log(data);
-      dispatch(setMarkerStatus(data));
+    window.eventSocket.on("connect", () => {
+      console.log(window.eventSocket.id);
     });
-  }, [socket]);
+
+    window.eventSocket.on("disconnect", () => {
+      console.log(window.eventSocket.id);
+    });
+  }, [window.eventSocket]);
 
   return (
     <div className="History">
@@ -83,7 +81,7 @@ function History() {
             >
               <TableHead>
                 <TableRow sx={{ height: 42 }}>
-                  <TableCell align="left">Show</TableCell>
+                  <TableCell align="center">Show</TableCell>
                   <TableCell align="left">Date Time</TableCell>
                   <TableCell align="left">Level</TableCell>
                   <TableCell align="left">Name</TableCell>

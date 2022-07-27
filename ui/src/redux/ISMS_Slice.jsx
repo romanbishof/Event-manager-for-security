@@ -9,9 +9,6 @@ import main_device_panic_detecting from "../iconImage/main_device_panic_detectin
 import main_device_siren_normal from "../iconImage/main_device_siren_normal.png";
 import main_device_panic_idle from "../iconImage/main_device_panic_idle.png";
 import axios from "axios";
-import { marker } from "leaflet";
-
-// import data from "../data/cloud_devices.json";
 
 // function to make obj tree from array of obj
 const buildTree = (nodes, parentId, n = 5) => {
@@ -86,8 +83,8 @@ const buildTree = (nodes, parentId, n = 5) => {
     //   );
   }
 };
-const hadleImageType = (deviceType) => {
-  switch (deviceType) {
+const hadleImageType = (marker) => {
+  switch (marker.Type) {
     case 14:
       return main_device_panic_idle;
     case 8:
@@ -98,7 +95,7 @@ const hadleImageType = (deviceType) => {
       return main_device_door_close;
     case 1:
       return camera_on;
-    case 400:
+    case 109:
       return main_device_siren_normal;
     case 108:
       return main_device_panic_detecting;
@@ -295,6 +292,7 @@ const ISMS_Slice = createSlice({
       state.event = action.payload;
     },
     setMarkerStatus: (state, action) => {
+      console.log(action.payload);
       action.payload.forEach((status) => {
         state.markers = current(state.markers).map((marker) => {
           return marker.id === status.ObjectId
@@ -307,14 +305,15 @@ const ISMS_Slice = createSlice({
   extraReducers: {
     [getIntegrationDevicesAsync.fulfilled]: (state, action) => {
       let markers = action.payload.filter((marker) => marker.LocationX !== 0);
-
+      // console.log(deviceDictionary);
       state.markers = markers.map((marker) => {
         return {
           coordinates: { lat: marker.LocationX, lng: marker.LocationY },
-          icon: hadleImageType(marker.Type),
+          icon: hadleImageType(marker),
           id: marker.Id,
           name: marker.Name,
           status: 3,
+          type: marker.Type,
         };
       });
 

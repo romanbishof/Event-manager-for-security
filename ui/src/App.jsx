@@ -9,8 +9,11 @@ import {
   getIntegrationDevicesAsync,
   getIntegrationStatusTypeListAsync,
 } from "./redux/ISMS_Slice";
+import { io } from "socket.io-client";
 
 window.mainMap = "";
+window.eventSocket = io("http://localhost:8081");
+window.statusSocket = io("http://localhost:8082");
 
 function App() {
   const dispatch = useDispatch();

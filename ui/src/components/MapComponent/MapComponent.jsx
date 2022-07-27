@@ -170,6 +170,7 @@ function MapComponent() {
                 isDraggable={false}
                 isSettings={false}
                 status={marker.status}
+                type={marker.type}
               />
             );
           })}

@@ -99,7 +99,7 @@ function MapSettingsComponent() {
         return main_device_door_close;
       case 1:
         return camera_on;
-      case 400:
+      case 109:
         return main_device_siren_normal;
       case 108:
         return main_device_panic_detecting;
