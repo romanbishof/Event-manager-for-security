@@ -112,7 +112,7 @@ export const getIntegrationDevicesAsync = createAsyncThunk(
   async () => {
     let data;
     await axios
-      .get(`http://localhost:8080/api/v1/integrationDevices`)
+      .get(process.env.REACT_APP_GET_ALL_DEVICE)
       .then((resp) => {
         data = resp.data;
         localStorage.setItem("integrationDevices", JSON.stringify(data));
@@ -134,10 +134,7 @@ export const updateIntegrationLocationDeviceAsync = createAsyncThunk(
   async (device) => {
     let data;
     await axios
-      .put(
-        `http://localhost:8080/api/v1/integrationDevices/updateLocation`,
-        device
-      )
+      .put(process.env.REACT_APP_UPDATE_DEVICE_LOCATION, device)
       .then((resp) => {
         data = resp.data;
 
@@ -160,9 +157,7 @@ export const getIntegrationStatusTypeListAsync = createAsyncThunk(
   async () => {
     let deviceStatusList;
     await axios
-      .post(
-        `http://nnpcbe:89/api/v2/IntegrationUI/GetIntegrationStatusTypeList`
-      )
+      .post(process.env.REACT_APP_STATUS_LIST)
       .then((resp) => {
         deviceStatusList = resp.data;
         sessionStorage.setItem(
