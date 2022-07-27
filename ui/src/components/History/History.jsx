@@ -36,7 +36,7 @@ function History() {
     );
   };
 
-  // lisening to Back-end
+  // lisening to Back-end for Events
   useEffect(() => {
     window.eventSocket.on("eventEmiter", (data) => {
       dispatch(addEventState(data));

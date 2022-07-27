@@ -4,6 +4,7 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import dashBoard from "../../iconImage/tab_dashboard_sel.png";
 import { useNavigate } from "react-router-dom";
 
+// Component that changes view between DASHBOARD and Status table
 function TabBar() {
   const [tab, setTab] = useState("DASHBOARD");
   const navigate = useNavigate();

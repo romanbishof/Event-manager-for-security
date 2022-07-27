@@ -12,9 +12,10 @@ import {
 import { io } from "socket.io-client";
 
 window.mainMap = "";
-window.eventSocket = io("http://localhost:8081");
-window.statusSocket = io("http://localhost:8082");
+window.eventSocket = io(process.env.REACT_APP_EVENT_SOCKET);
+window.statusSocket = io(process.env.REACT_APP_STATUS_SOCKET);
 
+// THIS IS OUR APP THAT CONTAINS THE WHOLE APPLICATION
 function App() {
   const dispatch = useDispatch();
 

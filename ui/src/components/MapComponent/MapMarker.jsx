@@ -9,6 +9,8 @@ import {
 import DeleteIcon from "@mui/icons-material/Delete";
 import "./MapSettingsComponent.css";
 
+// Creates custom marker on MAP
+
 function MapMarker({
   id,
   coordinates,

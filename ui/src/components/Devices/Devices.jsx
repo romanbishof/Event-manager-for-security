@@ -4,8 +4,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import "./Devices.css";
 import { useDispatch, useSelector } from "react-redux";
-import { setPhysicalDevices, setZoneId } from "../../redux/ISMS_Slice";
-// import { v4 as uuidv4 } from "uuid";
+import { setPhysicalDevices } from "../../redux/ISMS_Slice";
 
 function Devices() {
   const state = useSelector((state) => state.ISMS);
@@ -24,6 +23,7 @@ function Devices() {
     dispatch(setPhysicalDevices(physicalDevices));
   };
 
+  // rendering tree
   const renderTree = (nodes) => {
     if (nodes?.Zones) {
       return (

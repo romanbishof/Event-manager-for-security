@@ -1,5 +1,5 @@
-import { divIcon, imageOverlay } from "leaflet";
-import React, { useEffect, useState } from "react";
+import { imageOverlay } from "leaflet";
+import React, { useEffect } from "react";
 import { useMap, useMapEvent } from "react-leaflet";
 import { useDispatch, useSelector } from "react-redux";
 import apapa_jetty_img from "../../images/Apapa - Copy.jpg";
@@ -8,7 +8,9 @@ import atlas_jetty_img from "../../images/ATLAS COVE_2.jpg";
 import calabar_jetty_img from "../../images/Calabar - Copy.jpg";
 import okrika_jetty_img from "../../images/Okrika 2.jpg";
 import MapMarker from "./MapMarker";
-import { setDevicesJetty, setSectionId } from "../../redux/ISMS_Slice";
+import { setDevicesJetty } from "../../redux/ISMS_Slice";
+
+// dandles the overlay of the map and hendles the viulazation of markers on map
 
 function MapComponent() {
   const state = useSelector((state) => state.ISMS);

@@ -5,6 +5,9 @@ import Sections from "../../Sections/Sections";
 import TableDevices from "../../TableDevices/TableDevices";
 import "./DashBoard.css";
 
+// Dashboard containing the Jetty sections  ==>
+// Specific Jetty Zones and Devices
+
 function DashBoard() {
   const state = useSelector((state) => state.ISMS);
   return (

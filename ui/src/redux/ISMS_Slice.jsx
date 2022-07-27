@@ -10,6 +10,8 @@ import main_device_siren_normal from "../iconImage/main_device_siren_normal.png"
 import main_device_panic_idle from "../iconImage/main_device_panic_idle.png";
 import axios from "axios";
 
+// THIS  IS REDUX STATE MANEGER SLICE IT CONTAINS ALL OUR ACTIONS
+
 // function to make obj tree from array of obj
 const buildTree = (nodes, parentId, n = 5) => {
   if (nodes.length === 0) {
@@ -292,7 +294,6 @@ const ISMS_Slice = createSlice({
       state.event = action.payload;
     },
     setMarkerStatus: (state, action) => {
-      console.log(action.payload);
       action.payload.forEach((status) => {
         state.markers = current(state.markers).map((marker) => {
           return marker.id === status.ObjectId

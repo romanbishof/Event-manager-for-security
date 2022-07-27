@@ -7,6 +7,8 @@ import "./Map.css";
 // import { io } from "socket.io-client";
 // const statusSocket = io("http://localhost:8082");
 
+// Map component that contanis the map its self
+// The MAP cannot be eddited and shows statuses and events on it
 function Map() {
   const state = useSelector((state) => state.ISMS);
   let dispatch = useDispatch();
@@ -14,8 +16,7 @@ function Map() {
   useEffect(() => {
     window.statusSocket.on("statusEmiter", (data) => {
       sessionStorage.setItem("status", JSON.stringify(data));
-      console.log("status");
-      console.log(data);
+      console.log(data[0]);
       dispatch(setMarkerStatus(data));
     });
     window.statusSocket.on("connect", () => {

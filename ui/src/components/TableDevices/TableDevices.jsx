@@ -6,6 +6,8 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import "./TableDevices.css";
 // import TableItem from "./TableItem/TableItem";
 
+// Component that creats table for our devices based on selected JETTY
+// and the coresponding Zone
 function TableDevices({ _devices, _label }) {
   const state = useSelector((state) => state.ISMS);
   const [searchText, setSearchText] = useState("");

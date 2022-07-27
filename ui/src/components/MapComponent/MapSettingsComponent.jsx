@@ -33,6 +33,8 @@ import {
 } from "@mui/material";
 import MapMarker from "./MapMarker";
 
+// MAP component that answers for adding / deleting / updating location of the markers
+
 function MapSettingsComponent() {
   const state = useSelector((state) => state.ISMS);
   const [section, setSection] = useState(false);

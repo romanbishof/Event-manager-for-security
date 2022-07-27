@@ -2,6 +2,8 @@ import React from "react";
 import Section from "./Section/Section";
 import "./Sections.css";
 
+// Component that shows the avaible Jetty for solection
+
 function Sections() {
   return (
     <div className="Sections">

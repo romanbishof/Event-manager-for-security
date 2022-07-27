@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { setCoordinatesJetty, setSectionId } from "../../../redux/ISMS_Slice";
 import "./Section.css";
 
+// component that generates each section
+
 function Section({ jetty, coordinates, sectionId }) {
   const state = useSelector((state) => state.ISMS);
   const dispatch = useDispatch();

@@ -19,6 +19,7 @@ import main_device_panic_idle from "../../../iconImage/main_device_panic_idle.pn
 import { useSelector } from "react-redux";
 import "./SettingsDevices.css";
 
+// Component that creates table for each devise in the selected JETTY
 function SettingsDevices({ _devices }) {
   const state = useSelector((state) => state.ISMS);
   const [searchText, setSearchText] = useState("");

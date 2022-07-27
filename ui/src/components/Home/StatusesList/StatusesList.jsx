@@ -8,11 +8,11 @@ import {
   TableRow,
 } from "@mui/material";
 
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { useSelector } from "react-redux";
 import "./StatusesList.css";
-import { setMarkerStatus } from "../../../redux/ISMS_Slice";
 
+// Component Shows a table of all avaible statuses
 function StatusesList() {
   const state = useSelector((state) => state.ISMS);
 
@@ -90,34 +90,6 @@ function StatusesList() {
             </Table>
           </TableContainer>
         </Paper>
-        {/* <div className="StatusesList__tbl-header">
-          <table>
-            <thead>
-              <tr>
-                <th>{`Id`}</th>
-                <th>{`Name`}</th>
-                <th>{`Enum value`}</th>
-                <th>{`Description`}</th>
-              </tr>
-            </thead>
-          </table>
-        </div>
-        <div className="StatusesList__tbl-content">
-          <table>
-            <tbody>
-              {state.deviceStatusList?.map((obj) => {
-                return (
-                  <tr key={obj.Id} className="StatusesList__table-row">
-                    <td>{obj.Id}</td>
-                    <td>{obj.Name}</td>
-                    <td>{obj.EnumValue}</td>
-                    <td>{obj.Description}</td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div> */}
       </div>
     </div>
   );

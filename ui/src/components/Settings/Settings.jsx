@@ -1,5 +1,5 @@
 // import { TreeItem, TreeView } from "@mui/lab";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 // import ChevronRightIcon from "@mui/icons-material/ChevronRight";
@@ -8,14 +8,14 @@ import { MapContainer } from "react-leaflet";
 import MapSettingsComponent from "../MapComponent/MapSettingsComponent";
 import { setCoordinatesJetty, setSectionId } from "../../redux/ISMS_Slice";
 // import gateway_on from "../../iconImage/gateway_on.png";
-import emergency_idle from "../../iconImage/emergency_idle.png";
-import doorphone_on from "../../iconImage/doorphone_on.png";
-import camera_on from "../../iconImage/camera_on.png";
-import main_device_door_close from "../../iconImage/main_device_door_close.png";
-// import main_device_door_open from "../../iconImage/main_device_door_open.png";
-import main_device_panic_detecting from "../../iconImage/main_device_panic_detecting.png";
-import main_device_siren_normal from "../../iconImage/main_device_siren_normal.png";
-import main_device_panic_idle from "../../iconImage/main_device_panic_idle.png";
+// import emergency_idle from "../../iconImage/emergency_idle.png";
+// import doorphone_on from "../../iconImage/doorphone_on.png";
+// import camera_on from "../../iconImage/camera_on.png";
+// import main_device_door_close from "../../iconImage/main_device_door_close.png";
+// // import main_device_door_open from "../../iconImage/main_device_door_open.png";
+// import main_device_panic_detecting from "../../iconImage/main_device_panic_detecting.png";
+// import main_device_siren_normal from "../../iconImage/main_device_siren_normal.png";
+// import main_device_panic_idle from "../../iconImage/main_device_panic_idle.png";
 import {
   Paper,
   Table,
@@ -26,6 +26,7 @@ import {
 } from "@mui/material";
 import SettingsDevices from "./SettingsDevices/SettingsDevices";
 
+// This is the SETTINGS page of our app
 function Settings() {
   const state = useSelector((state) => state.ISMS);
   const [devices, setDevices] = useState([]);
