@@ -64,7 +64,11 @@ async function consumeEvent() {
 
     connection.on('close', function () {
         console.log("Connection closed.");
-        process.exit();
+        // consumeEvent()
+        // process.exit();
+        process.disconnect()
+
+        // return
     });
 
 

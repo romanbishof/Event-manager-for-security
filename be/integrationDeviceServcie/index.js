@@ -44,3 +44,11 @@ io.on("connection", (socket) => {
     })
 
 });
+
+process.on('disconnect', () => {
+    console.log('trying to reconnect');
+
+    httpServer.listen(PORT, () => {
+        console.log(`the status service is running on port ${PORT}`);
+    })
+})
