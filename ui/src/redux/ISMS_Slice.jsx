@@ -289,13 +289,15 @@ const ISMS_Slice = createSlice({
       state.event = action.payload;
     },
     setMarkerStatus: (state, action) => {
-      action.payload.forEach((status) => {
-        state.markers = current(state.markers).map((marker) => {
-          return marker.id === status.ObjectId
-            ? { ...marker, status: status.State }
-            : { ...marker };
+      if (action.payload.length !== 0) {
+        action.payload.forEach((status) => {
+          state.markers = current(state.markers).map((marker) => {
+            return marker.id === status.ObjectId
+              ? { ...marker, status: status.State }
+              : { ...marker };
+          });
         });
-      });
+      }
     },
   },
   extraReducers: {

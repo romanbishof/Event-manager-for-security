@@ -25,8 +25,12 @@ httpServer.listen(PORT, () => {
 io.on("connection", (socket) => {
     console.log(`User Connected: ${socket.id} `);
 
-    socket.on('Error', () => {
-        console.log(' socket error in main servise error ');
+    socket.on('error', (err) => {
+        console.log(' socket error in main servise error: ', err);
+    })
+
+    socket.on('disconnect', (reason) => {
+        console.log(reason);
     })
 
 });

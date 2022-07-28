@@ -29,10 +29,13 @@ io.on("connection", (socket) => {
         socket.emit('receive_message', data)
     })
 
-    socket.on('Error', () => {
-        console.log(' socket error in main servise error ');
+    socket.on('error', (err) => {
+        console.log(' socket error in main servise error: ', err);
     })
 
+    socket.on('disconnect', (reason) => {
+        console.log(reason);
+    })
 });
 
 

@@ -16,7 +16,6 @@ function Map() {
   useEffect(() => {
     window.statusSocket.on("statusEmiter", (data) => {
       sessionStorage.setItem("status", JSON.stringify(data));
-      console.log(data[0]);
       dispatch(setMarkerStatus(data));
     });
     window.statusSocket.on("connect", () => {

@@ -43,6 +43,10 @@ function History() {
       sessionStorage.setItem("event", JSON.stringify(data));
     });
 
+    window.eventSocket.on("error", (error) => {
+      console.log(error);
+    });
+
     window.eventSocket.on("connect", () => {
       console.log(window.eventSocket.id);
     });

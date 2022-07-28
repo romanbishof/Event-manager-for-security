@@ -3,13 +3,15 @@ import amqp from 'amqplib/callback_api.js'
 
 
 // connecting to RabbitMQ
-amqp.connect('amqp://admin:Aa123456@10.0.0.92:5672/', function (err, connection) {
-    if (err) {
-        throw err;
+amqp.connect('amqp://admin:Aa123456@10.0.0.92:5672/', function connectRabbit(err0, connection) {
+    if (err0) {
+        console.log('error at connection: ', err0);
+        connectRabbit(err, connection)
+        // throw err;
     }
-    connection.createChannel(function connect(err, channel) {
-        if (err) {
-            console.log('fail to connect to chanel ');
+    connection.createChannel(function connect(err1, channel) {
+        if (err1) {
+            console.log('fail to connect to chanel: ', err1);
             connect(err, channel)
         }
         else {
