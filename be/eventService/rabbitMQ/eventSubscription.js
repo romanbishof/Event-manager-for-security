@@ -56,6 +56,14 @@ async function consumeEvent() {
 
     const connection = await amqp.connect('amqp://admin:Aa123456@10.0.0.92:5672/');
 
+    connection.on('connect', () => {
+        console.log('Connected to rabbitmq');
+    })
+
+    connection.on('disconnect', function (params) {
+        console.log('Disconnected from rabbitmq:', params.err.stack);
+    });
+
     const channel = await connection.createChannel()
 
     connection.on('error', (err) => {
@@ -65,9 +73,9 @@ async function consumeEvent() {
     connection.on('close', function () {
         console.log("Connection closed.");
         // consumeEvent()
+        channel.close()
+        connection.close()
         // process.exit();
-        process.disconnect()
-
         // return
     });
 

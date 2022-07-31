@@ -1,5 +1,5 @@
 import { divIcon } from "leaflet";
-import React, { useEffect } from "react";
+import React, { useEffect, lazy, useState } from "react";
 import { Marker, Popup, Tooltip } from "react-leaflet";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -8,6 +8,8 @@ import {
 } from "../../redux/ISMS_Slice";
 import DeleteIcon from "@mui/icons-material/Delete";
 import "./MapSettingsComponent.css";
+
+// import statusImg from `../../icons/${temp}.${temp2}`
 
 // Creates custom marker on MAP
 
@@ -23,15 +25,30 @@ function MapMarker({
 }) {
   const state = useSelector((state) => state.ISMS);
   const dispatch = useDispatch();
+  const [image, setImage] = useState("");
+
+  useEffect(() => {}, [state]);
 
   // making custom marker with label
   const icon = (img, name) => {
+    let imgType = hendleMarkerType(type);
+    let imgStatus = hendleStatusType(status);
+    // console.log(
+    //   require(`../../icons/${imgType.toLowerCase()}.${imgStatus.toLowerCase()}.png`)
+    //     ? "true"
+    //     : "false"
+    // );
     return divIcon({
       className: "MapMarker__Marker",
       iconSize: [12, 12],
       html: `<div class="MapMarker__div"> 
               <div class="MapMarker__alarm-div" id=${id}>
-                <img class="MapMarker__image" src='${img}')}/>  
+                <img class="MapMarker__image" src='${
+                  // require(`../../icons/${imgType}.${imgStatus}.png`)
+                  //   ? require(`../../icons/${imgType}.${imgStatus}.png`)
+                  //   :
+                  img
+                }'/>  
               </div>
               <br />
               <span class="MapMarker__span" draggable={false}>${name}</span> 
@@ -153,29 +170,29 @@ function MapMarker({
       case 40:
         return "Full";
       default:
-        break;
+        return "Default";
     }
   };
 
   // console.log(`${name}, ${hendleStatusType(status)}`);
-  // const hendleMarkerType = (_type) => {
-  //   switch (_type) {
-  //     case 14:
-  //       return "panic";
-  //     case 8:
-  //       return "emergency";
-  //     case 9:
-  //       return "doorphone";
-  //     case 77:
-  //       return "door";
-  //     case 1:
-  //       return "camera";
-  //     case 400:
-  //       return "siren";
-  //     default:
-  //       return;
-  //   }
-  // };
+  const hendleMarkerType = (_type) => {
+    switch (_type) {
+      case 14:
+        return "panic";
+      case 8:
+        return "emergency";
+      case 9:
+        return "doorphone";
+      case 77:
+        return "door";
+      case 1:
+        return "camera";
+      case 109:
+        return "siren";
+      default:
+        return;
+    }
+  };
 
   return (
     <Marker

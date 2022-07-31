@@ -310,7 +310,7 @@ const ISMS_Slice = createSlice({
           icon: hadleImageType(marker),
           id: marker.Id,
           name: marker.Name,
-          status: 3,
+          status: 2,
           type: marker.Type,
         };
       });
