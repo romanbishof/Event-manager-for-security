@@ -33,22 +33,14 @@ function MapMarker({
   const icon = (img, name) => {
     let imgType = hendleMarkerType(type);
     let imgStatus = hendleStatusType(status);
-    // console.log(
-    //   require(`../../icons/${imgType.toLowerCase()}.${imgStatus.toLowerCase()}.png`)
-    //     ? "true"
-    //     : "false"
-    // );
+
+    let imgTemp = require(`../../icons/${imgType}.${imgStatus}.png`);
     return divIcon({
       className: "MapMarker__Marker",
       iconSize: [12, 12],
       html: `<div class="MapMarker__div"> 
               <div class="MapMarker__alarm-div" id=${id}>
-                <img class="MapMarker__image" src='${
-                  // require(`../../icons/${imgType}.${imgStatus}.png`)
-                  //   ? require(`../../icons/${imgType}.${imgStatus}.png`)
-                  //   :
-                  img
-                }'/>  
+                <img class="MapMarker__image" src='${img}'/>  
               </div>
               <br />
               <span class="MapMarker__span" draggable={false}>${name}</span> 
@@ -189,8 +181,10 @@ function MapMarker({
         return "camera";
       case 109:
         return "siren";
+      case 1:
+        return "camera";
       default:
-        return;
+        return "point";
     }
   };
 

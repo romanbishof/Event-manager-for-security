@@ -146,7 +146,8 @@ function MapSettingsComponent() {
             icon: hadleImageType(type),
             id: id,
             name: name,
-            // status: 3,
+            status: 2,
+            type: type,
           },
         ])
       );
@@ -220,6 +221,8 @@ function MapSettingsComponent() {
                   name={marker.name}
                   isDraggable={true}
                   isSettings={true}
+                  status={marker.status}
+                  type={marker.type}
                 ></MapMarker>
               </div>
             );
