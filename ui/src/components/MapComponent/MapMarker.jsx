@@ -25,7 +25,7 @@ function MapMarker({
 }) {
   const state = useSelector((state) => state.ISMS);
   const dispatch = useDispatch();
-  const [image, setImage] = useState("");
+  // const [image, setImage] = useState("");
 
   useEffect(() => {}, [state]);
 
@@ -33,14 +33,16 @@ function MapMarker({
   const icon = (img, name) => {
     let imgType = hendleMarkerType(type);
     let imgStatus = hendleStatusType(status);
+    console.log(imgType);
 
     let imgTemp = require(`../../icons/${imgType}.${imgStatus}.png`);
+    // console.log(imgTemp);
     return divIcon({
       className: "MapMarker__Marker",
-      iconSize: [12, 12],
+      iconSize: [14, 14],
       html: `<div class="MapMarker__div"> 
               <div class="MapMarker__alarm-div" id=${id}>
-                <img class="MapMarker__image" src='${img}'/>  
+                <img class="MapMarker__image" src='${imgTemp}'/>  
               </div>
               <br />
               <span class="MapMarker__span" draggable={false}>${name}</span> 
@@ -168,7 +170,7 @@ function MapMarker({
 
   // console.log(`${name}, ${hendleStatusType(status)}`);
   const hendleMarkerType = (_type) => {
-    switch (_type) {
+    switch (Number(_type)) {
       case 14:
         return "panic";
       case 8:
@@ -181,8 +183,6 @@ function MapMarker({
         return "camera";
       case 109:
         return "siren";
-      case 1:
-        return "camera";
       default:
         return "point";
     }
